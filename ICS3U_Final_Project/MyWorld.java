@@ -14,9 +14,9 @@ public class MyWorld extends World
     GreenfootImage background = new GreenfootImage("images/game_map08.png");
     
     
-    public static ArrayList<int[]> pathOne = new ArrayList<int[]>();
+    static ArrayList<int[]> pathOne = new ArrayList<int[]>();
     static ArrayList<int[]> pathTwo = new ArrayList<int[]>();
-    
+    static ArrayList<int[]> tiles = new ArrayList<int[]>();
     /**
      * Constructor for objects of class MyWorld
      * 
@@ -32,11 +32,14 @@ public class MyWorld extends World
         
         readMouseInfo("Tower Defense MousePos1.txt", pathOne);
         readMouseInfo("Tower Defense MousePos2.txt", pathTwo);
+        readMouseInfo("tiles_coordinates.txt", tiles);
         
-        DudeEnemy aa = new DudeEnemy(16, 10, 10);
+        DudeEnemy aa = new DudeEnemy(5, 10, 10);
         addObject(aa, pathOne.get(0)[0], pathOne.get(0)[1]);
         aa.relocate(pathOne.get(0)[1],pathOne.get(0)[1]);
         
+        display_tiles(tiles);
+        TowerTile tile = new TowerTile(100, 100);
         
         
         
@@ -51,10 +54,24 @@ public class MyWorld extends World
     
     public void act()
     {
-
+        if(Greenfoot.mouseClicked(null))
+        {
+            int x = Greenfoot.getMouseInfo().getX();
+            int y = Greenfoot.getMouseInfo().getY();
+            System.out.println(x + " " + y);
+        }
         ;
     }
 
+    public void display_tiles(ArrayList<int[]> t)
+    {
+        for (int[] pos: t)
+        {
+            TowerTile tile = new TowerTile(pos[0], pos[1]);
+            addObject(tile, pos[0], pos[1]);
+        }
+        
+    }
     public void mouseCoords(String f)
     {
         if(Greenfoot.mouseClicked(null))

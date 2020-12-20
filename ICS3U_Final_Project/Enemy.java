@@ -24,7 +24,7 @@ public class Enemy extends Actor
     int xDiff;
     int yDiff;
     List<GreenfootImage> images;
-    ArrayList<int[]> path = world.pathOne;
+    ArrayList<int[]> path = world.pathTwo;
     boolean moving = true;
     
     private int imageIndex = 0;
@@ -46,7 +46,7 @@ public class Enemy extends Actor
             int y = path.get(currentIndex)[1];
             currentIndex++;
             relocate(x,y);
-            System.out.println(x + " xy " + y);
+            //System.out.println(x + " xy " + y);
             
         }
         //System.out.println(currentIndex);
@@ -59,7 +59,7 @@ public class Enemy extends Actor
             return;
         }
         //USING THIS AS A SUBSTITUTION LMAO
-        if (currentIndex >= 14) 
+        if (currentIndex >= 19) 
         //THIS IS SO WEIRD!!! THE PATH>SIZE() CHANGES EVERY TIME I RUN IT
         {
             System.out.println("manually disappeared");
