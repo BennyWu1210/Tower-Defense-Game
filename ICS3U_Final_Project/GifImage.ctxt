@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.target=GifImage
+comment0.text=\n\ This\ class\ can\ be\ used\ to\ read\ animated\ gif\ image\ files\ and\ extract\ the\ individual\n\ images\ of\ the\ animation\ sequence.\n\ \n\ @author\ Michael\ Berry\n\ @author\ Neil\ Brown\n\ \n\ Copyright\ (c)\ 2011,2013,2014,2018\n
+comment1.params=file
+comment1.target=GifImage(java.lang.String)
+comment1.text=\n\ Set\ the\ image\ of\ the\ actor.\ If\ the\ image\ is\ a\ normal\ picture,\ it\ will\ be\ displayed\ as\ normal.\n\ If\ it's\ an\ animated\ GIF\ file\ then\ it\ will\ be\ displayed\ as\ an\ animated\ actor.\n
+comment2.params=
+comment2.target=java.util.List\ getImages()
+comment2.text=\n\ Get\ all\ the\ images\ used\ in\ the\ animation\n\ @return\ a\ list\ of\ GreenfootImages,\ corresponding\ to\ each\ frame.\n
+comment3.params=
+comment3.target=void\ pause()
+comment3.text=\n\ Pause\ the\ animation.\n
+comment4.params=
+comment4.target=void\ resume()
+comment4.text=\n\ Resume\ the\ animation.\n
+comment5.params=
+comment5.target=boolean\ isRunning()
+comment5.text=\n\ Determines\ whether\ the\ animation\ is\ running\n\ @return\ true\ if\ the\ animation\ is\ running,\ false\ otherwise\n
+comment6.params=
+comment6.target=greenfoot.GreenfootImage\ getCurrentImage()
+comment7.params=
+comment7.target=void\ loadImages()
+comment7.text=\n\ Load\ the\ images\n
+numComments=8

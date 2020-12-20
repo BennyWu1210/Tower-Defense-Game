@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Enemy
+comment0.text=\n\ Write\ a\ description\ of\ class\ Enemy\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=speed\ health\ coins
+comment1.target=Enemy(double,\ double,\ int)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ move()
+comment4.params=x\ y
+comment4.target=void\ relocate(int,\ int)
+comment5.params=
+comment5.target=boolean\ disDetect()
+comment6.params=
+comment6.target=greenfoot.GreenfootImage\ getImage()
+numComments=7
