@@ -1,3 +1,4 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
@@ -17,14 +18,14 @@ public class Enemy extends Actor
     double speed;
     double health;
     int coins;
-    int[] pos = new int[2];
-    int[] destination = new int[2];
-    int currentIndex = 0;
     
-    int xDiff;
-    int yDiff;
     List<GreenfootImage> images;
     ArrayList<int[]> path = world.pathTwo;
+    int[] pos = new int[2];
+    int[] destination = {path.get(0)[0], path.get(0)[1]};
+    int currentIndex = 0;
+    int xDiff;
+    int yDiff;
     boolean moving = true;
     
     private int imageIndex = 0;
@@ -36,28 +37,30 @@ public class Enemy extends Actor
        this.coins = coins;
        
     }
+    
     public void act() 
     {
         
-        if (disDetect())
+        if (distanceFrom(destination[0], destination[1])<16)
         {
-            Random ran = new Random();
+            System.out.println("relocated");
             int x = path.get(currentIndex)[0];
             int y = path.get(currentIndex)[1];
             currentIndex++;
             relocate(x,y);
-            //System.out.println(x + " xy " + y);
-            
         }
+        
         //System.out.println(currentIndex);
         //System.out.println(path.size());
-        if (currentIndex >= path.size()-1) 
+        
+        if (currentIndex >= path.size()) 
         //THIS IS SO WEIRD!!! THE PATH>SIZE() CHANGES EVERY TIME I RUN IT
         {
             System.out.println("disappeared");
             getWorld().removeObject(this);
             return;
         }
+        
         //USING THIS AS A SUBSTITUTION LMAO
         if (currentIndex >= 19) 
         //THIS IS SO WEIRD!!! THE PATH>SIZE() CHANGES EVERY TIME I RUN IT
@@ -67,10 +70,17 @@ public class Enemy extends Actor
             return;
         }
         
-        //System.out.println("moving");
+        //move(destination[0], destination[1]);
         move();
-        
-    }    
+    }   
+    
+    public void relocate(int x, int y)
+    {
+        destination[0] = x;
+        destination[1] = y;
+        xDiff = destination[0] - getX();
+        yDiff = destination[1] - getY();
+    }
     
     public void move()
     {
@@ -90,31 +100,24 @@ public class Enemy extends Actor
         //return moving;
     }
     
-    public void relocate(int x, int y)
+    public void move(int x, int y)
     {
-        destination[0] = x;
-        destination[1] = y;
-        xDiff = destination[0] - getX();
-        yDiff = destination[1] - getY();
+        double d = distanceFrom(x, y);
+        double blocks = d/speed;
+        double xd = (x - getX())/blocks;
+        double yd = (y - getY())/blocks;
+        System.out.println((int)(xd+0.5) + " " + getY()+(int)(yd+0.5));
+        setLocation(getX()+(int)xd, getY()+(int)(yd+0.5));
     }
     
-    public boolean disDetect()
+    public double distanceFrom(int x, int y)
     {
-        /*
-        if(Math.abs(destination[0]-getX()) < Math.abs(destination[0]-(getX()+xDiff)) )
-        {
-            return true;
-        }
-        */
-        
-        if(Math.abs(destination[0]-getX()) < 5 || Math.abs(destination[1]-getY()) < 5)
-        {
-            return true;
-        }
-        
-        return false;
+        double distance = Math.sqrt(Math.pow(x-getX(), 2) + Math.pow(y-getY(), 2));
+        //System.out.println("dis:" + distance);
+        return distance;
             
     }
+    
     public GreenfootImage getImage()
     {
         GreenfootImage image = images.get(imageIndex);

@@ -34,9 +34,9 @@ public class MyWorld extends World
         readMouseInfo("Tower Defense MousePos2.txt", pathTwo);
         readMouseInfo("tiles_coordinates.txt", tiles);
         
-        DudeEnemy aa = new DudeEnemy(5, 10, 10);
+        DudeEnemy aa = new DudeEnemy(4, 10, 10);
         addObject(aa, pathOne.get(0)[0], pathOne.get(0)[1]);
-        aa.relocate(pathOne.get(0)[1],pathOne.get(0)[1]);
+        aa.relocate(pathOne.get(0)[0], pathOne.get(0)[1]);
         
         display_tiles(tiles);
         TowerTile tile = new TowerTile(100, 100);
