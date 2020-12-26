@@ -15,18 +15,17 @@ public class DudeEnemy extends Enemy
      */
     
     GifImage image = new GifImage("dude.gif");
-    boolean moving = true;
-    public DudeEnemy(double speed, double health, int coins)
+   
+    public DudeEnemy(double speed, double health, int coins, int x, int y)
     {
         
-        super(speed, health, coins);
+        super(speed, health, coins, x, y);
         this.images = image.getImages();
         for(GreenfootImage image: images)
         {
             image.scale(25, 25);
         }
-        
-        
+        gif = true;
     }
     
     public void act() 

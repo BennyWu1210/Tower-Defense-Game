@@ -1,4 +1,3 @@
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
@@ -8,42 +7,41 @@ import java.util.*;
  * @version (a version number or a date)
  */
 
-public class Enemy extends Actor
+public class Enemy extends Entity
 {
     /**
      * Act - do whatever the Enemy wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    MyWorld world = (MyWorld)getWorld();
-    double speed;
+    
     double health;
     int coins;
     
-    List<GreenfootImage> images;
-    ArrayList<int[]> path = world.pathTwo;
-    int[] pos = new int[2];
+    
+    ArrayList<int[]> path = world.pathOne;
+    
     int[] destination = {path.get(0)[0], path.get(0)[1]};
     int currentIndex = 0;
-    int xDiff;
-    int yDiff;
-    boolean moving = true;
+    private int xDiff;
+    private int yDiff;
     
-    private int imageIndex = 0;
-    
-    public Enemy(double speed, double health, int coins)
+
+    public Enemy(double speed, double health, int coins, int x, int y)
     {
        this.speed = speed;
        this.health = health;
        this.coins = coins;
-       
+       gif = true;
+       pos[0] = x;
+       pos[1] = y;
     }
     
     public void act() 
     {
         
-        if (distanceFrom(destination[0], destination[1])<16)
+        if (distanceFrom(destination[0], destination[1])<19)
         {
-            System.out.println("relocated");
+            //System.out.println("relocated");
             int x = path.get(currentIndex)[0];
             int y = path.get(currentIndex)[1];
             currentIndex++;
@@ -56,22 +54,23 @@ public class Enemy extends Actor
         if (currentIndex >= path.size()) 
         //THIS IS SO WEIRD!!! THE PATH>SIZE() CHANGES EVERY TIME I RUN IT
         {
-            System.out.println("disappeared");
-            getWorld().removeObject(this);
-            return;
+            //System.out.println("disappeared");
+            //getWorld().removeObject(this);
+            //return;
+            this.existing = false;
         }
         
         //USING THIS AS A SUBSTITUTION LMAO
-        if (currentIndex >= 19) 
+        if (currentIndex >= 13) 
         //THIS IS SO WEIRD!!! THE PATH>SIZE() CHANGES EVERY TIME I RUN IT
         {
-            System.out.println("manually disappeared");
-            getWorld().removeObject(this);
-            return;
+            //System.out.println("manually disappeared");
+            //getWorld().removeObject(this);
+            //return;
+            this.existing = false;
         }
-        
-        //move(destination[0], destination[1]);
-        move();
+        move(destination[0], destination[1]);
+        //move();
     }   
     
     public void relocate(int x, int y)
@@ -84,7 +83,7 @@ public class Enemy extends Actor
     
     public void move()
     {
-        boolean moving = true;
+
         
         //System.out.println("xx"+getX());
         double d = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
@@ -94,40 +93,31 @@ public class Enemy extends Actor
         //System.out.println("speed" + speed);
         //System.out.println("xDiff" + xDiff);
         //System.out.println("d" + d);
-        setLocation(getX()+(int)xBlock, getY()+(int)yBlock);
+        setLocation(getX()+(int)(xBlock+0.5), getY()+(int)(yBlock+0.5));
         //System.out.println(getX()+(int)xBlock + " " + getY()+(int)yBlock);
         
-        //return moving;
     }
     
-    public void move(int x, int y)
-    {
-        double d = distanceFrom(x, y);
-        double blocks = d/speed;
-        double xd = (x - getX())/blocks;
-        double yd = (y - getY())/blocks;
-        System.out.println((int)(xd+0.5) + " " + getY()+(int)(yd+0.5));
-        setLocation(getX()+(int)xd, getY()+(int)(yd+0.5));
-    }
-    
-    public double distanceFrom(int x, int y)
-    {
-        double distance = Math.sqrt(Math.pow(x-getX(), 2) + Math.pow(y-getY(), 2));
-        //System.out.println("dis:" + distance);
-        return distance;
-            
-    }
-    
+
     public GreenfootImage getImage()
     {
+        
         GreenfootImage image = images.get(imageIndex);
         imageIndex ++;
+            
         if (imageIndex>=images.size())
         {
             imageIndex = 0;
         }
+            
         return image;
-        
     }
-    
+
 }
+
+    
+    
+    
+    
+    
+

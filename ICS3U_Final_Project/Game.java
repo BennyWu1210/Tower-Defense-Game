@@ -9,19 +9,24 @@ import java.io.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class MyWorld extends World
+public class Game extends World
 {
     GreenfootImage background = new GreenfootImage("images/game_map08.png");
     
-    
+    SimpleTimer time = new SimpleTimer();
     static ArrayList<int[]> pathOne = new ArrayList<int[]>();
     static ArrayList<int[]> pathTwo = new ArrayList<int[]>();
     static ArrayList<int[]> tiles = new ArrayList<int[]>();
+    static ArrayList<Enemy> dudeList = new ArrayList<Enemy>();
+    //DudeEnemy aa;
+    //Inferno bb;
+    //Fireball ff;
+    Inferno bb;
     /**
      * Constructor for objects of class MyWorld
      * 
      */
-    public MyWorld()
+    public Game()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1050, 700, 1); 
@@ -34,22 +39,29 @@ public class MyWorld extends World
         readMouseInfo("Tower Defense MousePos2.txt", pathTwo);
         readMouseInfo("tiles_coordinates.txt", tiles);
         
-        DudeEnemy aa = new DudeEnemy(4, 10, 10);
-        addObject(aa, pathOne.get(0)[0], pathOne.get(0)[1]);
-        aa.relocate(pathOne.get(0)[0], pathOne.get(0)[1]);
+        //aa = new DudeEnemy(1, 10, 10);
+        //addObject(aa, pathOne.get(0)[0], pathOne.get(0)[1]);
+        //aa.relocate(pathOne.get(0)[0], pathOne.get(0)[1]);
         
         display_tiles(tiles);
         TowerTile tile = new TowerTile(100, 100);
         
+        //bb = new Inferno();
+        //addObject(bb, 418, 504);
         
-        
-
+        //ff = new Fireball(aa);
+        //addObject(ff, 418, 504);
         /*
         for(int[] arr: pathOne)
         {
             System.out.println(arr[0] + " " + arr[1]);
         }
         */
+        
+        Intro n = new Intro();
+        Greenfoot.setWorld(n);
+        time.mark();
+        
     }
     
     public void act()
@@ -58,10 +70,20 @@ public class MyWorld extends World
         {
             int x = Greenfoot.getMouseInfo().getX();
             int y = Greenfoot.getMouseInfo().getY();
-            System.out.println(x + " " + y);
+            //System.out.println(x + " " + y);
         }
-        ;
+        
+        if(time.millisElapsed()>Greenfoot.getRandomNumber(800)+800)
+        {
+            addEnemy();
+        }
+        //ff.shoot(500,100);
+        //ff.shoot(aa);
+        moveEnemy();
+        //ff.checkClosest();
+
     }
+
 
     public void display_tiles(ArrayList<int[]> t)
     {
@@ -72,6 +94,28 @@ public class MyWorld extends World
         }
         
     }
+    
+    public void addEnemy()
+    {
+       time.mark();
+       DudeEnemy e = new DudeEnemy(2,10,10,pathOne.get(0)[0], pathOne.get(0)[1]);
+       dudeList.add(e); 
+       addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
+       //e.relocate(pathOne.get(0)[0], pathOne.get(0)[1]);
+    }
+
+    public void moveEnemy()
+    {
+        for(int i=0; i<dudeList.size()-1; i++)
+        {
+            
+           if (!dudeList.get(i).existing)
+           {
+              this.removeObject(dudeList.get(i));
+              dudeList.remove(i);
+           }
+        }
+    }
     public void mouseCoords(String f)
     {
         if(Greenfoot.mouseClicked(null))
@@ -79,7 +123,7 @@ public class MyWorld extends World
             int x = Greenfoot.getMouseInfo().getX();
             int y = Greenfoot.getMouseInfo().getY();
             int[] arr = {x,y};
-            System.out.println(x + " " + y);
+            //System.out.println(x + " " + y);
             writeMouseInfo(x,y,f);
         }
     }
