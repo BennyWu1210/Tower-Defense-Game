@@ -16,7 +16,7 @@ public class Tower extends Entity
     Game world = (Game)getWorld();
     GreenfootImage image;
     int[] pos = new int[2];
-    int radius = 60;
+    int radius;
     
     
     public Tower(TowerTile tile)

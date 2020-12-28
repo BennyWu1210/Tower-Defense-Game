@@ -22,7 +22,7 @@ public class Inferno extends Tower
         image.scale(40,60);
         setImage(image);
         setLocation(pos[0], pos[1]-20);
-
+        radius = 200;
     }
     
     public void act() 

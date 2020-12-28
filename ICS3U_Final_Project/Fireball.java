@@ -38,7 +38,11 @@ public class Fireball extends Projectile
         // Add your action code here.'
         //Random ran = new Random();
         //setLocation(getX()+2, getY()+2);
-        
+        if(!target.existing)
+        {
+            getWorld().removeObject(this);
+            return;
+        }
 
         move(target.getX(), target.getY());
         System.out.println(target.getX() + " fireball " + target.getY());

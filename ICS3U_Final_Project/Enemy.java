@@ -64,7 +64,7 @@ public class Enemy extends Entity
         if (currentIndex >= 13) 
         //THIS IS SO WEIRD!!! THE PATH>SIZE() CHANGES EVERY TIME I RUN IT
         {
-            //System.out.println("manually disappeared");
+            System.out.println("manually disappeared");
             //getWorld().removeObject(this);
             //return;
             this.existing = false;

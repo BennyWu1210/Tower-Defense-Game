@@ -58,18 +58,20 @@ public class TowerTile extends Actor
             
         }
         
-        if(Greenfoot.mouseClicked(fireButton))
-        {
-            Inferno i = new Inferno(this);
-            getWorld().addObject(i, position[0], position[1]-20);
-        }
-        
-        else if(Greenfoot.mouseClicked(lightningButton))
+        if(Greenfoot.mouseClicked(lightningButton))
         {
             LightningTower l = new LightningTower(this);
             getWorld().addObject(l, position[0], position[1]-20);
 
         }
+        
+        else if(Greenfoot.mouseClicked(fireButton))
+        {
+            Inferno i = new Inferno(this);
+            getWorld().addObject(i, position[0], position[1]-20);
+        }
+        
+        
         
     }
     

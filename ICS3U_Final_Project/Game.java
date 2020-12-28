@@ -58,10 +58,10 @@ public class Game extends World
         }
         */
         
-        Intro n = new Intro();
+        TitlePage n = new TitlePage();
         Greenfoot.setWorld(n);
         time.mark();
-        
+        //addEnemy();
     }
     
     public void act()
@@ -73,10 +73,13 @@ public class Game extends World
             //System.out.println(x + " " + y);
         }
         
-        if(time.millisElapsed()>Greenfoot.getRandomNumber(800)+800)
+        
+        if(time.millisElapsed()>1200)
         {
             addEnemy();
         }
+        
+        
         //ff.shoot(500,100);
         //ff.shoot(aa);
         moveEnemy();
@@ -106,7 +109,7 @@ public class Game extends World
 
     public void moveEnemy()
     {
-        for(int i=0; i<dudeList.size()-1; i++)
+        for(int i=0; i<dudeList.size(); i++)
         {
             
            if (!dudeList.get(i).existing)
@@ -153,7 +156,6 @@ public class Game extends World
     {
         try
         {
-            
             File file = new File(f);
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine())
