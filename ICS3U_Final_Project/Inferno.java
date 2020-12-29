@@ -21,7 +21,7 @@ public class Inferno extends Tower
         image = new GreenfootImage("inferno_tower1.png");
         image.scale(40,60);
         setImage(image);
-        setLocation(pos[0], pos[1]-20);
+        //setLocation(pos[0], pos[1]-20);
         radius = 200;
     }
     
@@ -34,10 +34,10 @@ public class Inferno extends Tower
             Enemy target = checkClosest();
             if(target != null)
             {
-                Fireball f = new Fireball(target, pos[0], pos[1]);
-                getWorld().addObject(f, pos[0], pos[1]);
+                Fireball f = new Fireball(target, getX(), getY());
+                getWorld().addObject(f, getX(), getY());
             }
-            System.out.println(target);
+            //System.out.println(target);
         }
     }    
     

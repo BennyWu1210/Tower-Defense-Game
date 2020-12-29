@@ -61,11 +61,12 @@ public class Game extends World
         TitlePage n = new TitlePage();
         Greenfoot.setWorld(n);
         time.mark();
-        //addEnemy();
+        addEnemy();
     }
     
     public void act()
     {
+        
         if(Greenfoot.mouseClicked(null))
         {
             int x = Greenfoot.getMouseInfo().getX();
@@ -73,17 +74,18 @@ public class Game extends World
             //System.out.println(x + " " + y);
         }
         
-        
+        /*
         if(time.millisElapsed()>1200)
         {
             addEnemy();
         }
-        
+        */
         
         //ff.shoot(500,100);
         //ff.shoot(aa);
         moveEnemy();
         //ff.checkClosest();
+        //System.out.println(dudeList.get(0).existing);
 
     }
 
@@ -100,6 +102,7 @@ public class Game extends World
     
     public void addEnemy()
     {
+       System.out.println("hii");
        time.mark();
        DudeEnemy e = new DudeEnemy(2,10,10,pathOne.get(0)[0], pathOne.get(0)[1]);
        dudeList.add(e); 

@@ -13,16 +13,14 @@ public class Tower extends Entity
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    Game world = (Game)getWorld();
+    //Game world = (Game)getWorld();
     GreenfootImage image;
-    int[] pos = new int[2];
     int radius;
     
     
     public Tower(TowerTile tile)
     {
-        pos[0] = tile.position[0];
-        pos[1] = tile.position[1];
+        setLocation(tile.position[0], tile.position[1]);
     }
     
     public void act() 
@@ -30,7 +28,7 @@ public class Tower extends Entity
         
     }    
     
-    
+
     public boolean isInRange(Enemy e)
     {
 
@@ -46,6 +44,7 @@ public class Tower extends Entity
         //double closest = Integer.MAX_VALUE;
         time.mark();
         //setLocation(pos[0], pos[1]-20);
+        System.out.println(world.dudeList.size());
         for(Enemy e: world.dudeList)
         {
             
