@@ -35,9 +35,9 @@ public class Game extends World
         System.out.println("--------");
         System.out.println(pathOne.size());
         
-        readMouseInfo("Tower Defense MousePos1.txt", pathOne);
-        readMouseInfo("Tower Defense MousePos2.txt", pathTwo);
-        readMouseInfo("tiles_coordinates.txt", tiles);
+        readMouseInfo("Tower Defense MousePos1 2.txt", pathOne);
+        readMouseInfo("Tower Defense MousePos2 2.txt", pathTwo);
+        readMouseInfo("tiles_coordinates 2.txt", tiles);
         
         //aa = new DudeEnemy(1, 10, 10);
         //addObject(aa, pathOne.get(0)[0], pathOne.get(0)[1]);

@@ -6,7 +6,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Intro extends World
+public class TitlePage extends World
 {
 
     /**
@@ -19,7 +19,7 @@ public class Intro extends World
     int imageIndex = 0;
     static int length = 960;
     static int width = 483;
-    public Intro()
+    public TitlePage()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(length, width, 1); 
@@ -69,7 +69,6 @@ public class Intro extends World
 
     }
     
-
     public void createButton()
     {
         GreenfootImage b = new GreenfootImage("start_button03.tif");
