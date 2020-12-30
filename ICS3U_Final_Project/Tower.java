@@ -14,17 +14,38 @@ public class Tower extends Entity
      */
     
     //Game world = (Game)getWorld();
-    GreenfootImage image;
+    static GreenfootImage image;
+    static GreenfootImage oval;
+    boolean clicked = false;
     int radius;
-    
-    
+    TowerTile tile;
+    Oval o;
     public Tower(TowerTile tile)
     {
         setLocation(tile.position[0], tile.position[1]);
+        this.tile = tile;
+        oval = new GreenfootImage("Oval3.png");
     }
     
     public void act() 
     {
+        if(Greenfoot.mouseClicked(this) && !clicked)
+        {
+            clicked = true;
+            displayCircle();
+        }
+        else if(Greenfoot.mouseClicked(null) && !Greenfoot.mouseClicked(this))
+        {
+            clicked = false;
+            displayCircle();
+
+        }
+        else if(Greenfoot.mouseClicked(this) && clicked)
+        {
+            clicked = false;
+            displayCircle();
+            
+        }
         
     }    
     
@@ -44,10 +65,17 @@ public class Tower extends Entity
         //double closest = Integer.MAX_VALUE;
         time.mark();
         //setLocation(pos[0], pos[1]-20);
-        System.out.println(world.dudeList.size());
+        int a = world.dudeList.size();
+        System.out.println(a);
+        
         for(Enemy e: world.dudeList)
         {
-            
+            /*
+            if(world.dudeList.size()!=a)
+            {
+                System.out.println(3/0);
+            }
+            */
             if(isInRange(e))
             {
                //closest = distanceFrom(e.getX(), e.getY());
@@ -55,10 +83,24 @@ public class Tower extends Entity
 
             }
         }
+        
         return null;
         
     }
     
+    public void displayCircle()
+    {
+        if (clicked)
+        {
+            o = new Oval();
+            getWorld().addObject(o, tile.getX(), tile.getY());
+        }
+        else
+        {
+            getWorld().removeObject(o);
+        }
+    }
+
 
 }
 

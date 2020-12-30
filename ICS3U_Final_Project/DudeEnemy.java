@@ -31,7 +31,7 @@ public class DudeEnemy extends Enemy
     public void act() 
     {
         super.act();
-
+        
         
         
     }    

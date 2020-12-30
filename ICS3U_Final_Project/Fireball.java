@@ -13,24 +13,30 @@ public class Fireball extends Projectile
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     SimpleTimer time = new SimpleTimer();
-    GifImage fireBall = new GifImage("flame02.gif");
+    GifImage image;
     GifImage explosion = new GifImage("explosion01.gif");
-    List<GreenfootImage> images;
-    private int imageIndex = 0;
-    Enemy target;
     
-    public Fireball(Enemy target, int xLoc, int yLoc)
+    
+    Enemy target;
+    Tower tower;
+    int[] destination = new int[2];
+    public Fireball(Enemy target, Tower tower)
     {
-        this.images = fireBall.getImages();
+       
+
+        time.mark();
+        image =  new GifImage("flame02.gif");
+        this.target = target;
+        this.tower = tower;
+        this.images = image.getImages();
         for(GreenfootImage image: images)
         {
             image.scale(25,25);
         }
-        setLocation(xLoc, yLoc);
-        time.mark();
+        speed = 5;
         gif = true;
-        this.target = target;
-        speed = 3;
+        setLocation(tower.getX(), tower.getY());
+        
     }
     
     public void act() 
@@ -38,32 +44,49 @@ public class Fireball extends Projectile
         // Add your action code here.'
         //Random ran = new Random();
         //setLocation(getX()+2, getY()+2);
-        
-        if(!target.existing)
+        if(target.existing)
         {
-            getWorld().removeObject(this);
-            return;
-        }
+            if(distanceFrom(tower.getX(), tower.getY())>tower.radius 
+               || distanceFrom(target.getX(), target.getY()) < 5)
+            {
+                disappear();
+                getWorld().removeObject(this);
+                return;
 
-        move(target.getX(), target.getY());
+            }
+
+            destination[0] = target.getX();
+            destination[1] = target.getY();
+            move(target.getX(), target.getY());
+        }
+        else
+        {
+            if(distanceFrom(tower.getX(), tower.getY())>tower.radius 
+               || distanceFrom(destination[0], destination[1]) < 5)
+            {
+                disappear();
+                getWorld().removeObject(this);
+                return;
+
+            }
+            if(destination[0]!=0)
+            {
+                move(destination[0], destination[1]);
+            }
+            else
+            {
+                getWorld().removeObject(this);
+            }
+        }
         //System.out.println(target.getX() + " fireball " + target.getY());
         //System.out.println(target.existing);
 
 
     }    
 
-    
-    public GreenfootImage getImage()
+    public void disappear()
     {
-        
-        GreenfootImage image = images.get(imageIndex);
-        imageIndex ++;
-            
-        if (imageIndex>=images.size())
-        {
-            imageIndex = 0;
-        }
-            
-        return image;
+        FireExplosion explosion = new FireExplosion(getX(), getY());
+        getWorld().addObject(explosion, getX(), getY());
     }
 }

@@ -13,7 +13,7 @@ public class Inferno extends Tower
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
 
-    ArrayList<int[]> positions = world.tiles;
+    ArrayList<int[]> positions;
      
     public Inferno(TowerTile tile)
     {
@@ -22,21 +22,32 @@ public class Inferno extends Tower
         image.scale(40,60);
         setImage(image);
         //setLocation(pos[0], pos[1]-20);
-        radius = 200;
+        radius = 150;
+
+    }
+    
+    public void addedToWorld(World game)
+    {
+        world = (Game)game;
+        positions = world.tiles;
     }
     
     public void act() 
     {
         super.act();
+
         if(time.millisElapsed()>900)
         {
+            
             time.mark();
             Enemy target = checkClosest();
+
             if(target != null)
             {
-                Fireball f = new Fireball(target, getX(), getY());
+                Fireball f = new Fireball(target, this);
                 getWorld().addObject(f, getX(), getY());
             }
+            
             //System.out.println(target);
         }
     }    

@@ -14,10 +14,10 @@ public class Game extends World
     GreenfootImage background = new GreenfootImage("images/game_map08.png");
     
     SimpleTimer time = new SimpleTimer();
-    static ArrayList<int[]> pathOne = new ArrayList<int[]>();
-    static ArrayList<int[]> pathTwo = new ArrayList<int[]>();
-    static ArrayList<int[]> tiles = new ArrayList<int[]>();
-    static ArrayList<Enemy> dudeList = new ArrayList<Enemy>();
+    public ArrayList<int[]> pathOne = new ArrayList<int[]>();
+    public ArrayList<int[]> pathTwo = new ArrayList<int[]>();
+    public ArrayList<int[]> tiles = new ArrayList<int[]>();
+    public ArrayList<Enemy> dudeList = new ArrayList<Enemy>();
     //DudeEnemy aa;
     //Inferno bb;
     //Fireball ff;
@@ -33,12 +33,12 @@ public class Game extends World
         setBackground(background);
         background.scale(1050, 700);
         System.out.println("--------");
-        System.out.println(pathOne.size());
         
-        readMouseInfo("Tower Defense MousePos1 2.txt", pathOne);
-        readMouseInfo("Tower Defense MousePos2 2.txt", pathTwo);
+        
+        readMouseInfo("Tower Defense MousePos1.txt", pathOne);
+        readMouseInfo("Tower Defense MousePos2.txt", pathTwo);
         readMouseInfo("tiles_coordinates 2.txt", tiles);
-        
+        System.out.println(pathOne.size());
         //aa = new DudeEnemy(1, 10, 10);
         //addObject(aa, pathOne.get(0)[0], pathOne.get(0)[1]);
         //aa.relocate(pathOne.get(0)[0], pathOne.get(0)[1]);
@@ -58,10 +58,12 @@ public class Game extends World
         }
         */
         
-        TitlePage n = new TitlePage();
-        Greenfoot.setWorld(n);
+        //TitlePage n = new TitlePage();
+        //Greenfoot.setWorld(n);
         time.mark();
         addEnemy();
+        LightningStrike l = new LightningStrike();
+        addObject(l, 100, 100);
     }
     
     public void act()
@@ -73,9 +75,10 @@ public class Game extends World
             int y = Greenfoot.getMouseInfo().getY();
             //System.out.println(x + " " + y);
         }
-        
+
+        //mouseCoords("Tower Defense MousePos1.txt");
         /*
-        if(time.millisElapsed()>1200)
+        if(time.millisElapsed()>1400)
         {
             addEnemy();
         }
@@ -104,7 +107,7 @@ public class Game extends World
     {
        System.out.println("hii");
        time.mark();
-       DudeEnemy e = new DudeEnemy(2,10,10,pathOne.get(0)[0], pathOne.get(0)[1]);
+       DudeEnemy e = new DudeEnemy(1.9,10,10,pathOne.get(0)[0], pathOne.get(0)[1]);
        dudeList.add(e); 
        addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
        //e.relocate(pathOne.get(0)[0], pathOne.get(0)[1]);

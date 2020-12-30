@@ -18,9 +18,9 @@ public class Enemy extends Entity
     int coins;
     
     
-    ArrayList<int[]> path = world.pathOne;
+    ArrayList<int[]> path;
     
-    int[] destination = {path.get(0)[0], path.get(0)[1]};
+    int[] destination;
     int currentIndex = 0;
     private int xDiff;
     private int yDiff;
@@ -36,10 +36,17 @@ public class Enemy extends Entity
        pos[1] = y;
     }
     
+    public void addedToWorld(World game)
+    {
+       world = (Game)game;
+       path = world.pathOne;
+       destination = new int[]{path.get(0)[0], path.get(0)[1]};
+    }     
+    
     public void act() 
     {
         
-        if (distanceFrom(destination[0], destination[1])<19)
+        if (distanceFrom(destination[0], destination[1])<10)
         {
             //System.out.println("relocated");
             int x = path.get(currentIndex)[0];
@@ -60,17 +67,9 @@ public class Enemy extends Entity
             this.existing = false;
         }
         
-        //USING THIS AS A SUBSTITUTION LMAO
-        if (currentIndex >= 13) 
-        //THIS IS SO WEIRD!!! THE PATH>SIZE() CHANGES EVERY TIME I RUN IT
-        {
-            System.out.println("manually disappeared");
-            //getWorld().removeObject(this);
-            //return;
-            this.existing = false;
-        }
-        move(destination[0], destination[1]);
-        //move();
+
+       move(destination[0], destination[1]);
+       //move();
     }   
     
     public void relocate(int x, int y)

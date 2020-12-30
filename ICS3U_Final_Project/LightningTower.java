@@ -13,16 +13,22 @@ public class LightningTower extends Tower
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    ArrayList<int[]> positions = world.tiles;
+    ArrayList<int[]> positions;
     
     public LightningTower(TowerTile tile)
     {
         super(tile);
-        image = new GreenfootImage("lightning_tower01.tif");
-        image.scale(40,60);
+        image = new GreenfootImage("lightning_tower1.png");
+        image.scale(55,75);
         setImage(image);
         setLocation(pos[0], pos[1]-20);
 
+    }
+    
+    public void addedToWorld(World game)
+    {
+        world = (Game)game;
+        positions = world.tiles;
     }
     
     public void act() 

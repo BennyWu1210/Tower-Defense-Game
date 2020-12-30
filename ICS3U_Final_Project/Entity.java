@@ -13,7 +13,7 @@ public abstract class Entity extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     SimpleTimer time = new SimpleTimer();
-    Game world = (Game)getWorld();
+    Game world; //DELETE THIS
     public double speed = 0;
     public int[] pos = new int[2];
     public boolean existing = true;
