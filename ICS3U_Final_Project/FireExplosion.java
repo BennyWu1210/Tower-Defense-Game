@@ -25,7 +25,7 @@ public class FireExplosion extends HitEffect
         imageIndex = 0;
         for(GreenfootImage image: images)
         {
-            image.scale(25,25);
+            image.scale(30,30);
         }
 
     }  

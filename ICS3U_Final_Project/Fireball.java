@@ -89,4 +89,18 @@ public class Fireball extends Projectile
         FireExplosion explosion = new FireExplosion(getX(), getY());
         getWorld().addObject(explosion, getX(), getY());
     }
+    
+    public GreenfootImage getImage()
+    {
+        
+        GreenfootImage image = images.get(imageIndex);
+        imageIndex ++;
+            
+        if (imageIndex>=images.size())
+        {
+            imageIndex = 0;
+        }
+            
+        return image;
+    }
 }

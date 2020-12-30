@@ -2,6 +2,9 @@
 comment0.target=LightningStrike
 comment0.text=\n\ Write\ a\ description\ of\ class\ LightningStrike\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=
-comment1.target=void\ LightningStrike()
-comment1.text=\n\ Act\ -\ do\ whatever\ the\ LightningStrike\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
-numComments=2
+comment1.target=LightningStrike()
+comment2.params=
+comment2.target=greenfoot.GreenfootImage\ getImage()
+comment3.params=angle
+comment3.target=void\ strike(double)
+numComments=4

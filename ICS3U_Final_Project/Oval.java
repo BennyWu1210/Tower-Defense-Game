@@ -17,7 +17,7 @@ public class Oval extends Actor
     {
         // Add your action code here.
         setImage(image);
-        image.scale(600,300);
+        image.scale(400,400);
         //setLocation(418,524);
     }    
 }

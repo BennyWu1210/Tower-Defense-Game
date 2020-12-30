@@ -63,7 +63,7 @@ public class Game extends World
         time.mark();
         addEnemy();
         LightningStrike l = new LightningStrike();
-        addObject(l, 100, 100);
+        addObject(l, 500, 500);
     }
     
     public void act()
@@ -77,12 +77,12 @@ public class Game extends World
         }
 
         //mouseCoords("Tower Defense MousePos1.txt");
-        /*
-        if(time.millisElapsed()>1400)
+        
+        if(time.millisElapsed()>2000)
         {
             addEnemy();
         }
-        */
+        
         
         //ff.shoot(500,100);
         //ff.shoot(aa);

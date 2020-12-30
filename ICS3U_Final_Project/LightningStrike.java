@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class LightningStrike here.
  * 
@@ -12,12 +12,39 @@ public class LightningStrike extends Projectile
      * Act - do whatever the LightningStrike wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-
-    public void LightningStrike() 
+    GifImage image = new GifImage("lightningStrike.gif");
+    List<GreenfootImage> images = image.getImages();
+    public LightningStrike() 
     {
         // Add your action code here.
-        image = new GifImage("lightningStrike.gif");
-        images = image.getImages();
-        setLocation(100,100);
-    }    
+        for(GreenfootImage img: images)
+        {
+            img.scale(100,100);
+            img.rotate(220);
+        }
+        setLocation(500,500);
+        
+    }  
+    
+    public GreenfootImage getImage()
+    {
+        
+        GreenfootImage image = images.get(imageIndex);
+        imageIndex ++;
+          
+        if (imageIndex>=images.size())
+        {
+            imageIndex = 0;
+        }
+            
+        return image;
+    }
+    
+    public void strike(double angle)
+    {
+        for(GreenfootImage img: images)
+        {
+            img.rotate((int)angle);
+        }
+    }
 }
