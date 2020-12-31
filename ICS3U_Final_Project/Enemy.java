@@ -14,6 +14,8 @@ public class Enemy extends Entity
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
+    SimpleTimer time = new SimpleTimer();
+    
     double health;
     int coins;
     
@@ -34,6 +36,8 @@ public class Enemy extends Entity
        gif = true;
        pos[0] = x;
        pos[1] = y;
+       time.mark();
+       
     }
     
     public void addedToWorld(World game)
@@ -68,7 +72,8 @@ public class Enemy extends Entity
         }
         
 
-       move(destination[0], destination[1]);
+        move(destination[0], destination[1]);
+            
        //move();
     }   
     
@@ -101,14 +106,13 @@ public class Enemy extends Entity
     public GreenfootImage getImage()
     {
         
-        GreenfootImage image = images.get(imageIndex);
-        imageIndex ++;
-            
+        GreenfootImage image = images.get((int)imageIndex);
+        imageIndex += 0.25;
         if (imageIndex>=images.size())
         {
             imageIndex = 0;
         }
-            
+        time.mark();  
         return image;
     }
 

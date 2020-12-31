@@ -57,7 +57,7 @@ public class Fireball extends Projectile
 
             destination[0] = target.getX();
             destination[1] = target.getY();
-            move(target.getX(), target.getY());
+            move(target.getX()+5, target.getY());
         }
         else
         {
@@ -71,7 +71,7 @@ public class Fireball extends Projectile
             }
             if(destination[0]!=0)
             {
-                move(destination[0], destination[1]);
+                move(destination[0]+5, destination[1]);
             }
             else
             {
@@ -93,7 +93,7 @@ public class Fireball extends Projectile
     public GreenfootImage getImage()
     {
         
-        GreenfootImage image = images.get(imageIndex);
+        GreenfootImage image = images.get((int)imageIndex);
         imageIndex ++;
             
         if (imageIndex>=images.size())

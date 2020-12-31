@@ -12,25 +12,44 @@ public class LightningStrike extends Projectile
      * Act - do whatever the LightningStrike wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    SimpleTimer time = new SimpleTimer();
     GifImage image = new GifImage("lightningStrike.gif");
     List<GreenfootImage> images = image.getImages();
-    public LightningStrike() 
+    
+    Enemy target;
+    Tower tower;
+    public LightningStrike(Enemy target, Tower tower) 
     {
         // Add your action code here.
+        this.target = target;
+        this.tower = tower;
         for(GreenfootImage img: images)
         {
             img.scale(100,100);
-            img.rotate(220);
+            img.rotate(130);
         }
-        setLocation(500,500);
         
+        //setLocation(418,524);
+        time.mark();
     }  
+    
+    public void act()
+    {
+        
+        if(imageIndex == images.size()-1)
+        {
+            getWorld().removeObject(this);
+            return;
+        }
+        
+
+    }
     
     public GreenfootImage getImage()
     {
         
-        GreenfootImage image = images.get(imageIndex);
-        imageIndex ++;
+        GreenfootImage image = images.get((int)imageIndex);
+        imageIndex += 0.5;
           
         if (imageIndex>=images.size())
         {
@@ -40,11 +59,36 @@ public class LightningStrike extends Projectile
         return image;
     }
     
-    public void strike(double angle)
+    public void strike(int[] start, int[] end)
     {
+        setLocation(end[0], end[1]);
+        int xDiff = end[0] - start[0];
+        int yDiff = start[1] - end[1];
+        double angle = 0;
+        if((xDiff>0 && yDiff>0)) //CAST Rule
+        {
+            angle = 180-57.3*Math.atan((double)Math.abs(yDiff)/Math.abs(xDiff));
+        }
+        else if (xDiff<0 && yDiff>0)
+        {
+            angle = 57.3*Math.atan((double)Math.abs(yDiff)/Math.abs(xDiff));
+        }
+        
+        else if (xDiff<0 && yDiff<0)
+        {
+            angle = 360-57.3*Math.atan((double)Math.abs(yDiff)/Math.abs(xDiff));
+            
+        }
+        else if((xDiff>0 && yDiff<0) )
+        {
+            angle = 180+57.3*Math.atan((double)Math.abs(yDiff)/Math.abs(xDiff));
+        }
+        System.out.println(xDiff + ", " + yDiff + ", " + angle);
+        
         for(GreenfootImage img: images)
         {
             img.rotate((int)angle);
         }
+        
     }
 }

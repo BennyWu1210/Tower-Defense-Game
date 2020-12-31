@@ -1,46 +1,33 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.*;
+
 /**
- * Write a description of class dude here.
+ * Write a description of class Yoshi here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-
-public class DudeEnemy extends Enemy
+public class Yoshi extends Enemy
 {
     /**
-     * Act - do whatever the dude wants to do. This method is called whenever
+     * Act - do whatever the Yoshi wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    
     GifImage image;
-   
-    public DudeEnemy(double speed, double health, int coins, int x, int y)
+    
+    public Yoshi(double speed, double health, int coins, int x, int y)
     {
-        
         super(speed, health, coins, x, y);
-        image = new GifImage("dude.gif");
+        image = new GifImage("Yoshi.gif");
         this.images = image.getImages();
         for(GreenfootImage image: images)
         {
-            image.scale(25, 25);
+            image.scale(40, 40);
         }
-        
-        gif = true;
     }
     
     public void act() 
     {
+        // Add your action code here.
         super.act();
-        
-        
-        
     }    
-    
-    
-    public void remove()
-    {
-        ;
-    }
 }

@@ -1,10 +1,12 @@
 #BlueJ class context
 comment0.target=LightningStrike
 comment0.text=\n\ Write\ a\ description\ of\ class\ LightningStrike\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=
-comment1.target=LightningStrike()
+comment1.params=target\ tower
+comment1.target=LightningStrike(Enemy,\ Tower)
 comment2.params=
-comment2.target=greenfoot.GreenfootImage\ getImage()
-comment3.params=angle
-comment3.target=void\ strike(double)
-numComments=4
+comment2.target=void\ act()
+comment3.params=
+comment3.target=greenfoot.GreenfootImage\ getImage()
+comment4.params=start\ end
+comment4.target=void\ strike(int[],\ int[])
+numComments=5

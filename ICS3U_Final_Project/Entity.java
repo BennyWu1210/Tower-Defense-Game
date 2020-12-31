@@ -18,7 +18,9 @@ public abstract class Entity extends Actor
     public int[] pos = new int[2];
     public boolean existing = true;
     List<GreenfootImage> images;
-    public int imageIndex = 0;
+    //public int imageIndex = 0;
+    public double imageIndex = 0; //This is to control the speed of the transition between images
+                                  // It requires a double to do so.
     public boolean gif = false;
     
     public abstract void act();  
@@ -43,8 +45,8 @@ public abstract class Entity extends Actor
     {
         if (gif)
         {
-            GreenfootImage image = images.get(imageIndex);
-            imageIndex ++;
+            GreenfootImage image = images.get((int)imageIndex);
+            imageIndex += 0.1;
             
             if (imageIndex>=images.size())
             {

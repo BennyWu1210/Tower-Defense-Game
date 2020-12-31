@@ -9,6 +9,12 @@ import java.io.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
+
+/**
+ * Optimize the shooting of towers
+ * Add lighning strikes and adjust the angle issue
+ * change the image of the mouse
+ */
 public class Game extends World
 {
     GreenfootImage background = new GreenfootImage("images/game_map08.png");
@@ -22,6 +28,7 @@ public class Game extends World
     //Inferno bb;
     //Fireball ff;
     Inferno bb;
+    
     /**
      * Constructor for objects of class MyWorld
      * 
@@ -37,7 +44,7 @@ public class Game extends World
         
         readMouseInfo("Tower Defense MousePos1.txt", pathOne);
         readMouseInfo("Tower Defense MousePos2.txt", pathTwo);
-        readMouseInfo("tiles_coordinates 2.txt", tiles);
+        readMouseInfo("tiles_coordinates.txt", tiles);
         System.out.println(pathOne.size());
         //aa = new DudeEnemy(1, 10, 10);
         //addObject(aa, pathOne.get(0)[0], pathOne.get(0)[1]);
@@ -57,25 +64,25 @@ public class Game extends World
             System.out.println(arr[0] + " " + arr[1]);
         }
         */
-        
+        //System.out.println(Math.atan());
         //TitlePage n = new TitlePage();
         //Greenfoot.setWorld(n);
         time.mark();
         addEnemy();
-        LightningStrike l = new LightningStrike();
-        addObject(l, 500, 500);
+        
     }
     
     public void act()
     {
         
+        /*
         if(Greenfoot.mouseClicked(null))
         {
             int x = Greenfoot.getMouseInfo().getX();
             int y = Greenfoot.getMouseInfo().getY();
             //System.out.println(x + " " + y);
         }
-
+        */
         //mouseCoords("Tower Defense MousePos1.txt");
         
         if(time.millisElapsed()>2000)
@@ -105,11 +112,21 @@ public class Game extends World
     
     public void addEnemy()
     {
-       System.out.println("hii");
-       time.mark();
-       DudeEnemy e = new DudeEnemy(1.9,10,10,pathOne.get(0)[0], pathOne.get(0)[1]);
-       dudeList.add(e); 
-       addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
+       int num = Greenfoot.getRandomNumber(2);
+       if(num==0)
+       {
+           DudeEnemy e = new DudeEnemy(1.9,10,10,pathOne.get(0)[0], pathOne.get(0)[1]);
+           time.mark();
+           dudeList.add(e); 
+           addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
+       }
+       else{
+           Yoshi e = new Yoshi(2.5,10,10,pathOne.get(0)[0], pathOne.get(0)[1]);
+           time.mark();
+           dudeList.add(e); 
+           addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
+       }
+       
        //e.relocate(pathOne.get(0)[0], pathOne.get(0)[1]);
     }
 

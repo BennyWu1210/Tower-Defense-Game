@@ -13,7 +13,7 @@ public class Projectile extends Entity
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     List<GreenfootImage> images;
-    public int imageIndex = 0;
+    public double imageIndex = 0;
     GifImage image;
     public void act() 
     {
