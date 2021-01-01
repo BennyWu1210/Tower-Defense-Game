@@ -41,7 +41,19 @@ public class LightningStrike extends Projectile
             getWorld().removeObject(this);
             return;
         }
-        
+        if(target.existing)
+        {
+            if(distanceFrom(tower.getX(), tower.getY())>tower.radius
+            || distanceFrom(target.getX(), target.getY()) < 5 )
+            {
+                if(distanceFrom(target.getX(), target.getY()) < 5)
+                {
+                    target.takeDamage(2);
+                }
+
+            }
+        }
+
 
     }
     

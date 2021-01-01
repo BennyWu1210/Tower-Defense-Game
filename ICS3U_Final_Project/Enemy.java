@@ -26,7 +26,7 @@ public class Enemy extends Entity
     int currentIndex = 0;
     private int xDiff;
     private int yDiff;
-    
+    DisplayBar healthBar;
 
     public Enemy(double speed, double health, int coins, int x, int y)
     {
@@ -36,6 +36,8 @@ public class Enemy extends Entity
        gif = true;
        pos[0] = x;
        pos[1] = y;
+       healthBar = new DisplayBar();
+       
        time.mark();
        
     }
@@ -45,6 +47,7 @@ public class Enemy extends Entity
        world = (Game)game;
        path = world.pathOne;
        destination = new int[]{path.get(0)[0], path.get(0)[1]};
+       game.addObject(healthBar, getX(), getY()-20);
     }     
     
     public void act() 
@@ -71,9 +74,28 @@ public class Enemy extends Entity
             this.existing = false;
         }
         
-
+        
+        if(this.isTouching(LightningStrike.class))
+        {
+            this.health -= 1;
+        }
+        
+       
+        if (this.health <= -1)
+        {
+            world = (Game)getWorld();
+            getWorld().removeObject(healthBar);
+            this.existing = false;
+            world.dudeList.remove(this);
+            world.removeObject(this);
+            return;
+        }
+        
+        
         move(destination[0], destination[1]);
-            
+        healthBar.updatePercentage((int)this.health);
+        healthBar.updatePosition(getX(),getY()-20);
+        //healthBar.updatePercentage(0.9);
        //move();
     }   
     
@@ -102,7 +124,6 @@ public class Enemy extends Entity
         
     }
     
-
     public GreenfootImage getImage()
     {
         
@@ -114,6 +135,18 @@ public class Enemy extends Entity
         }
         time.mark();  
         return image;
+    }
+    
+    public void takeDamage(double ouch)
+    {
+        if(this.health-ouch<0)
+        {
+            this.health = -1;
+        }
+        else
+        {
+            this.health -= ouch;
+        }
     }
 
 }

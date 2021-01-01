@@ -29,6 +29,7 @@ public class Game extends World
     //Fireball ff;
     Inferno bb;
     
+    
     /**
      * Constructor for objects of class MyWorld
      * 
@@ -67,14 +68,23 @@ public class Game extends World
         //System.out.println(Math.atan());
         //TitlePage n = new TitlePage();
         //Greenfoot.setWorld(n);
+        
         time.mark();
         addEnemy();
+        
+        DisplayBar bar = new DisplayBar();
+        addObject(bar, 100, 100);
+        bar.updatePercentage(1);
+        //bar.updatePosition(100-25,100-1);
+        //bar.updatePercentage(0.9);
         
     }
     
     public void act()
     {
-        
+
+      
+        //bar.updatePercentage(0.5);
         /*
         if(Greenfoot.mouseClicked(null))
         {
@@ -85,7 +95,7 @@ public class Game extends World
         */
         //mouseCoords("Tower Defense MousePos1.txt");
         
-        if(time.millisElapsed()>2000)
+        if(time.millisElapsed()>1000)
         {
             addEnemy();
         }
@@ -115,13 +125,14 @@ public class Game extends World
        int num = Greenfoot.getRandomNumber(2);
        if(num==0)
        {
-           DudeEnemy e = new DudeEnemy(1.9,10,10,pathOne.get(0)[0], pathOne.get(0)[1]);
+           DudeEnemy e = new DudeEnemy(1.9,5,10,pathOne.get(0)[0], pathOne.get(0)[1]);
+
            time.mark();
            dudeList.add(e); 
            addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
        }
        else{
-           Yoshi e = new Yoshi(2.5,10,10,pathOne.get(0)[0], pathOne.get(0)[1]);
+           Yoshi e = new Yoshi(3.5,5,10,pathOne.get(0)[0], pathOne.get(0)[1]);
            time.mark();
            dudeList.add(e); 
            addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);

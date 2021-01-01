@@ -44,16 +44,22 @@ public class Fireball extends Projectile
         // Add your action code here.'
         //Random ran = new Random();
         //setLocation(getX()+2, getY()+2);
+        //System.out.println(target.existing);
         if(target.existing)
         {
-            if(distanceFrom(tower.getX(), tower.getY())>tower.radius 
-               || distanceFrom(target.getX(), target.getY()) < 5)
+            
+            if(distanceFrom(tower.getX(), tower.getY())>tower.radius
+            || distanceFrom(target.getX(), target.getY()) < 5 )
             {
+                if(distanceFrom(target.getX(), target.getY()) < 5)
+                {
+                    target.takeDamage(1);
+                }
                 disappear();
                 getWorld().removeObject(this);
                 return;
-
             }
+            
 
             destination[0] = target.getX();
             destination[1] = target.getY();
@@ -62,8 +68,9 @@ public class Fireball extends Projectile
         else
         {
             if(distanceFrom(tower.getX(), tower.getY())>tower.radius 
-               || distanceFrom(destination[0], destination[1]) < 5)
+               || distanceFrom(destination[0], destination[1]) < 6)
             {
+                
                 disappear();
                 getWorld().removeObject(this);
                 return;
