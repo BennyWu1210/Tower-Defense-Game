@@ -12,5 +12,5 @@ comment4.target=void\ act()
 comment5.params=x\ y
 comment5.target=void\ updatePosition(int,\ int)
 comment6.params=health
-comment6.target=void\ updatePercentage(int)
+comment6.target=void\ updatePercentage(double)
 numComments=7

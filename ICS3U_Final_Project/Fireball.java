@@ -14,7 +14,7 @@ public class Fireball extends Projectile
      */
     SimpleTimer time = new SimpleTimer();
     GifImage image;
-    GifImage explosion = new GifImage("explosion01.gif");
+    GifImage explosion;
     
     
     Enemy target;
@@ -26,6 +26,7 @@ public class Fireball extends Projectile
 
         time.mark();
         image =  new GifImage("flame02.gif");
+        explosion = new GifImage("explosion01.gif");
         this.target = target;
         this.tower = tower;
         this.images = image.getImages();

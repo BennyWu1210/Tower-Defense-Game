@@ -39,9 +39,5 @@ public class DudeEnemy extends Enemy
         
     }    
     
-    
-    public void remove()
-    {
-        ;
-    }
+
 }

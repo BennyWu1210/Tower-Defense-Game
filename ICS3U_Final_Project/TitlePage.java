@@ -71,9 +71,9 @@ public class TitlePage extends World
     
     public void createButton()
     {
-        GreenfootImage b = new GreenfootImage("start_button03.tif");
-        StartButton button = new StartButton(b, (int)(232), 
-                                            (int)(112));
+        GreenfootImage b = new GreenfootImage("start_button.png");
+        StartButton button = new StartButton(b, (int)(242), 
+                                            (int)(88));
         addObject(button, length/2, width*4/5);
     }
     

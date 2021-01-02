@@ -36,7 +36,7 @@ public class LightningTower extends Tower
     {
         // Add your action code here.
         super.act();
-        if(time.millisElapsed()>2800){
+        if(time.millisElapsed()>2400){
             
             time.mark();
             Enemy target = checkClosest();

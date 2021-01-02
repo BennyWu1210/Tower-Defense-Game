@@ -48,7 +48,7 @@ public class LightningStrike extends Projectile
             {
                 if(distanceFrom(target.getX(), target.getY()) < 5)
                 {
-                    target.takeDamage(2);
+                    target.takeDamage(1.5);
                 }
 
             }

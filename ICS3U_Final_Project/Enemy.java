@@ -37,7 +37,7 @@ public class Enemy extends Entity
        pos[0] = x;
        pos[1] = y;
        healthBar = new DisplayBar();
-       
+       this.existing = true;
        time.mark();
        
     }
@@ -45,17 +45,35 @@ public class Enemy extends Entity
     public void addedToWorld(World game)
     {
        world = (Game)game;
-       path = world.pathOne;
+       int num = Greenfoot.getRandomNumber(2);
+       if(num==0)
+       {
+           path = world.pathOne;
+       }
+       else
+       {
+           path = world.pathTwo;
+       }
        destination = new int[]{path.get(0)[0], path.get(0)[1]};
        game.addObject(healthBar, getX(), getY()-20);
     }     
     
     public void act() 
     {
+        if (currentIndex == path.size()) 
+        //THIS IS SO WEIRD!!! THE PATH>SIZE() CHANGES EVERY TIME I RUN IT
+        {
+            //System.out.println("disappeared");
+            //getWorld().removeObject(this);
+            //return;
+            this.existing = false;
+        }
         
-        if (distanceFrom(destination[0], destination[1])<10)
+        if (distanceFrom(destination[0], destination[1])<5)
         {
             //System.out.println("relocated");
+            //System.out.println(path.size());
+            //System.out.println(currentIndex);
             int x = path.get(currentIndex)[0];
             int y = path.get(currentIndex)[1];
             currentIndex++;
@@ -65,19 +83,17 @@ public class Enemy extends Entity
         //System.out.println(currentIndex);
         //System.out.println(path.size());
         
-        if (currentIndex >= path.size()) 
-        //THIS IS SO WEIRD!!! THE PATH>SIZE() CHANGES EVERY TIME I RUN IT
-        {
-            //System.out.println("disappeared");
-            //getWorld().removeObject(this);
-            //return;
-            this.existing = false;
-        }
         
+        
+        
+        if(this.isTouching(Fireball.class))
+        {
+            this.health -= 0.1;
+        }
         
         if(this.isTouching(LightningStrike.class))
         {
-            this.health -= 1;
+            this.health -= 0.3;
         }
         
        
@@ -93,7 +109,7 @@ public class Enemy extends Entity
         
         
         move(destination[0], destination[1]);
-        healthBar.updatePercentage((int)this.health);
+        healthBar.updatePercentage(this.health);
         healthBar.updatePosition(getX(),getY()-20);
         //healthBar.updatePercentage(0.9);
        //move();
@@ -149,6 +165,12 @@ public class Enemy extends Entity
         }
     }
 
+    public void remove()
+    {
+        getWorld().removeObject(healthBar);
+        getWorld().removeObject(this);
+        return;
+    }
 }
 
     

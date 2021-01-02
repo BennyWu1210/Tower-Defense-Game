@@ -17,7 +17,7 @@ import java.io.*;
  */
 public class Game extends World
 {
-    GreenfootImage background = new GreenfootImage("images/game_map08.png");
+    GreenfootImage background = new GreenfootImage("images/game_map11.png");
     
     SimpleTimer time = new SimpleTimer();
     public ArrayList<int[]> pathOne = new ArrayList<int[]>();
@@ -28,7 +28,8 @@ public class Game extends World
     //Inferno bb;
     //Fireball ff;
     Inferno bb;
-    
+    int total_coins;
+    Label coins;
     
     /**
      * Constructor for objects of class MyWorld
@@ -46,7 +47,7 @@ public class Game extends World
         readMouseInfo("Tower Defense MousePos1.txt", pathOne);
         readMouseInfo("Tower Defense MousePos2.txt", pathTwo);
         readMouseInfo("tiles_coordinates.txt", tiles);
-        System.out.println(pathOne.size());
+        //System.out.println(pathOne.size());
         //aa = new DudeEnemy(1, 10, 10);
         //addObject(aa, pathOne.get(0)[0], pathOne.get(0)[1]);
         //aa.relocate(pathOne.get(0)[0], pathOne.get(0)[1]);
@@ -72,6 +73,16 @@ public class Game extends World
         time.mark();
         addEnemy();
         
+        total_coins = 9999999;
+        coins = new Label("-" + total_coins, 50);
+        coins.setFillColor(Color.YELLOW);
+        updateCoins(2);
+        addObject(coins, 260, 70);
+
+        GreenfootImage coin = new GreenfootImage("coin.png");
+        coin.scale(60,60);
+        background.drawImage(coin, 150, 40);
+        
         DisplayBar bar = new DisplayBar();
         addObject(bar, 100, 100);
         bar.updatePercentage(1);
@@ -83,7 +94,7 @@ public class Game extends World
     public void act()
     {
 
-      
+        //mouseCoords("Tower Defense MousePos2.txt");
         //bar.updatePercentage(0.5);
         /*
         if(Greenfoot.mouseClicked(null))
@@ -99,7 +110,6 @@ public class Game extends World
         {
             addEnemy();
         }
-        
         
         //ff.shoot(500,100);
         //ff.shoot(aa);
@@ -131,8 +141,9 @@ public class Game extends World
            dudeList.add(e); 
            addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
        }
+       
        else{
-           Yoshi e = new Yoshi(3.5,5,10,pathOne.get(0)[0], pathOne.get(0)[1]);
+           Yoshi e = new Yoshi(2.5,5,10,pathOne.get(0)[0], pathOne.get(0)[1]);
            time.mark();
            dudeList.add(e); 
            addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
@@ -148,11 +159,17 @@ public class Game extends World
             
            if (!dudeList.get(i).existing)
            {
-              this.removeObject(dudeList.get(i));
+              dudeList.get(i).remove();
               dudeList.remove(i);
            }
         }
     }
+    
+    public void updateCoins(int coin)
+    {
+        coins.setValue("-" + ((int)total_coins+(int)coin));
+    }
+    
     public void mouseCoords(String f)
     {
         if(Greenfoot.mouseClicked(null))

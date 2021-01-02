@@ -16,7 +16,7 @@ public class DisplayBar extends Actor
     Game world;
     //GreenfootImage full;
     //GreenfootImage empty;
-    int health = 5;
+    double health = 5;
     int[] pos = new int[2];
     GreenfootImage[] image = new GreenfootImage[6];
     
@@ -60,11 +60,11 @@ public class DisplayBar extends Actor
 
     }
     
-    public void updatePercentage(int health)
+    public void updatePercentage(double health)
     {
         Game world = (Game)getWorld();
         this.health = health;
-        setImage(image[health]);
+        setImage(image[(int)health]);
         //empty.scale((int)(25*(1-percentage)), 3);
         //setLocation((int)(getX()-25+(25*(1-percentage)/2)), getY());
     }
