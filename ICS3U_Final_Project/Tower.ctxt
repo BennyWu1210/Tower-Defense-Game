@@ -1,7 +1,14 @@
 #BlueJ class context
 comment0.target=Tower
 comment0.text=\n\ Write\ a\ description\ of\ class\ Tower\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=
-comment1.target=void\ act()
-comment1.text=\n\ Act\ -\ do\ whatever\ the\ Tower\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
-numComments=2
+comment1.params=tile
+comment1.target=Tower(TowerTile)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=e
+comment3.target=boolean\ isInRange(Enemy)
+comment4.params=
+comment4.target=Enemy\ checkClosest()
+comment5.params=
+comment5.target=void\ displayCircle()
+numComments=6
