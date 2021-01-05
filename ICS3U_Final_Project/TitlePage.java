@@ -21,7 +21,7 @@ public class TitlePage extends World
     static int width = 483;
     public TitlePage()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        // Create a new world with 960x483 cells with a cell size of 1x1 pixels.
         super(length, width, 1); 
         for(GreenfootImage i: background)
         {
@@ -42,15 +42,7 @@ public class TitlePage extends World
         {
             getImage();
         }
-        
 
-        /*
-        if(Greenfoot.mouseClicked(null))
-        {
-            Game g = new Game();
-            Greenfoot.setWorld(g);
-        }
-        */
     }
     
     public GreenfootImage getImage()
@@ -72,14 +64,12 @@ public class TitlePage extends World
     public void createButton()
     {
         GreenfootImage b = new GreenfootImage("start_button.png");
-        StartButton button = new StartButton(b, (int)(242), 
-                                            (int)(88));
+        StartButton button = new StartButton(b, (int)(242), (int)(88));
         addObject(button, length/2, width*4/5);
     }
     
     public void displayTitle()
     {
-        
         Label l = new Label("Welcome to Benny's Tower Defense",52);
         addObject(l, length/2, width/8);
     }

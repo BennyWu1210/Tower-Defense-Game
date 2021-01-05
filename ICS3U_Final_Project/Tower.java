@@ -13,13 +13,15 @@ public class Tower extends Entity
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    //Game world = (Game)getWorld();
+
     static GreenfootImage image;
     static GreenfootImage oval;
-    boolean clicked = false;
-    int radius;
-    TowerTile tile;
-    Oval o;
+    private boolean clicked = false;
+    private int radius;
+    protected TowerTile tile;
+    protected Oval o;
+    protected int fire_rate;
+    
     public Tower(TowerTile tile)
     {
         setLocation(tile.position[0], tile.position[1]);
@@ -62,23 +64,15 @@ public class Tower extends Entity
     
     public Enemy checkClosest()
     {
-        //double closest = Integer.MAX_VALUE;
         time.mark();
-        //setLocation(pos[0], pos[1]-20);
-        int a = world.dudeList.size();
+        int a = world.enemyList.size();
         System.out.println(a);
         
-        for(Enemy e: world.dudeList)
+        for(Enemy e: world.enemyList)
         {
-            /*
-            if(world.dudeList.size()!=a)
-            {
-                System.out.println(3/0);
-            }
-            */
+
             if(isInRange(e))
             {
-               //closest = distanceFrom(e.getX(), e.getY());
                return e;
 
             }
@@ -101,7 +95,15 @@ public class Tower extends Entity
         }
     }
 
+    public int getRadius()
+    {
+        return this.radius;
+    }
 
+    public void setRadius(int r)
+    {
+        this.radius = r;
+    }
 }
 
 

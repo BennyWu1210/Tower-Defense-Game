@@ -7,4 +7,5 @@ comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ changeSize()
+comment3.text=\n\ Changes\ the\ size\ of\ button\ constantly\ to\ create\ an\ animation\n
 numComments=4

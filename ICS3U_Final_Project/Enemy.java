@@ -16,22 +16,25 @@ public class Enemy extends Entity
     
     SimpleTimer time = new SimpleTimer();
     
-    double health;
-    int coins;
     
+    protected double max_health;
+    protected double health;
+    protected int coins;
+    protected int[] destination;
+    protected DisplayBar healthBar;
     
-    ArrayList<int[]> path;
-    
-    int[] destination;
-    int currentIndex = 0;
+    private ArrayList<int[]> path;
+    private int currentIndex = 0;
     private int xDiff;
     private int yDiff;
-    DisplayBar healthBar;
+    
 
-    public Enemy(double speed, double health, int coins, int x, int y)
+    public Enemy(double speed, double max_health, int coins, int x, int y)
     {
        this.speed = speed;
-       this.health = health;
+       this.max_health = max_health;
+       this.health = max_health;
+       
        this.coins = coins;
        gif = true;
        pos[0] = x;
@@ -46,6 +49,7 @@ public class Enemy extends Entity
     {
        world = (Game)game;
        int num = Greenfoot.getRandomNumber(2);
+       // Randomly chooses between the two paths
        if(num==0)
        {
            path = world.pathOne;
@@ -54,6 +58,7 @@ public class Enemy extends Entity
        {
            path = world.pathTwo;
        }
+       
        destination = new int[]{path.get(0)[0], path.get(0)[1]};
        game.addObject(healthBar, getX(), getY()-20);
     }     
@@ -61,58 +66,45 @@ public class Enemy extends Entity
     public void act() 
     {
         if (currentIndex == path.size()) 
-        //THIS IS SO WEIRD!!! THE PATH>SIZE() CHANGES EVERY TIME I RUN IT
         {
-            //System.out.println("disappeared");
-            //getWorld().removeObject(this);
-            //return;
             this.existing = false;
         }
         
         if (distanceFrom(destination[0], destination[1])<5)
         {
-            //System.out.println("relocated");
-            //System.out.println(path.size());
-            //System.out.println(currentIndex);
             int x = path.get(currentIndex)[0];
             int y = path.get(currentIndex)[1];
             currentIndex++;
             relocate(x,y);
         }
         
-        //System.out.println(currentIndex);
-        //System.out.println(path.size());
-        
-        
-        
-        
+        /*
         if(this.isTouching(Fireball.class))
-        {
-            this.health -= 0.1;
-        }
-        
-        if(this.isTouching(LightningStrike.class))
         {
             this.health -= 0.3;
         }
         
-       
+        if(this.isTouching(LightningStrike.class))
+        {
+            
+            this.health -= 0.2;
+        }
+        */
+
+
         if (this.health <= -1)
         {
             world = (Game)getWorld();
             getWorld().removeObject(healthBar);
             this.existing = false;
-            world.dudeList.remove(this);
-            world.removeObject(this);
             return;
         }
         
         
         move(destination[0], destination[1]);
-        healthBar.updatePercentage(this.health);
+        healthBar.updatePercentage(this.health/this.max_health);
         healthBar.updatePosition(getX(),getY()-20);
-        //healthBar.updatePercentage(0.9);
-       //move();
+
     }   
     
     public void relocate(int x, int y)
@@ -126,17 +118,10 @@ public class Enemy extends Entity
     public void move()
     {
 
-        
-        //System.out.println("xx"+getX());
         double d = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
         double xBlock = xDiff/(d/speed);
         double yBlock = yDiff/(d/speed);
-        //System.out.println("xBlock" + xBlock);
-        //System.out.println("speed" + speed);
-        //System.out.println("xDiff" + xDiff);
-        //System.out.println("d" + d);
         setLocation(getX()+(int)(xBlock+0.5), getY()+(int)(yBlock+0.5));
-        //System.out.println(getX()+(int)xBlock + " " + getY()+(int)yBlock);
         
     }
     
@@ -165,8 +150,22 @@ public class Enemy extends Entity
         }
     }
 
+    public int getCoins()
+    {
+        return this.coins;
+    }
+    
+    public double getHealth()
+    {
+        return this.health;
+    }
+
     public void remove()
     {
+        world = (Game)getWorld();
+        world.updateCoins(973);
+        DropCoin drop = new DropCoin();
+        getWorld().addObject(drop, this.getX(), this.getY());
         getWorld().removeObject(healthBar);
         getWorld().removeObject(this);
         return;

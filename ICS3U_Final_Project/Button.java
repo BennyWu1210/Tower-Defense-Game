@@ -21,15 +21,18 @@ public class Button extends Actor
     public Button(GreenfootImage button)
     {
         this.button = button;
-        setImage(this.button);
+        setImage(button);
         time.mark();
     }
+    
     public void act() 
     {
-        
-        // Add your action code here.
+
     }    
     
+    /**
+     * Changes the size of button constantly to create an animation
+     */
     public void changeSize()
     {
         setImage(this.button);
@@ -48,13 +51,11 @@ public class Button extends Actor
         
         if(sizeOfButton>1.25)
         {
-            
             increasing = false;
         }
         
         else if(sizeOfButton<1)
         {
-            
             increasing = true;
         }
         

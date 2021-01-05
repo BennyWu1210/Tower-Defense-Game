@@ -23,19 +23,21 @@ public class LightningStrike extends Projectile
         // Add your action code here.
         this.target = target;
         this.tower = tower;
+        this.damage = 3.5;
+        this.splash_damage = 1.2;
+
         for(GreenfootImage img: images)
         {
             img.scale(100,100);
             img.rotate(130);
         }
         
-        //setLocation(418,524);
         time.mark();
     }  
     
     public void act()
     {
-        
+        super.act();
         if(imageIndex == images.size()-1)
         {
             getWorld().removeObject(this);
@@ -43,12 +45,12 @@ public class LightningStrike extends Projectile
         }
         if(target.existing)
         {
-            if(distanceFrom(tower.getX(), tower.getY())>tower.radius
-            || distanceFrom(target.getX(), target.getY()) < 5 )
+            if(distanceFrom(tower.getX(), tower.getY())>tower.getRadius()
+            || distanceFrom(target.getX(), target.getY()) < 6 )
             {
                 if(distanceFrom(target.getX(), target.getY()) < 5)
                 {
-                    target.takeDamage(1.5);
+                    target.takeDamage(damage);
                 }
 
             }

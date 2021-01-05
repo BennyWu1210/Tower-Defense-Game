@@ -14,23 +14,35 @@ public class GoldMine extends Actor
      */
     SimpleTimer time = new SimpleTimer();
     int Miningspeed;
-    public GoldMine(int speed)
+    int level;
+    int productivity;
+    GreenfootImage image;
+    public GoldMine(int speed, int level)
     {
         this.Miningspeed = speed;
+        this.level = level;
+        productivity = 10;
         time.mark();
-        
+        image = new GreenfootImage("gold_mine_level01.png");
+        image.scale(100,70);
+        setImage(image);
     }
     
     public void act() 
     {
-        if(1000/time.millisElapsed()<Miningspeed)
+        if(1000/Miningspeed<time.millisElapsed())
         {
-            
+            System.out.println("yo");
+            time.mark();
+            spawnCoin();
         }
     }    
     
-    public void showCoin()
+    public void spawnCoin()
     {
-        ;
+        Game world = (Game)getWorld();
+        DropCoin coin = new DropCoin();
+        world.addObject(coin, getX()-10, getY()-25);
+        world.updateCoins(10);
     }
 }

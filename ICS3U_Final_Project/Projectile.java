@@ -15,10 +15,27 @@ public class Projectile extends Entity
     List<GreenfootImage> images;
     public double imageIndex = 0;
     GifImage image;
+    double damage;
+    double splash_damage;
+    
     public void act() 
     {
-        
+        splashDamage();
     }  
+    
+    public void splashDamage()
+    {
+        if(this.isTouching(Enemy.class))
+        {
+            List<Enemy> enemies = getIntersectingObjects(Enemy.class);
+            for(Enemy e: enemies)
+            {
+                e.takeDamage(splash_damage);
+            }
+                
+        }
+        
+    }
     
 
 

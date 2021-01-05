@@ -1,10 +1,10 @@
 #BlueJ class context
 comment0.target=GoldMine
 comment0.text=\n\ Write\ a\ description\ of\ class\ GoldMine\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=speed
-comment1.target=GoldMine(int)
+comment1.params=speed\ level
+comment1.target=GoldMine(int,\ int)
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
-comment3.target=void\ showCoin()
+comment3.target=void\ spawnCoin()
 numComments=4

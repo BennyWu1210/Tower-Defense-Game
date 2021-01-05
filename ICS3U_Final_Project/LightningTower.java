@@ -18,7 +18,8 @@ public class LightningTower extends Tower
     public LightningTower(TowerTile tile)
     {
         super(tile);
-        radius = 80;
+        this.fire_rate = 1800;
+        setRadius(80);
         image = new GreenfootImage("lightning_tower1.png");
         image.scale(55,75);
         setImage(image);
@@ -34,22 +35,16 @@ public class LightningTower extends Tower
     
     public void act() 
     {
-        // Add your action code here.
         super.act();
-        if(time.millisElapsed()>2400){
-            
+        if(time.millisElapsed()>1800){
             time.mark();
             Enemy target = checkClosest();
             if(target != null)
             {
-                //System.out.println("checked");
                 LightningStrike f = new LightningStrike(target, this);
                 int[] start = {this.getX(), this.getY()-30};
                 int[] end = {target.getX(), target.getY()};
-                getWorld().addObject(f,end[0],end[1]);
-                //System.out.println(getX()+" "+getY()+" "+ " "+target.getX()+" "+target.getY());
-                //System.out.println(degree);
-                
+                getWorld().addObject(f,end[0],end[1]);              
                 f.strike(start, end);
             }
         }

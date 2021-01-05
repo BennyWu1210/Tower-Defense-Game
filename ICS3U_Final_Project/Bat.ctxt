@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Bat
+comment0.text=\n\ Write\ a\ description\ of\ class\ Bat\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=speed\ health\ coins\ x\ y
+comment1.target=Bat(double,\ double,\ int,\ int,\ int)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=ouch
+comment3.target=void\ takeDamage(double)
+numComments=4

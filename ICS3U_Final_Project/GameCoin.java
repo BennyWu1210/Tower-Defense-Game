@@ -22,7 +22,7 @@ public class GameCoin extends Coin
     
     public void act() 
     {
-        // Add your action code here.
+        
     }    
     
     public void displayCoin()

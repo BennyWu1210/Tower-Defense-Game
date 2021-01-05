@@ -13,7 +13,6 @@ public class StartButton extends Button
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
 
-    
     public StartButton(GreenfootImage image, int l, int w)
     {
         super(image);
@@ -22,16 +21,19 @@ public class StartButton extends Button
         button.scale(length, width);
         
     }
+    
     public void act() 
     {
-        
         changeSize();
-        
+        detectClick();
+    }  
+    
+    public void detectClick()
+    {
         if(Greenfoot.mouseClicked(this))
         {
             Game game = new Game();
             Greenfoot.setWorld(game);
-            
         }
-    }    
+    }
 }

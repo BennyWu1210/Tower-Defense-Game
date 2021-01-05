@@ -18,11 +18,11 @@ public class Inferno extends Tower
     public Inferno(TowerTile tile)
     {
         super(tile);
+        this.fire_rate = 900;
         image = new GreenfootImage("inferno_tower1.png");
         image.scale(40,60);
         setImage(image);
-        //setLocation(pos[0], pos[1]-20);
-        radius = 150;
+        setRadius(150);
 
     }
     
@@ -48,7 +48,6 @@ public class Inferno extends Tower
                 getWorld().addObject(f, getX(), getY());
             }
             
-            //System.out.println(target);
         }
     }    
     

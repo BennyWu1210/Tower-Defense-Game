@@ -12,15 +12,14 @@ public abstract class Entity extends Actor
      * Act - do whatever the Entity wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    Game world; 
     SimpleTimer time = new SimpleTimer();
-    Game world; //DELETE THIS
-    public double speed = 0;
+    public double speed = 0; 
     public int[] pos = new int[2];
     public boolean existing = true;
     List<GreenfootImage> images;
-    //public int imageIndex = 0;
-    public double imageIndex = 0; //This is to control the speed of the transition between images
-                                  // It requires a double to do so.
+
+    public double imageIndex = 0; // The index has to be a double to control the speed of image transition
     public boolean gif = false;
     
     public abstract void act();  
@@ -28,7 +27,6 @@ public abstract class Entity extends Actor
     public double distanceFrom(int x, int y)
     {
         double distance = Math.sqrt(Math.pow(x-getX(), 2) + Math.pow(y-getY(), 2));
-        //system.out.println("dis:" + distance);
         return distance;
     }     
     

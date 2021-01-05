@@ -15,8 +15,6 @@ public class Fireball extends Projectile
     SimpleTimer time = new SimpleTimer();
     GifImage image;
     GifImage explosion;
-    
-    
     Enemy target;
     Tower tower;
     int[] destination = new int[2];
@@ -24,37 +22,41 @@ public class Fireball extends Projectile
     {
        
 
-        time.mark();
+        
         image =  new GifImage("flame02.gif");
         explosion = new GifImage("explosion01.gif");
         this.target = target;
         this.tower = tower;
         this.images = image.getImages();
+        this.damage = 2.2;
+        this.splash_damage = 1;
+        this.gif = true;
+        time.mark();
+        
         for(GreenfootImage image: images)
         {
             image.scale(25,25);
         }
         speed = 5;
-        gif = true;
+        
         setLocation(tower.getX(), tower.getY());
         
     }
     
     public void act() 
     {
-        // Add your action code here.'
-        //Random ran = new Random();
-        //setLocation(getX()+2, getY()+2);
-        //System.out.println(target.existing);
+
+        super.act();
+        
         if(target.existing)
         {
             
-            if(distanceFrom(tower.getX(), tower.getY())>tower.radius
-            || distanceFrom(target.getX(), target.getY()) < 5 )
+            if(distanceFrom(tower.getX(), tower.getY())>tower.getRadius()
+            || distanceFrom(target.getX(), target.getY()) < 7 )
             {
-                if(distanceFrom(target.getX(), target.getY()) < 5)
+                if(distanceFrom(target.getX(), target.getY()) < 7)
                 {
-                    target.takeDamage(1);
+                    target.takeDamage(damage);
                 }
                 disappear();
                 getWorld().removeObject(this);
@@ -68,7 +70,7 @@ public class Fireball extends Projectile
         }
         else
         {
-            if(distanceFrom(tower.getX(), tower.getY())>tower.radius 
+            if(distanceFrom(tower.getX(), tower.getY())>tower.getRadius()
                || distanceFrom(destination[0], destination[1]) < 6)
             {
                 
@@ -86,9 +88,6 @@ public class Fireball extends Projectile
                 getWorld().removeObject(this);
             }
         }
-        //System.out.println(target.getX() + " fireball " + target.getY());
-        //System.out.println(target.existing);
-
 
     }    
 

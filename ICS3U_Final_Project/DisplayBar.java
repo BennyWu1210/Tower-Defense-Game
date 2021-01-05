@@ -14,27 +14,19 @@ public class DisplayBar extends Actor
      */
     
     Game world;
-    //GreenfootImage full;
-    //GreenfootImage empty;
-    double health = 5;
     int[] pos = new int[2];
     GreenfootImage[] image = new GreenfootImage[6];
     
     public DisplayBar()
     {
-        //full = new GreenfootImage("green.png");
-        //empty = new GreenfootImage("red.png");
-        //setImage(empty);
-        //full.scale(25,3);
-        //empty.scale(1,3);
+
         for(int i=0; i<6; i++)
         {
             image[i] = new GreenfootImage("greenBar0" + i + ".png");
             image[i].scale(25,3);
         }
         setImage(image[1]);
-        //world.background.drawImage(empty, getX(), getY());
-        //empty.drawImage(full, getX(), getY());
+
     }
     
     public void addedToWorld(World game)
@@ -42,16 +34,11 @@ public class DisplayBar extends Actor
         Game world = (Game)getWorld();
     }
     
-    public DisplayBar(GreenfootImage a, GreenfootImage b)
-    {
-
-    }
     
     public void act() 
     {
        Game world = (Game)getWorld();
-       //world.background.drawImage(empty, getX()-12, getY()-1);
-        // Add your action code here.
+
     }   
     
     public void updatePosition(int x, int y)
@@ -60,12 +47,35 @@ public class DisplayBar extends Actor
 
     }
     
-    public void updatePercentage(double health)
+    public void updatePercentage(double percent)
     {
-        Game world = (Game)getWorld();
-        this.health = health;
-        setImage(image[(int)health]);
-        //empty.scale((int)(25*(1-percentage)), 3);
-        //setLocation((int)(getX()-25+(25*(1-percentage)/2)), getY());
+        world = (Game)getWorld();
+        
+        if(percent == 1)
+        {
+            setImage(image[5]);
+        }
+        else if(percent >= 0.8)
+        {
+            setImage(image[4]);
+        }
+        else if(percent >= 0.6)
+        {
+            setImage(image[3]);
+        }
+        else if(percent >= 0.4)
+        {
+            setImage(image[2]);
+        }
+        else if(percent >= 0.2)
+        {
+            setImage(image[1]);
+        }
+        else if(percent >= 0)
+        {
+            setImage(image[0]);
+        }
+        
+
     }
 }

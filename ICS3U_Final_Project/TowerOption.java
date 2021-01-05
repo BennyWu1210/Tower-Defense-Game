@@ -22,6 +22,6 @@ public class TowerOption extends Button
     }
     public void act() 
     {
-        // Add your action code here.
+
     }    
 }
