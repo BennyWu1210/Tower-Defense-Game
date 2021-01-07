@@ -25,6 +25,8 @@ public class LightningTower extends Tower
         setImage(image);
         setLocation(pos[0], pos[1]-20);
         time.mark();
+        lv = new Label("Level " + getLevel(), 20);
+        lv.setFillColor(Color.CYAN);
     }
     
     public void addedToWorld(World game)
@@ -36,6 +38,7 @@ public class LightningTower extends Tower
     public void act() 
     {
         super.act();
+        displayLevel();
         if(time.millisElapsed()>1800){
             time.mark();
             Enemy target = checkClosest();
@@ -49,4 +52,11 @@ public class LightningTower extends Tower
             }
         }
     }    
+    
+    public void displayLevel()
+    {
+       //getWorld().removeObject(lv);
+       lv.setValue("Level " + getLevel());
+       getWorld().addObject(lv, this.getX(), this.getY()-35);
+    }
 }

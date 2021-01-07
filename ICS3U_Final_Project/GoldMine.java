@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class GoldMine extends Actor
+public class GoldMine extends Decoration
 {
     /**
      * Act - do whatever the GoldMine wants to do. This method is called whenever
@@ -21,6 +21,8 @@ public class GoldMine extends Actor
     {
         this.Miningspeed = speed;
         this.level = level;
+        this.length = 100;
+        this.width = 70;
         productivity = 10;
         time.mark();
         image = new GreenfootImage("gold_mine_level01.png");
@@ -30,6 +32,7 @@ public class GoldMine extends Actor
     
     public void act() 
     {
+        enlarge();
         if(1000/Miningspeed<time.millisElapsed())
         {
             System.out.println("yo");
@@ -44,5 +47,17 @@ public class GoldMine extends Actor
         DropCoin coin = new DropCoin();
         world.addObject(coin, getX()-10, getY()-25);
         world.updateCoins(10);
+    }
+    
+    public void enlarge()
+    {
+        if(Greenfoot.mouseMoved(this))
+        {
+            image.scale((int)(length*1.3),(int)(width*1.3));
+        }
+        if (Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this))
+        {
+            image.scale(length,width);
+        }
     }
 }

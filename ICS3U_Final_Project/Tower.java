@@ -18,14 +18,19 @@ public class Tower extends Entity
     static GreenfootImage oval;
     private boolean clicked = false;
     private int radius;
+    private int level;
+    protected UpgradeButton u;
+    protected Label lv;
     protected TowerTile tile;
     protected Oval o;
     protected int fire_rate;
+    
     
     public Tower(TowerTile tile)
     {
         setLocation(tile.position[0], tile.position[1]);
         this.tile = tile;
+        this.level = 1;
         oval = new GreenfootImage("Oval3.png");
     }
     
@@ -35,18 +40,14 @@ public class Tower extends Entity
         {
             clicked = true;
             displayCircle();
+            displayUpgrade();
         }
-        else if(Greenfoot.mouseClicked(null) && !Greenfoot.mouseClicked(this))
+        else if((Greenfoot.mouseClicked(null) && !Greenfoot.mouseClicked(this))
+        || (Greenfoot.mouseClicked(this) && clicked))
         {
             clicked = false;
             displayCircle();
-
-        }
-        else if(Greenfoot.mouseClicked(this) && clicked)
-        {
-            clicked = false;
-            displayCircle();
-            
+            displayUpgrade();
         }
         
     }    
@@ -94,7 +95,35 @@ public class Tower extends Entity
             getWorld().removeObject(o);
         }
     }
-
+    
+    public void levelUp()
+    {
+        this.level ++;
+    }
+    
+    public void displayUpgrade()
+    {
+        if (clicked)
+        {
+            u = new UpgradeButton(this);
+            getWorld().addObject(u, tile.getX()+25, tile.getY()+15);
+        }
+        else
+        {
+            if(u.detectClick())
+            {
+                this.levelUp();
+            }
+            getWorld().removeObject(u);
+        }
+        
+    }
+    
+    public int getLevel()
+    {
+        return this.level;
+    }
+    
     public int getRadius()
     {
         return this.radius;
@@ -104,6 +133,8 @@ public class Tower extends Entity
     {
         this.radius = r;
     }
+    
+
 }
 
 

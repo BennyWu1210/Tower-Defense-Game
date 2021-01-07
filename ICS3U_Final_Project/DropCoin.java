@@ -40,11 +40,12 @@ public class DropCoin extends Coin
     
     public GreenfootImage getImage()
     {
-        GreenfootImage image = images.get((int)index);
         if (index>=images.size())
         {
             index = 0;
         }
+        
+        GreenfootImage image = images.get((int)index);
         index += 0.25;
         time.mark();  
         return image;

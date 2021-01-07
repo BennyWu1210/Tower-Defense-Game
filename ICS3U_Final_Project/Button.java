@@ -38,13 +38,11 @@ public class Button extends Actor
         setImage(this.button);
         if(increasing && time.millisElapsed()>200)
         {
-            setImage(this.button);
             sizeOfButton += 0.125;
             time.mark();
         }
         else if(!increasing && time.millisElapsed()>200)
         {
-            setImage(this.button);
             sizeOfButton -= 0.125;
             time.mark();
         }
@@ -62,4 +60,17 @@ public class Button extends Actor
         button.scale((int)(length*sizeOfButton),(int)(width*sizeOfButton));
         
     }
+    
+    public void checkHover()
+    {
+        if(Greenfoot.mouseMoved(this))
+        {
+            button.scale((int)(length*1.25),(int)(width*1.25));
+        }
+        if (Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this))
+        {
+            button.scale(length,width);
+        }
+    }
+    
 }

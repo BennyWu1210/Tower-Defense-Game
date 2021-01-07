@@ -33,6 +33,14 @@ public class TowerTile extends Actor
     public void act() 
     {
         detectClick();
+        if(Greenfoot.mouseMoved(this))
+        {
+            block.scale((int)(40*1.25),(int)(40*1.25));
+        }
+        if (Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this))
+        {
+            block.scale(40,40);
+        }
         // Add your action code here.
     }    
     
@@ -67,10 +75,11 @@ public class TowerTile extends Actor
         
         else if(Greenfoot.mouseClicked(fireButton))
         {
-            Inferno i = new Inferno(this);
+            InfernoTower i = new InfernoTower(this);
+            
             getWorld().addObject(i, position[0], position[1]-20);
         }
-        
+        //BombTower i = new BombTower(this);
         
         
     }

@@ -12,16 +12,18 @@ public class TowerOption extends Button
      * Act - do whatever the TowerOption wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    static int length = 20;
-    static int width = 25;
+    static int l = 20;
+    static int w = 25;
     
     public TowerOption(GreenfootImage button)
     {
         super(button);
+        this.length = l;
+        this.width = w;
         button.scale(length,width);
     }
     public void act() 
     {
-
+        checkHover();
     }    
 }

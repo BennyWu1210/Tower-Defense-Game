@@ -1,11 +1,12 @@
 #BlueJ class context
 comment0.target=StartButton
 comment0.text=\n\ Write\ a\ description\ of\ class\ StartButton\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=image\ l\ w
-comment1.target=StartButton(greenfoot.GreenfootImage,\ int,\ int)
-comment1.text=\n\ Act\ -\ do\ whatever\ the\ StartButton\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
+comment1.params=file_name\ l\ w
+comment1.target=StartButton(java.lang.String,\ int,\ int)
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ detectClick()
-numComments=4
+comment4.params=
+comment4.target=void\ checkHover()
+numComments=5
