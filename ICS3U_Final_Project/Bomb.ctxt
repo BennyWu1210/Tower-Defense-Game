@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Bomb
+comment0.text=\n\ Write\ a\ description\ of\ class\ Bomb\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=target\ tower
+comment1.target=Bomb(Enemy,\ Tower)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ disappear()
+comment4.params=
+comment4.target=greenfoot.GreenfootImage\ getImage()
+numComments=5

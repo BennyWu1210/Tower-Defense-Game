@@ -18,7 +18,7 @@ import java.io.*;
 public class Game extends World
 {
 
-    
+
     // These arraylists store the set position of the paths, and the current status of the enemies
     public ArrayList<int[]> pathOne = new ArrayList<int[]>(); 
     public ArrayList<int[]> pathTwo = new ArrayList<int[]>();
@@ -29,7 +29,9 @@ public class Game extends World
     int total_coins;                        // It represents the total amount of coins the player possesses
     Label coins;                            // The label on the top left corner of the screen
     SimpleTimer time = new SimpleTimer();   // A timer to control the speed of towers/enemies
-    
+    SimpleTimer game_time = new SimpleTimer();
+    int lives;
+    Heart[] hearts;
     
     /**
      * Constructor for objects of class Game
@@ -64,26 +66,32 @@ public class Game extends World
         // Update the status of the gold mine
         updateMine(1, 1); 
 
+        lives = 5;
+        hearts = new Heart[lives];
+        storeHeath();
+        displayHealth(800, 50);
         
         time.mark();
         
-        
-        
     }
+    
     
     public void act()
     {
-
+        
         /* 
          * Add an enemy onto the screen after a certain amount of time
          * TODO: Needs to be change based on the difficulties of different levels
          */
-        
+        if(game_time.millisElapsed()>50000)
+        {
+            detectCondition(true);
+        }
         if(time.millisElapsed()>Greenfoot.getRandomNumber(400)+800)
         {
             addEnemy();
         }
-        
+        detectCondition(false);
         checkEnemyStatus(); // Constantly checks if the enemy is in the world
 
     }
@@ -153,6 +161,43 @@ public class Game extends World
     {
         total_coins += coin;
         coins.setValue(total_coins);
+    }
+    
+    public void storeHeath()
+    {
+        for(int i=0; i<lives; i++)
+        {
+            hearts[i] = new Heart();
+        }
+    }
+    
+    public void displayHealth(int x, int y)
+    {
+        
+        for (int i=0; i<lives; i++)
+        {
+            addObject(hearts[i], x+i*30, y);
+        }
+        
+        for (int i=4; i>lives-1; i--)
+        {
+            removeObject(hearts[i]);
+        }
+        
+    }
+    
+    public void detectCondition(boolean win)
+    {
+        if (lives<=0)
+        {
+            GameOver oo = new GameOver(this);
+            Greenfoot.setWorld(oo);
+        }
+        else if(win)
+        {
+            GameWin yah = new GameWin(this);
+            Greenfoot.setWorld(yah);
+        }
     }
     
     public void mouseCoords(String f)

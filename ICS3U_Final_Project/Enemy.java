@@ -67,6 +67,9 @@ public class Enemy extends Entity
     {
         if (currentIndex == path.size()) 
         {
+            Game world = (Game)getWorld();
+            world.lives --;
+            world.displayHealth(800, 50);
             this.existing = false;
         }
         

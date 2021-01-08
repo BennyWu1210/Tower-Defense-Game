@@ -25,12 +25,15 @@ public class StartButton extends Button
         
     }
 
-    SimpleTimer timer; 
+    SimpleTimer timer = new SimpleTimer(); 
     public void act() 
     {
         // The pixels of the button becomes TERRIBLE when hovered for too many times
         // Presumably it is caused by calling the scale method too much
-
+        if(timer.millisElapsed()>1000)
+        {
+            button = new GreenfootImage(file_name); // Refreshing the button fixes the problem
+        }
         detectClick();
         checkHover();
     }  

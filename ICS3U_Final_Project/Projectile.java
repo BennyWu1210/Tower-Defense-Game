@@ -17,10 +17,10 @@ public class Projectile extends Entity
     GifImage image;
     double damage;
     double splash_damage;
-    
+    Tower tower;
     public void act() 
     {
-        splashDamage();
+        
     }  
     
     public void splashDamage()

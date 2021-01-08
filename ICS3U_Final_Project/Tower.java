@@ -66,10 +66,10 @@ public class Tower extends Entity
     public Enemy checkClosest()
     {
         time.mark();
-        int a = world.enemyList.size();
+        int a = ((Game)getWorld()).enemyList.size();
         System.out.println(a);
         
-        for(Enemy e: world.enemyList)
+        for(Enemy e: ((Game)getWorld()).enemyList)
         {
 
             if(isInRange(e))
@@ -110,7 +110,7 @@ public class Tower extends Entity
         }
         else
         {
-            if(u.detectClick())
+            if(u != null && u.detectClick())
             {
                 this.levelUp();
             }

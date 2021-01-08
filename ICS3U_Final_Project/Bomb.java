@@ -1,59 +1,41 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.*;
+
 /**
- * Write a description of class Fireball here.
+ * Write a description of class Bomb here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Fireball extends Projectile
+public class Bomb extends Projectile
 {
     /**
-     * Act - do whatever the Fireball wants to do. This method is called whenever
+     * Act - do whatever the Bomb wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    SimpleTimer time = new SimpleTimer();
-    GifImage image;
-    GifImage explosion;
     Enemy target;
-    
     int[] destination = new int[2];
-    public Fireball(Enemy target, Tower tower)
+    public Bomb(Enemy target, Tower tower)
     {
-       
-
-        
-        this.image =  new GifImage("flame02.gif");
+        this.image =  new GifImage("bomb-4.png");
+        this.images = image.getImages();
         this.target = target;
         this.tower = tower;
-        this.images = image.getImages();
-        this.damage = 2.2;
-        this.splash_damage = 1;
+        this.damage = 0;
+        this.splash_damage = 3;
         this.gif = true;
-        time.mark();
-        
-        for(GreenfootImage image: images)
-        {
-            image.scale(25,25);
-        }
-        speed = 5;
-        
-        setLocation(tower.getX(), tower.getY());
-        
+        speed = 4;
+
     }
     
     public void act() 
     {
-
-        super.act();
-        splashDamage();
         if(target.existing)
         {
             
             if(distanceFrom(tower.getX(), tower.getY())>tower.getRadius()
-            || distanceFrom(target.getX(), target.getY()) < 7 )
+            || distanceFrom(target.getX(), target.getY()) < 15 )
             {
-                if(distanceFrom(target.getX(), target.getY()) < 7)
+                if(distanceFrom(target.getX(), target.getY()) < 15)
                 {
                     target.takeDamage(damage);
                 }
@@ -65,7 +47,7 @@ public class Fireball extends Projectile
 
             destination[0] = target.getX();
             destination[1] = target.getY();
-            move(target.getX()+5, target.getY());
+            move(target.getX()+8, target.getY());
         }
         else
         {
@@ -87,17 +69,11 @@ public class Fireball extends Projectile
                 getWorld().removeObject(this);
             }
         }
-
     }    
-
-    public void setDamage(int damage)
-    {
-        this.damage = damage;
-    }
     
     public void disappear()
     {
-        FireExplosion explosion = new FireExplosion(getX(), getY());
+        BombExplosion explosion = new BombExplosion(getX(), getY(), splash_damage);
         getWorld().addObject(explosion, getX(), getY());
     }
     

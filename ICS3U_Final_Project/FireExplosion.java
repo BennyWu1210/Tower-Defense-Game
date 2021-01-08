@@ -12,17 +12,15 @@ public class FireExplosion extends HitEffect
      * Act - do whatever the FireExplosion wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    GifImage explosion;
-    List<GreenfootImage> images;
-    int imageIndex;
+    
     
     public FireExplosion(int x, int y) 
     {
         // Add your action code here.
-        explosion = new GifImage("explosion01.gif");
-        images = explosion.getImages();
+        this.explosion = new GifImage("explosion01.gif");
+        this.images = explosion.getImages();
+        this.imageIndex = 0;
         setLocation(x, y);
-        imageIndex = 0;
         for(GreenfootImage image: images)
         {
             image.scale(30,30);
@@ -32,19 +30,10 @@ public class FireExplosion extends HitEffect
     
     public void act()
     {
-        if(imageIndex >= images.size())
-        {
-            getWorld().removeObject(this);
-            return;
-        }
+        checkRemove();
     }
     
-    public GreenfootImage getImage()
-    {
-        imageIndex ++;
-        return explosion.getCurrentImage();
-
-    }
+    
        
     
 }

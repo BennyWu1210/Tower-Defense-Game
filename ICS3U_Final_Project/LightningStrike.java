@@ -17,7 +17,6 @@ public class LightningStrike extends Projectile
     List<GreenfootImage> images = image.getImages();
     
     Enemy target;
-    Tower tower;
     public LightningStrike(Enemy target, Tower tower) 
     {
         // Add your action code here.
@@ -38,6 +37,7 @@ public class LightningStrike extends Projectile
     public void act()
     {
         super.act();
+        splashDamage();
         if(imageIndex == images.size()-1)
         {
             getWorld().removeObject(this);
