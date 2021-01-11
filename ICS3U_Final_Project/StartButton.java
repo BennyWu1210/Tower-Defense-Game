@@ -47,7 +47,7 @@ public class StartButton extends Button
         }
     }
     
-    private boolean hovering = true;
+    private boolean hovering = false;
     public void checkHover()
     {
         if(Greenfoot.mouseMoved(this))

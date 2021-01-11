@@ -12,7 +12,7 @@ public class Yoshi extends Enemy
      * Act - do whatever the Yoshi wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    GifImage image;
+    public GifImage image;
     
     public Yoshi(double speed, double health, int coins, int x, int y)
     {

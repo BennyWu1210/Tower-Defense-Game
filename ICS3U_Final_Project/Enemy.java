@@ -47,60 +47,58 @@ public class Enemy extends Entity
     
     public void addedToWorld(World game)
     {
-       world = (Game)game;
-       int num = Greenfoot.getRandomNumber(2);
-       // Randomly chooses between the two paths
-       if(num==0)
+       if(game.getClass() == Game.class)
        {
-           path = world.pathOne;
+           world = (Game)game;
+           int num = Greenfoot.getRandomNumber(2);
+           // Randomly chooses between the two paths
+           if(num==0)
+           {
+               path = world.pathOne;
+           }
+           else
+           {
+               path = world.pathTwo;
+           }
+           
+           destination = new int[]{path.get(0)[0], path.get(0)[1]};
+           game.addObject(healthBar, getX(), getY()-20);
        }
        else
        {
-           path = world.pathTwo;
+           
+           destination = new int[2];
        }
-       
-       destination = new int[]{path.get(0)[0], path.get(0)[1]};
-       game.addObject(healthBar, getX(), getY()-20);
     }     
     
     public void act() 
     {
-        if (currentIndex == path.size()) 
+        if(getWorld().getClass() == Game.class)
         {
-            Game world = (Game)getWorld();
-            world.lives --;
-            world.displayHealth(800, 50);
-            this.existing = false;
-        }
-        
-        if (distanceFrom(destination[0], destination[1])<5)
-        {
+            if (currentIndex == path.size()) 
+            {
+                Game world = (Game)getWorld();
+                world.lives --;
+                world.displayHealth(800, 50);
+                this.existing = false;
+                
+            }
+            if (distanceFrom(destination[0], destination[1])<5)
+            {
             int x = path.get(currentIndex)[0];
             int y = path.get(currentIndex)[1];
             currentIndex++;
             relocate(x,y);
-        }
-        
-        /*
-        if(this.isTouching(Fireball.class))
-        {
-            this.health -= 0.3;
-        }
-        
-        if(this.isTouching(LightningStrike.class))
-        {
-            
-            this.health -= 0.2;
-        }
-        */
+            }
 
-
-        if (this.health <= -1)
-        {
+            if (this.health <= -1)
+            {
             world = (Game)getWorld();
             getWorld().removeObject(healthBar);
             this.existing = false;
             return;
+            }
+
         }
         
         

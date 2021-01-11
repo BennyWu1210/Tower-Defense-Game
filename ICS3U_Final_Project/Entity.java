@@ -17,7 +17,7 @@ public abstract class Entity extends Actor
     public double speed = 0; 
     public int[] pos = new int[2];
     public boolean existing = true;
-    List<GreenfootImage> images;
+    public List<GreenfootImage> images;
 
     public double imageIndex = 0; // The index has to be a double to control the speed of image transition
     public boolean gif = false;

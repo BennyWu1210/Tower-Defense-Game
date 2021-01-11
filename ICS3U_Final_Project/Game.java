@@ -30,8 +30,10 @@ public class Game extends World
     Label coins;                            // The label on the top left corner of the screen
     SimpleTimer time = new SimpleTimer();   // A timer to control the speed of towers/enemies
     SimpleTimer game_time = new SimpleTimer();
+    Label counter;
     int lives;
     Heart[] hearts;
+    int level;
     
     /**
      * Constructor for objects of class Game
@@ -55,13 +57,13 @@ public class Game extends World
         display_tiles(tiles);
         
         // Set the labels and the amount of coins
-        total_coins = 999;
+        total_coins = 0;
         coins = new Label(total_coins, 50); 
         coins.setFillColor(Color.YELLOW);
         addObject(coins, 260, 70);
         GreenfootImage coin = new GreenfootImage("coin.png");
         coin.scale(60,60);
-        background.drawImage(coin, 150, 40);
+        background.drawImage(coin, 160, 40);
         
         // Update the status of the gold mine
         updateMine(1, 1); 
@@ -70,6 +72,10 @@ public class Game extends World
         hearts = new Heart[lives];
         storeHeath();
         displayHealth(800, 50);
+        
+        counter = new Label("time: " + game_time.millisElapsed()/1000.0, 30);
+        counter.setFillColor(Color.BLACK);
+        addObject(counter, 400, 70);
         
         time.mark();
         
@@ -83,13 +89,17 @@ public class Game extends World
          * Add an enemy onto the screen after a certain amount of time
          * TODO: Needs to be change based on the difficulties of different levels
          */
-        if(game_time.millisElapsed()>50000)
+        if(game_time.millisElapsed()>3000)
         {
             detectCondition(true);
         }
         if(time.millisElapsed()>Greenfoot.getRandomNumber(400)+800)
         {
             addEnemy();
+        }
+        if(game_time.millisElapsed()>10)
+        {
+            updateTimer();
         }
         detectCondition(false);
         checkEnemyStatus(); // Constantly checks if the enemy is in the world
@@ -161,6 +171,22 @@ public class Game extends World
     {
         total_coins += coin;
         coins.setValue(total_coins);
+    }
+    
+    public void updateTimer()
+    {
+        if (game_time.millisElapsed()<10000)
+        {
+            counter.setValue("time: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,3));
+        }
+        else if(game_time.millisElapsed()<100000)
+        {
+            counter.setValue("time: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,4));
+        }
+        else
+        {
+            counter.setValue("time: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,5));
+        }
     }
     
     public void storeHeath()
