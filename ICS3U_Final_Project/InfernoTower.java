@@ -23,6 +23,7 @@ public class InfernoTower extends Tower
         image.scale(40,60);
         setImage(image);
         setRadius(150);
+        setCost(300);
         lv = new Label("Level " + getLevel(), 20);
         lv.setFillColor(Color.RED);
     }

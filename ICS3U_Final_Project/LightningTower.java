@@ -24,6 +24,7 @@ public class LightningTower extends Tower
         image.scale(55,75);
         setImage(image);
         setLocation(pos[0], pos[1]-20);
+        setCost(500);
         time.mark();
         lv = new Label("Level " + getLevel(), 20);
         lv.setFillColor(Color.CYAN);

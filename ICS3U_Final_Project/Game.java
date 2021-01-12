@@ -17,42 +17,48 @@ import java.io.*;
  */
 public class Game extends World
 {
-
-
+ 
     // These arraylists store the set position of the paths, and the current status of the enemies
     public ArrayList<int[]> pathOne = new ArrayList<int[]>(); 
     public ArrayList<int[]> pathTwo = new ArrayList<int[]>();
     public ArrayList<int[]> tiles = new ArrayList<int[]>();
     public ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 
-    GreenfootImage background = new GreenfootImage("images/game_map11.png");
+    GreenfootImage background;
     int total_coins;                        // It represents the total amount of coins the player possesses
     Label coins;                            // The label on the top left corner of the screen
     SimpleTimer time = new SimpleTimer();   // A timer to control the speed of towers/enemies
     SimpleTimer game_time = new SimpleTimer();
     Label counter;
+    Label coin_display;
     int lives;
     Heart[] hearts;
     int level;
+    Level current_level;
     
     /**
      * Constructor for objects of class Game
      * All variables are constant at the beginning
      */
-    public Game()
+    public Game(Level level)
     {    
         // Create a new world with 1050 x 700 cells with a cell size of 1x1 pixels.
         super(1050, 700, 1); 
-        setBackground(background);
+        this.current_level = level;
+        
+        background = level.getBackground();
+        //background = new GreenfootImage("game_map202.jpg");
         background.scale(1050, 700);
+        setBackground(background);
+        
         System.out.println("--------");
         System.out.println("Welcome to Benny's Tower Defense");
         System.out.println("--------");
         
         // It reads the coordinates of the map and store it into certain arrays
-        readMouseInfo("Tower Defense MousePos1.txt", pathOne);
-        readMouseInfo("Tower Defense MousePos2.txt", pathTwo);
-        readMouseInfo("tiles_coordinates.txt", tiles);
+        readMouseInfo(level.getPathOne(), pathOne);
+        readMouseInfo(level.getPathTwo(), pathTwo);
+        readMouseInfo(level.getTiles(), tiles);
 
         display_tiles(tiles);
         
@@ -85,16 +91,29 @@ public class Game extends World
     public void act()
     {
         
+        if(Greenfoot.mouseClicked(null))
+        {
+            MouseInfo mouse = Greenfoot.getMouseInfo();
+            if(mouse!=null)
+            {
+                writeMouseInfo(mouse.getX(), mouse.getY(), "Tower Defense MousePos6.txt");
+            }
+        }
+        
+        
         /* 
+         * 
          * Add an enemy onto the screen after a certain amount of time
          * TODO: Needs to be change based on the difficulties of different levels
          */
-        if(game_time.millisElapsed()>3000)
+
+        if(game_time.millisElapsed()>80000)
         {
             detectCondition(true);
         }
-        if(time.millisElapsed()>Greenfoot.getRandomNumber(400)+800)
+        if(time.millisElapsed()>Greenfoot.getRandomNumber(2000)+2200)
         {
+            time.mark();
             addEnemy();
         }
         if(game_time.millisElapsed()>10)
@@ -103,6 +122,11 @@ public class Game extends World
         }
         detectCondition(false);
         checkEnemyStatus(); // Constantly checks if the enemy is in the world
+        
+        if (coin_display!= null && 2000<no_coin.millisElapsed() && no_coin.millisElapsed()<3000)
+        {
+            removeObject(coin_display);
+        }
 
     }
 
@@ -212,6 +236,44 @@ public class Game extends World
         
     }
     
+    private SimpleTimer no_coin = new SimpleTimer();
+    
+    public boolean checkCoins(int coin)
+    {
+        if (this.total_coins - coin < 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+        
+    }
+    
+    public void takeCoins(int coin)
+    {
+
+        if (this.total_coins - coin < 0)
+        {
+            coin_display = new Label("You do not have enough coins!", 50);
+            coin_display.setFillColor(Color.RED);
+            addObject(coin_display, 530, 300);
+            no_coin.mark();
+        }
+        else
+        {
+            this.total_coins -= coin;
+        }
+        
+        
+        
+        
+        
+        
+        
+    }
+    
     public void detectCondition(boolean win)
     {
         if (lives<=0)
@@ -224,6 +286,18 @@ public class Game extends World
             GameWin yah = new GameWin(this);
             Greenfoot.setWorld(yah);
         }
+    }
+    
+    public void changeLevel(int l)
+    {
+        if(l==1)
+        {
+            Level level = new Level(1050, 700, new GreenfootImage("images/game_map11.png"), 
+            "Tower Defense MousePos1.txt","Tower Defense MousePos2.txt", "tiles_coordinates.txt");
+            Game game = new Game(level);
+            Greenfoot.setWorld(game);
+        }
+        
     }
     
     public void mouseCoords(String f)
@@ -267,8 +341,25 @@ public class Game extends World
             while (sc.hasNextLine())
             {
                 String data = sc.nextLine();
-                int x = Integer.parseInt(data.substring(1, 4));
-                int y = Integer.parseInt(data.substring(6, 9));
+                String store_x = "";
+                String store_y = "";
+                int index = 1;
+                System.out.println(data);
+                while (data.charAt(index) != ',')
+                {
+                    System.out.println(data.charAt(index));
+                    store_x += data.charAt(index);
+                    index ++;
+                }
+                index += 2;
+                while (data.charAt(index) != ')')
+                {
+                    store_y += data.charAt(index);
+                    index ++;
+                }
+                
+                int x = Integer.parseInt(store_x);
+                int y = Integer.parseInt(store_y);
                 int[] arr = {x, y};
                 path.add(arr);
                 // TODO: There may be two-digit integers, not the best way!

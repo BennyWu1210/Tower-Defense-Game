@@ -164,7 +164,7 @@ public class Enemy extends Entity
     public void remove()
     {
         world = (Game)getWorld();
-        world.updateCoins(973);
+        //world.updateCoins(973);
         DropCoin drop = new DropCoin();
         getWorld().addObject(drop, this.getX(), this.getY());
         getWorld().removeObject(healthBar);

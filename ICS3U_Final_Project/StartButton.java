@@ -42,9 +42,13 @@ public class StartButton extends Button
     {
         if(Greenfoot.mouseClicked(this))
         {
-            Game game = new Game();
+            GreenfootImage background = new GreenfootImage("images/game_map202.jpg");
+            Level level = new Level(1050, 700, background, "Tower Defense MousePos5.txt",
+            "Tower Defense MousePos6.txt", "tiles_coordinates03.txt");
+            Game game = new Game(level);
             Greenfoot.setWorld(game);
         }
+            
     }
     
     private boolean hovering = false;

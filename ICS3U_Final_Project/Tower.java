@@ -19,6 +19,7 @@ public class Tower extends Entity
     private boolean clicked = false;
     private int radius;
     private int level;
+    private int cost;
     protected UpgradeButton u;
     protected Label lv;
     protected TowerTile tile;
@@ -132,6 +133,11 @@ public class Tower extends Entity
     public void setRadius(int r)
     {
         this.radius = r;
+    }
+    
+    public void setCost(int c)
+    {
+        this.cost = cost;
     }
     
 
