@@ -33,7 +33,7 @@ public class Game extends World
     Label coin_display;
     int lives;
     Heart[] hearts;
-    int level;
+    static int level;
     Level current_level;
     
     /**
@@ -45,7 +45,7 @@ public class Game extends World
         // Create a new world with 1050 x 700 cells with a cell size of 1x1 pixels.
         super(1050, 700, 1); 
         this.current_level = level;
-        
+        this.level = 1;
         background = level.getBackground();
         //background = new GreenfootImage("game_map202.jpg");
         background.scale(1050, 700);
@@ -90,7 +90,7 @@ public class Game extends World
     
     public void act()
     {
-        
+        /*
         if(Greenfoot.mouseClicked(null))
         {
             MouseInfo mouse = Greenfoot.getMouseInfo();
@@ -99,7 +99,13 @@ public class Game extends World
                 writeMouseInfo(mouse.getX(), mouse.getY(), "Tower Defense MousePos6.txt");
             }
         }
-        
+        */
+        if(Greenfoot.isKeyDown("ENTER"))
+        {
+            
+            changeLevel((level)%3);
+            level++;
+        }
         
         /* 
          * 
@@ -240,38 +246,32 @@ public class Game extends World
     
     public boolean checkCoins(int coin)
     {
-        if (this.total_coins - coin < 0)
+        if (this.total_coins - coin > 0)
         {
-            return false;
+            return true;
         }
         else
         {
-            return true;
+            return false;
         }
         
     }
     
     public void takeCoins(int coin)
     {
-
-        if (this.total_coins - coin < 0)
+        if(checkCoins(coin))
+        {
+            this.total_coins -= coin;
+        }
+        else
         {
             coin_display = new Label("You do not have enough coins!", 50);
             coin_display.setFillColor(Color.RED);
             addObject(coin_display, 530, 300);
-            no_coin.mark();
-        }
-        else
-        {
-            this.total_coins -= coin;
+            no_coin.mark(); 
         }
         
-        
-        
-        
-        
-        
-        
+
     }
     
     public void detectCondition(boolean win)
@@ -288,6 +288,11 @@ public class Game extends World
         }
     }
     
+    public int getLevel()
+    {
+        return this.level;
+    }
+    
     public void changeLevel(int l)
     {
         if(l==1)
@@ -297,7 +302,22 @@ public class Game extends World
             Game game = new Game(level);
             Greenfoot.setWorld(game);
         }
-        
+        else if (l==2)
+        {
+            GreenfootImage background = new GreenfootImage("images/game_map101.jpg");
+            Level level = new Level(1050, 700, background, "Tower Defense MousePos3.txt",
+            "Tower Defense MousePos4.txt", "tiles_coordinates02.txt");
+            Game game = new Game(level);
+            Greenfoot.setWorld(game);
+        }
+        else if (l==3)
+        {
+            GreenfootImage background = new GreenfootImage("images/game_map202.jpg");
+            Level level = new Level(1050, 700, background, "Tower Defense MousePos5.txt",
+            "Tower Defense MousePos6.txt", "tiles_coordinates03.txt");
+            Game game = new Game(level);
+            Greenfoot.setWorld(game);
+        }
     }
     
     public void mouseCoords(String f)

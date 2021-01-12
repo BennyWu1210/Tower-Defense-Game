@@ -42,9 +42,9 @@ public class StartButton extends Button
     {
         if(Greenfoot.mouseClicked(this))
         {
-            GreenfootImage background = new GreenfootImage("images/game_map202.jpg");
-            Level level = new Level(1050, 700, background, "Tower Defense MousePos5.txt",
-            "Tower Defense MousePos6.txt", "tiles_coordinates03.txt");
+            GreenfootImage background = new GreenfootImage("images/game_map11.png");
+            Level level = new Level(1050, 700, background, "Tower Defense MousePos1.txt",
+            "Tower Defense MousePos2.txt", "tiles_coordinates.txt");
             Game game = new Game(level);
             Greenfoot.setWorld(game);
         }

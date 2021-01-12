@@ -73,6 +73,7 @@ public class GameOver extends World
         if(yoshi.distanceFrom(1050, 300)<10)
         {
             removeObject(yoshi);
+            this.game.changeLevel(game.getLevel()+1);
         }
         else
         {

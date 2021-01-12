@@ -34,6 +34,7 @@ public class TowerTile extends Actor
     
     public void act() 
     {
+        
         detectClick();
         if(Greenfoot.mouseMoved(this))
         {
@@ -75,8 +76,9 @@ public class TowerTile extends Actor
             {
                 LightningTower l = new LightningTower(this);
                 world.addObject(l, position[0], position[1]-20);
+                
             }
-            world.takeCoins(bombButton.getCoin());
+            world.takeCoins(lightningButton.getCoin());
             world.removeObject(lightningButton.cost_label);
         }
         
@@ -87,7 +89,7 @@ public class TowerTile extends Actor
                 InfernoTower i = new InfernoTower(this);
                 world.addObject(i, position[0], position[1]-20);
             }
-            world.takeCoins(bombButton.getCoin());
+            world.takeCoins(fireButton.getCoin());
             world.removeObject(fireButton.cost_label);
         }
         else if(Greenfoot.mouseClicked(bombButton))

@@ -20,7 +20,7 @@ public class BombTower extends Tower
         image.scale(50,65);
         setRadius(150);
         setImage(image);
-        setCost(1000);
+        setCost(100);
         lv = new Label("Level " + getLevel(), 20);
         lv.setFillColor(Color.BLACK);
     }
