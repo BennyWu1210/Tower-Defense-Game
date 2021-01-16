@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.io.*;
 /**
  * Write a description of class StartButton here.
  * 
@@ -42,11 +42,17 @@ public class StartButton extends Button
     {
         if(Greenfoot.mouseClicked(this))
         {
+            /*
             GreenfootImage background = new GreenfootImage("images/game_map11.png");
-            Level level = new Level(1050, 700, background, "Tower Defense MousePos1.txt",
+            Level level = new Level(1050, 700, 1, background, "Tower Defense MousePos1.txt",
             "Tower Defense MousePos2.txt", "tiles_coordinates.txt");
+            */
+            File file = new File("level_01.txt");
+            Level level = new Level(file);
             Game game = new Game(level);
+            
             Greenfoot.setWorld(game);
+            
         }
             
     }

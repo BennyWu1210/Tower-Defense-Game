@@ -62,7 +62,8 @@ public class Enemy extends Entity
            }
            
            destination = new int[]{path.get(0)[0], path.get(0)[1]};
-           game.addObject(healthBar, getX(), getY()-20);
+           setLocation(path.get(0)[0], path.get(0)[1]);
+           game.addObject(healthBar, getX()+5, getY()-20);
        }
        else
        {
@@ -104,7 +105,7 @@ public class Enemy extends Entity
         
         move(destination[0], destination[1]);
         healthBar.updatePercentage(this.health/this.max_health);
-        healthBar.updatePosition(getX(),getY()-20);
+        healthBar.updatePosition(getX()+5,getY()-20);
 
     }   
     
@@ -161,6 +162,11 @@ public class Enemy extends Entity
         return this.health;
     }
 
+    public void setSpeed(double speed)
+    {
+        this.speed = speed;
+    }
+    
     public void remove()
     {
         world = (Game)getWorld();

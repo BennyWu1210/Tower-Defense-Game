@@ -19,6 +19,8 @@ public class InfernoTower extends Tower
     {
         super(tile);
         this.fire_rate = 900;
+        this.damage = 2.2;
+        this.splash_damage = 1;
         image = new GreenfootImage("inferno_tower1.png");
         image.scale(40,60);
         setImage(image);
@@ -38,9 +40,9 @@ public class InfernoTower extends Tower
     {
         super.act();
         displayLevel();
-        if(time.millisElapsed()>900)
+        if(time.millisElapsed()>this.fire_rate)
         {
-            
+            //System.out.println("firerate" + this.fire_rate);
             time.mark();
             Enemy target = checkClosest();
 

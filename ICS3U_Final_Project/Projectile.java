@@ -36,6 +36,13 @@ public class Projectile extends Entity
         }
         
     }
+
+    public void setDamage(double increase)
+    {
+        damage *= increase;
+        splash_damage *= increase;
+    }
+    
     
 
 

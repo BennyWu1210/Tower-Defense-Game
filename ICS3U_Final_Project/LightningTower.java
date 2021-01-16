@@ -18,8 +18,10 @@ public class LightningTower extends Tower
     public LightningTower(TowerTile tile)
     {
         super(tile);
-        this.fire_rate = 1800;
-        setRadius(80);
+        this.fire_rate = 1600;
+        this.damage = 3.5;
+        this.splash_damage = 0.7;
+        setRadius(100);
         image = new GreenfootImage("lightning_tower1.png");
         image.scale(55,75);
         setImage(image);
@@ -40,7 +42,7 @@ public class LightningTower extends Tower
     {
         super.act();
         displayLevel();
-        if(time.millisElapsed()>1800){
+        if(time.millisElapsed()>this.fire_rate){
             time.mark();
             Enemy target = checkClosest();
             if(target != null)

@@ -20,6 +20,8 @@ public class Tower extends Entity
     private int radius;
     private int level;
     private int cost;
+    protected double damage;
+    protected double splash_damage;
     protected UpgradeButton u;
     protected Label lv;
     protected TowerTile tile;
@@ -100,6 +102,11 @@ public class Tower extends Entity
     public void levelUp()
     {
         this.level ++;
+        this.damage *= 1.2;
+        this.splash_damage *= 1.2;
+        this.fire_rate *= 0.9;
+        this.cost *= 1.2;
+        ((Game)getWorld()).takeCoins(this.cost);
     }
     
     public void displayUpgrade()
@@ -113,11 +120,26 @@ public class Tower extends Entity
         {
             if(u != null && u.detectClick())
             {
+                System.out.println("hi");
                 this.levelUp();
             }
-            getWorld().removeObject(u);
+            if(u!=null)
+            {
+                u.remove();
+            }
         }
         
+    }
+    
+    public double getDamage()
+    {
+        return this.damage;
+        
+    }
+    
+    public double getSplashDamage()
+    {
+        return this.splash_damage;
     }
     
     public int getLevel()
@@ -130,6 +152,11 @@ public class Tower extends Entity
         return this.radius;
     }
 
+    public int getCost()
+    {
+        return this.cost;
+    }
+    
     public void setRadius(int r)
     {
         this.radius = r;

@@ -1,4 +1,5 @@
 
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 import java.io.*;
@@ -23,6 +24,9 @@ public class Game extends World
     public ArrayList<int[]> pathTwo = new ArrayList<int[]>();
     public ArrayList<int[]> tiles = new ArrayList<int[]>();
     public ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+    //public ArrayList<Integer> enemy_num;
+
+                
 
     GreenfootImage background;
     int total_coins;                        // It represents the total amount of coins the player possesses
@@ -33,20 +37,23 @@ public class Game extends World
     Label coin_display;
     int lives;
     Heart[] hearts;
-    static int level;
+    public static int level;
+    int wave;
     Level current_level;
     
     /**
      * Constructor for objects of class Game
      * All variables are constant at the beginning
      */
-    public Game(Level level)
+    public Game(Level l)
     {    
         // Create a new world with 1050 x 700 cells with a cell size of 1x1 pixels.
+        
         super(1050, 700, 1); 
-        this.current_level = level;
-        this.level = 1;
-        background = level.getBackground();
+        this.current_level = l;
+        this.wave = 1;
+        level = l.getLevel();
+        background = l.getBackground();
         //background = new GreenfootImage("game_map202.jpg");
         background.scale(1050, 700);
         setBackground(background);
@@ -56,14 +63,14 @@ public class Game extends World
         System.out.println("--------");
         
         // It reads the coordinates of the map and store it into certain arrays
-        readMouseInfo(level.getPathOne(), pathOne);
-        readMouseInfo(level.getPathTwo(), pathTwo);
-        readMouseInfo(level.getTiles(), tiles);
+        readMouseInfo(l.getPathOne(), pathOne);
+        readMouseInfo(l.getPathTwo(), pathTwo);
+        readMouseInfo(l.getTiles(), tiles);
 
         display_tiles(tiles);
         
         // Set the labels and the amount of coins
-        total_coins = 0;
+        total_coins = 10000;
         coins = new Label(total_coins, 50); 
         coins.setFillColor(Color.YELLOW);
         addObject(coins, 260, 70);
@@ -83,6 +90,8 @@ public class Game extends World
         counter.setFillColor(Color.BLACK);
         addObject(counter, 400, 70);
         
+        //changeWave();
+        
         time.mark();
         
     }
@@ -100,11 +109,11 @@ public class Game extends World
             }
         }
         */
-        if(Greenfoot.isKeyDown("ENTER"))
+        if(game_time.millisElapsed() >500 && Greenfoot.isKeyDown("ENTER"))
         {
-            
-            changeLevel((level)%3);
             level++;
+            changeLevel((level)%3+1);
+            System.out.println(level);
         }
         
         /* 
@@ -117,7 +126,7 @@ public class Game extends World
         {
             detectCondition(true);
         }
-        if(time.millisElapsed()>Greenfoot.getRandomNumber(2000)+2200)
+        if(time.millisElapsed()>Greenfoot.getRandomNumber(2000)+2500)
         {
             time.mark();
             addEnemy();
@@ -150,34 +159,94 @@ public class Game extends World
         
     }
     
+    
+                        
     public void addEnemy()
     {
-       int num = Greenfoot.getRandomNumber(3);
-       if(num==0)
-       {
-           DudeEnemy e = new DudeEnemy(1.9,20,10,pathOne.get(0)[0], pathOne.get(0)[1]);
-
-           time.mark();
-           enemyList.add(e); 
-           addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
-       }
+        //int num = Greenfoot.getRandomNumber(6);
+        
+        /*
+        if(num==0)
+        {
+        DudeEnemy d = new DudeEnemy(2.1,30,40,pathOne.get(0)[0], pathOne.get(0)[1]);
+        createEnemy(d);
+        }
+        
+        else if(num==1){
+        Yoshi y = new Yoshi(2.6,22,30,pathOne.get(0)[0], pathOne.get(0)[1]);
+        createEnemy(y);
+        }
+        else if(num==2){
+        Bat b = new Bat(4.2,3,15,pathOne.get(0)[0], pathOne.get(0)[1]);
+        createEnemy(b);
+        }
+        
+        else if(num==3)
+        {
+        WalkingSoldier w = new WalkingSoldier(2,45,20,pathOne.get(0)[0], pathOne.get(0)[1]);
+        createEnemy(w);
+        }
+        
+        else if(num==4)
+        {
+        Snail s = new Snail(2.2,45,100,pathOne.get(0)[0], pathOne.get(0)[1]);
+        createEnemy(s);
+        }
+        
+        else if(num==5 || num==6)
+        {
+        Golem g = new Golem(1.9,500,300,pathOne.get(0)[0], pathOne.get(0)[1]);
+        createEnemy(g);
+        }
+        */
        
-       else if(num==1){
-           Yoshi e = new Yoshi(2.5,12,10,pathOne.get(0)[0], pathOne.get(0)[1]);
-           time.mark();
-           enemyList.add(e); 
-           addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
-       }
-       else{
-           Bat e = new Bat(4,3,10,pathOne.get(0)[0], pathOne.get(0)[1]);
-           time.mark();
-           enemyList.add(e); 
-           addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
-       }
-       
+        //int n = enemy_num.get(Greenfoot.getRandomNumber(enemy_num.size()));
+        System.out.println(current_level.getEnemy());
+        int n = current_level.getEnemy().get(Greenfoot.getRandomNumber(current_level.getEnemy().size()));
+        switch (n) {
+            case 1:
+                DudeEnemy d = new DudeEnemy(2.1,30,40,pathOne.get(0)[0], pathOne.get(0)[1]);
+                createEnemy(d);
+                break;
+            case 2:
+                Yoshi y = new Yoshi(2.6,22,30,pathOne.get(0)[0], pathOne.get(0)[1]);
+                createEnemy(y);
+                break;
+            case 3:
+                Bat b = new Bat(4.2,3,15,pathOne.get(0)[0], pathOne.get(0)[1]);
+                createEnemy(b);
+                break;
+            case 4:
+                WalkingSoldier w = new WalkingSoldier(2,45,20,pathOne.get(0)[0], pathOne.get(0)[1]);
+                createEnemy(w);
+                break;
+            case 5:
+                Snail s = new Snail(1.9,45,100,pathOne.get(0)[0], pathOne.get(0)[1]);
+                createEnemy(s);
+                break;
+            case 6:
+                Golem g = new Golem(1.9,500,300,pathOne.get(0)[0], pathOne.get(0)[1]);
+                createEnemy(g);
+                break;
+            default:
+                Bat bat = new Bat(4.2,3,15,pathOne.get(0)[0], pathOne.get(0)[1]);
+                createEnemy(bat);
+                break;
+                
 
+
+      
+        }
+        
     }
-
+    
+    public void createEnemy(Enemy e)
+    {
+        time.mark();
+        enemyList.add(e); 
+        addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
+    }
+    
     public void checkEnemyStatus()
     {
         for(int i=0; i<enemyList.size(); i++)
@@ -246,7 +315,7 @@ public class Game extends World
     
     public boolean checkCoins(int coin)
     {
-        if (this.total_coins - coin > 0)
+        if (this.total_coins - coin >= 0)
         {
             return true;
         }
@@ -293,30 +362,70 @@ public class Game extends World
         return this.level;
     }
     
+    /*
+    public void changeWave()
+    {
+        System.out.println(level);
+        if(level==1)
+        {
+            enemy_num = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
+        }
+        else if(level==2)
+        {
+            enemy_num = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4));
+        }
+        else if(level==3)
+        {
+            enemy_num = new ArrayList<Integer>(Arrays.asList(3, 4, 5, 6));
+        }
+        
+        
+    }
+    */
+    
     public void changeLevel(int l)
     {
         if(l==1)
         {
-            Level level = new Level(1050, 700, new GreenfootImage("images/game_map11.png"), 
+            /*
+            Level level = new Level(1050, 700, 1, new GreenfootImage("images/game_map11.png"), 
             "Tower Defense MousePos1.txt","Tower Defense MousePos2.txt", "tiles_coordinates.txt");
+            */
+            File file = new File("Level_01.txt");
+            Level level = new Level(file);
             Game game = new Game(level);
+            //game.changeWave();
             Greenfoot.setWorld(game);
+            
+            
         }
         else if (l==2)
         {
+            /*
             GreenfootImage background = new GreenfootImage("images/game_map101.jpg");
-            Level level = new Level(1050, 700, background, "Tower Defense MousePos3.txt",
+            Level level = new Level(1050, 700, 2, background, "Tower Defense MousePos3.txt",
             "Tower Defense MousePos4.txt", "tiles_coordinates02.txt");
+            */
+            File file = new File("Level_02.txt");
+            Level level = new Level(file);
             Game game = new Game(level);
+            //game.changeWave();
             Greenfoot.setWorld(game);
+            
         }
         else if (l==3)
         {
+            /*
             GreenfootImage background = new GreenfootImage("images/game_map202.jpg");
-            Level level = new Level(1050, 700, background, "Tower Defense MousePos5.txt",
+            Level level = new Level(1050, 700, 3, background, "Tower Defense MousePos5.txt",
             "Tower Defense MousePos6.txt", "tiles_coordinates03.txt");
+            */
+            File file = new File("Level_03.txt");
+            Level level = new Level(file);
             Game game = new Game(level);
+            //game.changeWave();
             Greenfoot.setWorld(game);
+            
         }
     }
     
@@ -364,10 +473,8 @@ public class Game extends World
                 String store_x = "";
                 String store_y = "";
                 int index = 1;
-                System.out.println(data);
                 while (data.charAt(index) != ',')
                 {
-                    System.out.println(data.charAt(index));
                     store_x += data.charAt(index);
                     index ++;
                 }

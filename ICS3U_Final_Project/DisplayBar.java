@@ -15,15 +15,14 @@ public class DisplayBar extends Actor
     
     Game world;
     int[] pos = new int[2];
-    GreenfootImage[] image = new GreenfootImage[6];
+    GreenfootImage[] image = new GreenfootImage[9];
     
     public DisplayBar()
     {
 
-        for(int i=0; i<6; i++)
+        for(int i=0; i<9; i++)
         {
-            image[i] = new GreenfootImage("greenBar0" + i + ".png");
-            image[i].scale(25,3);
+            image[i] = new GreenfootImage("healthBar" + i + ".png");
         }
         setImage(image[1]);
 
@@ -53,27 +52,39 @@ public class DisplayBar extends Actor
         
         if(percent == 1)
         {
-            setImage(image[5]);
+            setImage(image[0]);
         }
-        else if(percent >= 0.8)
-        {
-            setImage(image[4]);
-        }
-        else if(percent >= 0.6)
-        {
-            setImage(image[3]);
-        }
-        else if(percent >= 0.4)
-        {
-            setImage(image[2]);
-        }
-        else if(percent >= 0.2)
+        else if(percent >= 0.875)
         {
             setImage(image[1]);
         }
-        else if(percent >= 0)
+        else if(percent >= 0.75)
         {
-            setImage(image[0]);
+            setImage(image[2]);
+        }
+        else if(percent >= 0.625)
+        {
+            setImage(image[3]);
+        }
+        else if(percent >= 0.5)
+        {
+            setImage(image[4]);
+        }
+        else if(percent >= 0.375)
+        {
+            setImage(image[5]);
+        }
+        else if(percent >= 0.25)
+        {
+            setImage(image[6]);
+        }
+        else if(percent >= 0.125)
+        {
+            setImage(image[7]);
+        }
+        else if(percent > 0)
+        {
+            setImage(image[8]);
         }
         
 

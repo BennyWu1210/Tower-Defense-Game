@@ -22,8 +22,8 @@ public class Bat extends Enemy
         this.images = image.getImages();
         for(GreenfootImage image: images)
         {
-            image.scale(40, 40);
-            image.mirrorHorizontally();
+            //image.scale(40, 40);
+            //image.mirrorHorizontally();
         }
         
     }
@@ -44,6 +44,19 @@ public class Bat extends Enemy
         {
             this.health -= ouch;
         }
+    }
+    
+    public GreenfootImage getImage()
+    {
+        
+        GreenfootImage image = images.get((int)imageIndex);
+        imageIndex += 0.2;
+        if (imageIndex>=images.size())
+        {
+            imageIndex = 0;
+        }
+        time.mark();  
+        return image;
     }
     
     

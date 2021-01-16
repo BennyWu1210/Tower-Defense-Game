@@ -26,7 +26,7 @@ public class GameOver extends World
         background.scale(1050,700);
         setBackground(background);
         this.game = game;
-        result = new Label("Nice job Mr. Chan!", 40);
+        result = new Label("Nice job LAO CHEN!", 40);
         result1 = new Label("You made it to Level " + game.level + "!", 30);
         result2 = new Label("And lasted for " + game.game_time.millisElapsed()/1000.0 + " seconds!", 30);
         for(GreenfootImage image: yoshi.images)

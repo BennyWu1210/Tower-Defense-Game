@@ -16,6 +16,7 @@ public class UpgradeButton extends Button
 
     boolean enlarged;
     Tower tower;
+    Label cost_label;
     
     public UpgradeButton(Tower tower)
     {
@@ -23,6 +24,7 @@ public class UpgradeButton extends Button
         this.length = 25;
         this.width = 25;
         this.tower = tower;
+        setLabel();
         button.scale(length,width);
         enlarged = false;
         
@@ -43,5 +45,47 @@ public class UpgradeButton extends Button
         return false;
     }
         
+    public void checkHover()
+    {
+        if(Greenfoot.mouseMoved(this))
+        {
+            button.scale((int)(length*1.25),(int)(width*1.25));
+            displayCost(true);
+        }
+        if (Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this))
+        {
+            button.scale(length,width);
+            displayCost(false);
+        }
+        
+    }
+    
+    public void setLabel()
+    {
+        cost_label = new Label("$" + tower.getCost(), 30);
+        cost_label.setFillColor(Color.RED);
+    }
 
+    public void displayCost(boolean appear)
+    {
+        if (appear)
+        {
+            getWorld().addObject(cost_label, this.getX(), this.getY()-20);
+        }
+        else
+        {
+            getWorld().removeObject(cost_label);
+        }
+    }
+    
+    public void remove()
+    {
+        
+        if(cost_label!=null)
+        {
+            getWorld().removeObject(cost_label);
+        }
+        getWorld().removeObject(this);
+        
+    }
 }

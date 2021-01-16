@@ -17,13 +17,13 @@ public class LightningStrike extends Projectile
     List<GreenfootImage> images = image.getImages();
     
     Enemy target;
-    public LightningStrike(Enemy target, Tower tower) 
+    public LightningStrike(Enemy target, Tower tower)
     {
         // Add your action code here.
         this.target = target;
         this.tower = tower;
-        this.damage = 3.5;
-        this.splash_damage = 1.2;
+        this.damage = tower.getDamage();
+        this.splash_damage = tower.getSplashDamage();
 
         for(GreenfootImage img: images)
         {

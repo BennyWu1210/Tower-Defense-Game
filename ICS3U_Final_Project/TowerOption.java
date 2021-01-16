@@ -30,7 +30,6 @@ public class TowerOption extends Button
         if (Greenfoot.mouseClicked(this))
         {
             getWorld().removeObject(cost_label);
-            System.out.println("cliccked");
         }
         checkHover();
         

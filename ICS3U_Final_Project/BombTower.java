@@ -1,3 +1,4 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -16,6 +17,9 @@ public class BombTower extends Tower
     public BombTower(TowerTile tile)
     {
         super(tile);
+        this.damage = 0;
+        this.splash_damage = 1.5;
+        this.fire_rate = 2300;
         image = new GreenfootImage("Bomb_Tower.png");
         image.scale(50,65);
         setRadius(150);
@@ -29,7 +33,7 @@ public class BombTower extends Tower
     {
         super.act();
         displayLevel();
-        if(time.millisElapsed()>2000)
+        if(time.millisElapsed()>this.fire_rate)
         {
             time.mark();
             Enemy target = checkClosest();

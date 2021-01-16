@@ -1,34 +1,32 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Yoshi here.
+ * Write a description of class Snail here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Yoshi extends Enemy
+public class Snail extends Enemy
 {
     /**
-     * Act - do whatever the Yoshi wants to do. This method is called whenever
+     * Act - do whatever the Snail wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public GifImage image;
     
-    public Yoshi(double speed, double health, int coins, int x, int y)
+    public Snail(double speed, double health, int coins, int x, int y)
     {
         super(speed, health, coins, x, y);
-        image = new GifImage("Yoshi.gif");
+        image = new GifImage("Snail.gif");
         this.images = image.getImages();
         for(GreenfootImage image: images)
         {
-            //image.scale(40, 40);
+            //image.scale(50, 50);
         }
     }
     
     public void act() 
     {
-
-        
         super.act();
-    }    
+    }
 }

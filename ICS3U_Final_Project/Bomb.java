@@ -20,8 +20,8 @@ public class Bomb extends Projectile
         this.images = image.getImages();
         this.target = target;
         this.tower = tower;
-        this.damage = 0;
-        this.splash_damage = 3;
+        this.damage = tower.getDamage();
+        this.splash_damage = tower.getSplashDamage();
         this.gif = true;
         speed = 4;
 

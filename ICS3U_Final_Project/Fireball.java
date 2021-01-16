@@ -18,17 +18,17 @@ public class Fireball extends Projectile
     Enemy target;
     
     int[] destination = new int[2];
+    
     public Fireball(Enemy target, Tower tower)
     {
        
 
-        
+        this.damage = tower.getDamage();
+        this.splash_damage = tower.getSplashDamage();
         this.image =  new GifImage("flame02.gif");
         this.target = target;
         this.tower = tower;
         this.images = image.getImages();
-        this.damage = 2.2;
-        this.splash_damage = 1;
         this.gif = true;
         time.mark();
         
