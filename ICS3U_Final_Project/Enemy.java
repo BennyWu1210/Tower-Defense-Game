@@ -1,3 +1,4 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
@@ -81,7 +82,8 @@ public class Enemy extends Entity
                 Game world = (Game)getWorld();
                 world.lives --;
                 world.displayHealth(800, 50);
-                this.existing = false;
+                existing = false;
+                return;
                 
             }
             if (distanceFrom(destination[0], destination[1])<5)
@@ -170,12 +172,20 @@ public class Enemy extends Entity
     public void remove()
     {
         world = (Game)getWorld();
-        //world.updateCoins(973);
-        DropCoin drop = new DropCoin();
-        getWorld().addObject(drop, this.getX(), this.getY());
-        getWorld().removeObject(healthBar);
-        getWorld().removeObject(this);
-        return;
+        if (currentIndex == path.size())
+        {
+            getWorld().removeObject(healthBar);
+            getWorld().removeObject(this);
+            return;
+        }
+        else
+        {
+            DropCoin drop = new DropCoin();
+            getWorld().addObject(drop, this.getX(), this.getY());
+            getWorld().removeObject(healthBar);
+            getWorld().removeObject(this);
+            return;
+        }
     }
 }
 

@@ -21,6 +21,7 @@ public class LightningTower extends Tower
         this.fire_rate = 1600;
         this.damage = 3.5;
         this.splash_damage = 0.7;
+        this.cost = level * 60;
         setRadius(100);
         image = new GreenfootImage("lightning_tower1.png");
         image.scale(55,75);

@@ -63,13 +63,19 @@ public class TitlePage extends World
     
     public void createButton()
     {
-        StartButton button = new StartButton("start_button.png", (int)(242), (int)(88));
-        addObject(button, length/2, width*4/5);
+        StartButton s_button = new StartButton("start_button.png", (int)(242), (int)(88));
+        addObject(s_button, length/2, width*5/6);
+        InstructionButton i_button = new InstructionButton("menu_button.png", (int)(70), (int)(72));
+        addObject(i_button, length/2, width*5/8);
     }
     
     public void displayTitle()
     {
         Label l = new Label("Welcome to Benny's Tower Defense",52);
+        l.setFillColor(Color.WHITE.brighter());
         addObject(l, length/2, width/8);
+        Label l2 = new Label("Also, Mr. Chan is so cool!", 50);
+        l2.setFillColor(Color.RED.darker());
+        addObject(l2, length/2, width/4);
     }
 }

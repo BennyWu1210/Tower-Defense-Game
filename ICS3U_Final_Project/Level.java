@@ -16,6 +16,7 @@ public class Level extends Actor
     int length;
     int width;
     int level;
+    int wave;
     GreenfootImage background;
     String pathOne;
     String pathTwo;
@@ -31,6 +32,7 @@ public class Level extends Actor
         this.pathTwo = pathTwo;
         this.tiles = tiles;
         this.level = level;
+        this.wave = 0;
         
     }
     
@@ -69,6 +71,11 @@ public class Level extends Actor
     {
         // Add your action code here.
     }    
+    
+    public void changeWave(int wave)
+    {
+        this.wave = wave;
+    }
     
     public int getLevel()
     {

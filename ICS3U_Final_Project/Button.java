@@ -21,12 +21,15 @@ public class Button extends Actor
     public Button(GreenfootImage button)
     {
         this.button = button;
-        setImage(button);
         time.mark();
+        length = 50;
+        width = 50;
+        setImage(button);
     }
     
     public void act() 
     {
+        checkHover();
 
     }    
     
@@ -71,6 +74,13 @@ public class Button extends Actor
         {
             button.scale(length,width);
         }
+    }
+    
+    public void scale(int l, int w)
+    {
+        button.scale(l, w);
+        setImage(button);
+        
     }
     
 }

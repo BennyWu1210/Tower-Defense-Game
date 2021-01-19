@@ -34,6 +34,7 @@ public class UpgradeButton extends Button
     public void act() 
     {
         checkHover();
+        
     }   
     
     public boolean detectClick()
@@ -81,11 +82,14 @@ public class UpgradeButton extends Button
     public void remove()
     {
         
-        if(cost_label!=null)
+        if(cost_label != null)
         {
-            getWorld().removeObject(cost_label);
+            ((Game)getWorld()).removeObject(cost_label);
         }
-        getWorld().removeObject(this);
+        if(this!=null)
+        {
+            ((Game)getWorld()).removeObject(this);
+        }
         
     }
 }

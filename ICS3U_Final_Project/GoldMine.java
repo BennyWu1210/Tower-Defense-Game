@@ -35,7 +35,6 @@ public class GoldMine extends Decoration
         enlarge();
         if(1000/Miningspeed<time.millisElapsed())
         {
-            System.out.println("yo");
             time.mark();
             spawnCoin();
         }

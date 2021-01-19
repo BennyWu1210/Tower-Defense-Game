@@ -18,13 +18,13 @@ public class Tower extends Entity
     static GreenfootImage oval;
     private boolean clicked = false;
     private int radius;
-    private int level;
-    private int cost;
+    protected int level;
+    protected int cost;
     protected double damage;
     protected double splash_damage;
     protected UpgradeButton u;
     protected Label lv;
-    protected TowerTile tile;
+    //protected TowerTile tile;
     protected Oval o;
     protected int fire_rate;
     
@@ -32,18 +32,31 @@ public class Tower extends Entity
     public Tower(TowerTile tile)
     {
         setLocation(tile.position[0], tile.position[1]);
-        this.tile = tile;
+        //this.tile = tile;
         this.level = 1;
+        
         oval = new GreenfootImage("Oval3.png");
+        //displayButton();
+        
     }
     
     public void act() 
     {
+
+        if(u != null && u.detectClick())
+        {
+            System.out.println("hi");
+            this.levelUp();
+            u.remove();
+        }
+        
         if(Greenfoot.mouseClicked(this) && !clicked)
         {
             clicked = true;
             displayCircle();
             displayUpgrade();
+            
+            
         }
         else if((Greenfoot.mouseClicked(null) && !Greenfoot.mouseClicked(this))
         || (Greenfoot.mouseClicked(this) && clicked))
@@ -53,8 +66,17 @@ public class Tower extends Entity
             displayUpgrade();
         }
         
+        
+        
     }    
     
+    /*
+    public void addedToWorld(World game)
+    {
+        u = new UpgradeButton(this);
+        ((Game)game).addObject(u, this.getX()+25, this.getY()+15);
+    }
+    */
 
     public boolean isInRange(Enemy e)
     {
@@ -91,7 +113,7 @@ public class Tower extends Entity
         if (clicked)
         {
             o = new Oval();
-            getWorld().addObject(o, tile.getX(), tile.getY());
+            getWorld().addObject(o, getX(), getY());
         }
         else
         {
@@ -101,34 +123,54 @@ public class Tower extends Entity
     
     public void levelUp()
     {
-        this.level ++;
-        this.damage *= 1.2;
-        this.splash_damage *= 1.2;
-        this.fire_rate *= 0.9;
-        this.cost *= 1.2;
         ((Game)getWorld()).takeCoins(this.cost);
+        if(((Game)getWorld()).checkCoins(this.cost))
+        {
+            this.level ++;
+            this.damage *= 1.2;
+            this.splash_damage *= 1.2;
+            this.fire_rate *= 0.9;
+            this.cost *= 2;
+        }
     }
     
     public void displayUpgrade()
     {
+        
         if (clicked)
         {
+            /*
+            if(u != null)
+            {
+               
+                getWorld().removeObject(u);
+                u = null;
+            }
+            else
+            {
+                u = new UpgradeButton(this);
+                getWorld().addObject(u, this.getX()+25, this.getY()+15);
+            }
+            */
             u = new UpgradeButton(this);
-            getWorld().addObject(u, tile.getX()+25, tile.getY()+15);
+            getWorld().addObject(u, this.getX()+25, this.getY()+15);
         }
         else
         {
-            if(u != null && u.detectClick())
-            {
-                System.out.println("hi");
-                this.levelUp();
-            }
-            if(u!=null)
-            {
-                u.remove();
-            }
+            getWorld().removeObject(u);
         }
         
+        
+        
+        
+       
+        
+    }
+    
+    public void displayButton()
+    {
+        u = new UpgradeButton(this);
+        getWorld().addObject(u, this.getX()+25, this.getY()+15);
     }
     
     public double getDamage()

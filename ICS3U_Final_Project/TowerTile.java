@@ -18,6 +18,7 @@ public class TowerTile extends Actor
     static GreenfootImage lightning = new GreenfootImage("lightning_symbol.png");
     static GreenfootImage bomb = new GreenfootImage("bomb-4.png");
     static boolean clicked = false;
+
     
     TowerOption fireButton = new TowerOption(fire, 30);
     TowerOption lightningButton = new TowerOption(lightning, 50);
@@ -76,10 +77,11 @@ public class TowerTile extends Actor
             {
                 LightningTower l = new LightningTower(this);
                 world.addObject(l, position[0], position[1]-20);
-                
+                world.removeObject(this);
             }
             world.takeCoins(lightningButton.getCoin());
             world.removeObject(lightningButton.cost_label);
+            
         }
         
         else if(Greenfoot.mouseClicked(fireButton))
@@ -88,9 +90,11 @@ public class TowerTile extends Actor
             {
                 InfernoTower i = new InfernoTower(this);
                 world.addObject(i, position[0], position[1]-20);
+                world.removeObject(this);
             }
             world.takeCoins(fireButton.getCoin());
             world.removeObject(fireButton.cost_label);
+            
         }
         else if(Greenfoot.mouseClicked(bombButton))
         {
@@ -98,6 +102,7 @@ public class TowerTile extends Actor
             {
                 BombTower b = new BombTower(this);
                 world.addObject(b, position[0], position[1]-20);
+                world.removeObject(this);
             }
             world.takeCoins(bombButton.getCoin());
             world.removeObject(bombButton.cost_label);

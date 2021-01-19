@@ -27,7 +27,7 @@ public class Game extends World
     //public ArrayList<Integer> enemy_num;
 
                 
-
+    
     GreenfootImage background;
     int total_coins;                        // It represents the total amount of coins the player possesses
     Label coins;                            // The label on the top left corner of the screen
@@ -35,10 +35,12 @@ public class Game extends World
     SimpleTimer game_time = new SimpleTimer();
     Label counter;
     Label coin_display;
+    Label wave_label;
     int lives;
     Heart[] hearts;
     public static int level;
     int wave;
+    int enemy_counter;
     Level current_level;
     
     /**
@@ -52,6 +54,7 @@ public class Game extends World
         super(1050, 700, 1); 
         this.current_level = l;
         this.wave = 1;
+        this.enemy_counter = 1;
         level = l.getLevel();
         background = l.getBackground();
         //background = new GreenfootImage("game_map202.jpg");
@@ -91,12 +94,14 @@ public class Game extends World
         addObject(counter, 400, 70);
         
         //changeWave();
+        wave_label = new Label("Level " + this.level + " - " + this.wave, 30);
+        displayWave();
         
         time.mark();
         
+        
     }
-    
-    
+
     public void act()
     {
         /*
@@ -109,7 +114,18 @@ public class Game extends World
             }
         }
         */
-        if(game_time.millisElapsed() >500 && Greenfoot.isKeyDown("ENTER"))
+        
+        //System.out.println(this.wave);
+        if(enemy_counter % 5 == 0 && this.wave < 3)
+        {
+            //level.changeWave();
+            this.wave ++;
+            displayWave();
+            this.enemy_counter ++;
+            
+        }
+        
+        if(game_time.millisElapsed() > 500 && Greenfoot.isKeyDown("ENTER"))
         {
             level++;
             changeLevel((level)%3+1);
@@ -121,16 +137,32 @@ public class Game extends World
          * Add an enemy onto the screen after a certain amount of time
          * TODO: Needs to be change based on the difficulties of different levels
          */
-
-        if(game_time.millisElapsed()>80000)
+        
+        if(wave == 3)
         {
-            detectCondition(true);
+            if(enemyList.size() == 0)
+            {
+                if(this.level == 3)
+                {
+                    changeLevel(-1);
+                }
+                else 
+                {
+                    changeLevel(this.level + 1);
+                }
+            }
         }
-        if(time.millisElapsed()>Greenfoot.getRandomNumber(2000)+2500)
+        else if(time.millisElapsed()>Greenfoot.getRandomNumber(1500)+(4-this.wave)*1500)
         {
             time.mark();
             addEnemy();
         }
+        
+        if(game_time.millisElapsed()>800000)
+        {
+            detectCondition(true);
+        }
+        
         if(game_time.millisElapsed()>10)
         {
             updateTimer();
@@ -138,7 +170,7 @@ public class Game extends World
         detectCondition(false);
         checkEnemyStatus(); // Constantly checks if the enemy is in the world
         
-        if (coin_display!= null && 2000<no_coin.millisElapsed() && no_coin.millisElapsed()<3000)
+        if (coin_display != null && 2000<no_coin.millisElapsed() && no_coin.millisElapsed()<3000)
         {
             removeObject(coin_display);
         }
@@ -201,15 +233,15 @@ public class Game extends World
         */
        
         //int n = enemy_num.get(Greenfoot.getRandomNumber(enemy_num.size()));
-        System.out.println(current_level.getEnemy());
+        //System.out.println(current_level.getEnemy());
         int n = current_level.getEnemy().get(Greenfoot.getRandomNumber(current_level.getEnemy().size()));
         switch (n) {
             case 1:
-                DudeEnemy d = new DudeEnemy(2.1,30,40,pathOne.get(0)[0], pathOne.get(0)[1]);
+                DudeEnemy d = new DudeEnemy(2.1+wave-1,30+wave*5,40,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(d);
                 break;
             case 2:
-                Yoshi y = new Yoshi(2.6,22,30,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Yoshi y = new Yoshi(2.6+wave-1,22*wave,30,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(y);
                 break;
             case 3:
@@ -217,7 +249,7 @@ public class Game extends World
                 createEnemy(b);
                 break;
             case 4:
-                WalkingSoldier w = new WalkingSoldier(2,45,20,pathOne.get(0)[0], pathOne.get(0)[1]);
+                WalkingSoldier w = new WalkingSoldier(2+wave-1,45+wave,20,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(w);
                 break;
             case 5:
@@ -256,6 +288,8 @@ public class Game extends World
            {
               enemyList.get(i).remove();
               enemyList.remove(i);
+              enemy_counter ++;
+              System.out.println(enemy_counter);
            }
         }
     }
@@ -276,16 +310,24 @@ public class Game extends World
     {
         if (game_time.millisElapsed()<10000)
         {
-            counter.setValue("time: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,3));
+            counter.setValue("TIME: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,3));
         }
         else if(game_time.millisElapsed()<100000)
         {
-            counter.setValue("time: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,4));
+            counter.setValue("TIME: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,4));
         }
         else
         {
-            counter.setValue("time: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,5));
+            counter.setValue("TIME: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,5));
         }
+    }
+    
+    public void displayWave()
+    {
+
+        wave_label.setValue("Level " + this.level + " - " + this.wave);
+        wave_label.setFillColor(Color.ORANGE);
+        addObject(wave_label, 700, 80);
     }
     
     public void storeHeath()
@@ -383,6 +425,7 @@ public class Game extends World
     }
     */
     
+   
     public void changeLevel(int l)
     {
         if(l==1)
@@ -426,6 +469,11 @@ public class Game extends World
             //game.changeWave();
             Greenfoot.setWorld(game);
             
+        }
+        else
+        {
+            GameWin win = new GameWin(this);
+            Greenfoot.setWorld(win);
         }
     }
     

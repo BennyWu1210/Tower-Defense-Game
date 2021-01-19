@@ -21,12 +21,13 @@ public class InfernoTower extends Tower
         this.fire_rate = 900;
         this.damage = 2.2;
         this.splash_damage = 1;
+        this.cost = level * 30;
         image = new GreenfootImage("inferno_tower1.png");
         image.scale(40,60);
         setImage(image);
         setRadius(150);
         setCost(30);
-        lv = new Label("Level " + getLevel(), 20);
+        lv = new Label("Level " + 1, 20);
         lv.setFillColor(Color.RED);
     }
     
