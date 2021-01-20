@@ -2,30 +2,32 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * This is the screen that gets to be displayed after the player loses the game
- * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class GameOver extends World
 {
     Game game;
     SimpleTimer time = new SimpleTimer();
     GreenfootImage background = new GreenfootImage("game_over.png");
+    Yoshi yoshi = new Yoshi(2.5,12,10, 0, 300);
+    
     Label result;
     Label result1;
     Label result2;
-    protected Yoshi yoshi = new Yoshi(2.5,12,10, 0, 300);
+    
+    
     /**
      * Constructor for objects of class GameOver.
      * 
      */
     public GameOver(Game game)
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1050, 700, 1);
         background.scale(1050,700);
         setBackground(background);
         this.game = game;
-        result = new Label("Nice job LAO CHEN!", 40);
+        result = new Label("Nice job MR. CHEN!", 40);
         result1 = new Label("You made it to Level " + game.level_num + "!", 30);
         result2 = new Label("And lasted for " + game.game_time.millisElapsed()/1000.0 + " seconds!", 30);
         for(GreenfootImage image: yoshi.images)
@@ -47,6 +49,9 @@ public class GameOver extends World
         
     }
     
+    /**
+     * Displays the three lines of labels indicating the player's stats
+     */
     public void displayResult()
     {
         if (time.millisElapsed() < 1500)
@@ -66,13 +71,16 @@ public class GameOver extends World
         }
     }
     
-    
+    /**
+     * Puts a funny yoshi onto the screen
+     */
     public void walkingYoshi()
     {
         if(yoshi.distanceFrom(1050, 300)<10)
         {
             removeObject(yoshi);
-            this.game.changeLevel(game.getLevel()+1);
+            TitlePage t = new TitlePage();
+            Greenfoot.setWorld(t);
         }
         else
         {

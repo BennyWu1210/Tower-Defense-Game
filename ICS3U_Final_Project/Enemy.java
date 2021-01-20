@@ -9,11 +9,7 @@ import java.util.*;
 
 public class Enemy extends Entity
 {
-    /**
-     * Act - do whatever the Enemy wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    
+
     SimpleTimer time = new SimpleTimer();
     
     
@@ -184,6 +180,7 @@ public class Enemy extends Entity
         {
             DropCoin drop = new DropCoin();
             getWorld().addObject(drop, this.getX(), this.getY());
+            ((Game)getWorld()).updateCoins(getCoins());
             getWorld().removeObject(healthBar);
             getWorld().removeObject(this);
             return;

@@ -14,19 +14,20 @@ public class Game extends World
 {
     Level current_level;
     
-    // These arraylists store the set position of the paths, gathered from different text files, and the current status of the enemies
+    /* These arraylists store the set position of the paths, 
+    gathered from different text files that I create, 
+    and the current status of the enemies */
     public ArrayList<int[]> pathOne = new ArrayList<int[]>(); 
     public ArrayList<int[]> pathTwo = new ArrayList<int[]>();
     public ArrayList<int[]> tiles = new ArrayList<int[]>();
     public ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 
     GreenfootImage background;
-    public static int level_num;
-
+    
     SimpleTimer time = new SimpleTimer();    // This keeps track of the time gap between the spawn of enmies   
     SimpleTimer game_time = new SimpleTimer();
-    SimpleTimer wave_alert = new SimpleTimer();
-    SimpleTimer no_coin = new SimpleTimer();
+    SimpleTimer wave_alert = new SimpleTimer(); 
+    SimpleTimer coin_delay = new SimpleTimer();
     
    
     // These labels represent the different messages displayed on the screen (time passed, new waves)
@@ -40,6 +41,7 @@ public class Game extends World
     int wave;
     int enemy_counter;
     int total_coins; 
+    static int level_num;
     
     // It stores the 5 lives 
     Heart[] hearts;
@@ -158,7 +160,7 @@ public class Game extends World
             
         }
         
-        if(game_time.millisElapsed() > 700 && Greenfoot.isKeyDown("ENTER"))
+        if(game_time.millisElapsed() > 400 && Greenfoot.isKeyDown("ENTER"))
         {
             
             if(level_num>=3)
@@ -170,12 +172,10 @@ public class Game extends World
             System.out.println(level_num);
         }
         
-        /* 
-         * 
+        /*
          * Adds an enemy onto the screen after a certain amount of time
          * Changes level if it passes the last wave
          */
-        
         
         if(wave == 5)
         {
@@ -197,7 +197,7 @@ public class Game extends World
             addEnemy();
         }
         
-        // Automatically wins if player lasted for 500 seconds
+        // Automatically wins if player lasted for 500 seconds in a single game
         if(game_time.millisElapsed()>500000)
         {
             detectCondition(true);
@@ -211,7 +211,7 @@ public class Game extends World
         detectCondition(false); // Constantly check if health is under 0
         checkEnemyStatus(); // Constantly checks if the enemy is in the world
         
-        if (coin_display != null && 2000<no_coin.millisElapsed() && no_coin.millisElapsed()<3000)
+        if (coin_display != null && 2000<coin_delay.millisElapsed() && coin_delay.millisElapsed()<3000)
         {
             removeObject(coin_display);
         }
@@ -240,27 +240,27 @@ public class Game extends World
         int n = current_level.getEnemy().get(Greenfoot.getRandomNumber(current_level.getEnemy().size()));
         switch (n) {
             case 1:
-                DudeEnemy d = new DudeEnemy(2.1+wave-1,30+wave*5,40,pathOne.get(0)[0], pathOne.get(0)[1]);
+                DudeEnemy d = new DudeEnemy(2.1+wave-1,30+wave*5,8,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(d);
                 break;
             case 2:
-                Yoshi y = new Yoshi(2.6+wave-1,22*wave,30,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Yoshi y = new Yoshi(2.6+wave-1,22*wave,12,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(y);
                 break;
             case 3:
-                Bat b = new Bat(4.2,3,15,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Bat b = new Bat(4.2+wave-2,3,6,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(b);
                 break;
             case 4:
-                WalkingSoldier w = new WalkingSoldier(2+wave-1,45+wave,20,pathOne.get(0)[0], pathOne.get(0)[1]);
+                WalkingSoldier w = new WalkingSoldier(2+wave-1,45+wave,18,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(w);
                 break;
             case 5:
-                Snail s = new Snail(1.9,45,100,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Snail s = new Snail(1.9+wave*0.5,45,27,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(s);
                 break;
             case 6:
-                Golem g = new Golem(1.9,500,300,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Golem g = new Golem(1.9+wave*0.5,500,55,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(g);
                 break;
             default:
@@ -272,7 +272,9 @@ public class Game extends World
         
     }
     
-    
+    /**
+     * Creates a new enemy and adds it into the world
+     */  
     public void createEnemy(Enemy e)
     {
         time.mark();
@@ -333,7 +335,9 @@ public class Game extends World
         }
     }
     
-    
+    /**
+     * Constantly displays the levels and waves as a label on the screen
+     */  
     public void displayWave()
     {
         wave_label.setValue("Level " + this.level_num + " - " + this.wave);
@@ -381,7 +385,7 @@ public class Game extends World
             coin_display = new Label("You do not have enough coins!", 50);
             coin_display.setFillColor(Color.RED);
             addObject(coin_display, 500, 250);
-            no_coin.mark(); 
+            coin_delay.mark(); 
             return false;
         }
         

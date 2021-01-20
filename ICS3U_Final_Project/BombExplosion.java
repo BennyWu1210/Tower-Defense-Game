@@ -24,7 +24,7 @@ public class BombExplosion extends HitEffect
         {
             image.scale(70,70);
         }
-        sound.setVolume(30);
+        sound.setVolume(50);
         sound.play();
 
     }  
