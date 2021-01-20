@@ -158,14 +158,15 @@ public class Game extends World
             
         }
         
-        if(game_time.millisElapsed() > 500 && Greenfoot.isKeyDown("ENTER"))
+        if(game_time.millisElapsed() > 700 && Greenfoot.isKeyDown("ENTER"))
         {
-            level_num++;
-            if(level_num>3)
+            
+            if(level_num>=3)
             {
-                level_num = 1;
+                level_num = 0;
             }
-            changeLevel((level_num));
+            level_num++;
+            changeLevel(level_num);
             System.out.println(level_num);
         }
         
@@ -180,7 +181,7 @@ public class Game extends World
         {
             if(enemyList.size() == 0)
             {
-                if(this.level_num == 3)
+                if(this.level_num == 4)
                 {
                     changeLevel(-1);
                 }
@@ -434,7 +435,7 @@ public class Game extends World
             File file = new File("Level_03.txt");
             Level level = new Level(file);
             Game game = new Game(level);
-            //game.changeWave()            Greenfoot.setWorld(game);
+            Greenfoot.setWorld(game);
             
         }
         else
