@@ -1,10 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class GameOver here.
+ * This is the screen that gets to be displayed after the player loses the game
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class GameOver extends World
 {
@@ -27,7 +26,7 @@ public class GameOver extends World
         setBackground(background);
         this.game = game;
         result = new Label("Nice job LAO CHEN!", 40);
-        result1 = new Label("You made it to Level " + game.level + "!", 30);
+        result1 = new Label("You made it to Level " + game.level_num + "!", 30);
         result2 = new Label("And lasted for " + game.game_time.millisElapsed()/1000.0 + " seconds!", 30);
         for(GreenfootImage image: yoshi.images)
         {

@@ -2,17 +2,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 import java.io.*;
 /**
- * Write a description of class Level here.
+ * Contains the properties of every level, and it is being passed into the Game class
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class Level extends Actor
 {
-    /**
-     * Act - do whatever the Level wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     int length;
     int width;
     int level;

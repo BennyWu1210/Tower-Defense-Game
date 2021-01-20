@@ -18,7 +18,7 @@ public class BombTower extends Tower
     {
         super(tile);
         this.damage = 0;
-        this.splash_damage = 1.5;
+        this.splash_damage = 2;
         this.fire_rate = 2300;
         this.cost = level * 100;
         image = new GreenfootImage("Bomb_Tower.png");
@@ -26,8 +26,15 @@ public class BombTower extends Tower
         setRadius(150);
         setImage(image);
         setCost(100);
-        lv = new Label("Level " + getLevel(), 20);
-        lv.setFillColor(Color.BLACK);
+        level_label = new Label("Level " + getLevel(), 20);
+        level_label.setFillColor(Color.BLACK);
+        
+    }
+    
+    public void addedToWorld(World game)
+    {
+        world = (Game)game;
+        getWorld().addObject(level_label, this.getX(), this.getY()-36);
     }
     
     public void act() 
@@ -50,8 +57,8 @@ public class BombTower extends Tower
     
     public void displayLevel()
     {
-       lv.setValue("Level " + getLevel());
-       getWorld().addObject(lv, this.getX(), this.getY()-36);
+       level_label.setValue("Level " + getLevel());
+       //getWorld().addObject(level_label, this.getX(), this.getY()-36);
     }
     
 }

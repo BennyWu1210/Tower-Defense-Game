@@ -1,10 +1,11 @@
 1050
 700
 1
-images/game_map11.png
-Tower Defense MousePos1.txt
-Tower Defense MousePos2.txt
-tiles_coordinates.txt
+images/game_map101.jpg
+Tower Defense MousePos3.txt
+Tower Defense MousePos4.txt
+tiles_coordinates02.txt
 1
 2
 3
+4

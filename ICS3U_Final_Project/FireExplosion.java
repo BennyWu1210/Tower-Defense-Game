@@ -1,10 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class FireExplosion here.
+ * A type of hit effect - fire explosion
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class FireExplosion extends HitEffect
 {

@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class InstructionButton here.
+ * The buttons that leads playes into the instruction page
  * 
  * @author (your name) 
  * @version (a version number or a date)

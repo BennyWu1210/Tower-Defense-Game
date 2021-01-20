@@ -1,30 +1,26 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class LightningStrike here.
+ * A type of projectile - lightning strike
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class LightningStrike extends Projectile
 {
-    /**
-     * Act - do whatever the LightningStrike wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     SimpleTimer time = new SimpleTimer();
     GifImage image = new GifImage("lightningStrike.gif");
     List<GreenfootImage> images = image.getImages();
-    
+
     Enemy target;
     public LightningStrike(Enemy target, Tower tower)
     {
-        // Add your action code here.
         this.target = target;
         this.tower = tower;
         this.damage = tower.getDamage();
         this.splash_damage = tower.getSplashDamage();
-
+        this.sound = new GreenfootSound("zap_sound.mp3");
+        this.sound.setVolume(35);
+        this.sound.play();
         for(GreenfootImage img: images)
         {
             img.scale(100,100);

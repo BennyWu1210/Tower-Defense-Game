@@ -1,17 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.io.*;
 /**
- * Write a description of class StartButton here.
+ * It is the button that leads players into the game
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class StartButton extends Button
 {
-    /**
-     * Act - do whatever the StartButton wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     
     private String file_name;
     public StartButton(String file_name, int l, int w)
@@ -42,11 +37,6 @@ public class StartButton extends Button
     {
         if(Greenfoot.mouseClicked(this))
         {
-            /*
-            GreenfootImage background = new GreenfootImage("images/game_map11.png");
-            Level level = new Level(1050, 700, 1, background, "Tower Defense MousePos1.txt",
-            "Tower Defense MousePos2.txt", "tiles_coordinates.txt");
-            */
             File file = new File("level_01.txt");
             Level level = new Level(file);
             Game game = new Game(level);

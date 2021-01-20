@@ -1,10 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class Instruction here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This is the instruction page that teaches players how to play the game
+ * @author (Benny Wu) 
  */
 public class Instruction extends World
 {
@@ -19,23 +17,6 @@ public class Instruction extends World
     static int width = 483;
     int imageIndex = 0;
     SimpleTimer t = new SimpleTimer();
-    /*
-    GifImage lightning; //TODO: Put these into a class!!!!!
-    GifImage fire;
-    GifImage bomb;
-    GifImage upgrade;
-    GifImage coin;
-    List<GreenfootImage> fire_list;
-    List<GreenfootImage> lightning_list;
-    List<GreenfootImage> bomb_list;
-    List<GreenfootImage> upgrade_list;
-    List<GreenfootImage> coin_list;
-    int lightningIndex = 0;
-    int fireIndex = 0;
-    int bombIndex = 0;
-    int upgradeIndex = 0;
-    int coinIndex = 0;
-    */
     Gif lightning;
     Gif fire;
     Gif bomb;
@@ -46,18 +27,7 @@ public class Instruction extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(length, width, 1); 
-        /*
-        lightning = new GifImage("lightning_ins.gif");
-        fire = new GifImage("fire_ins.gif");
-        bomb = new GifImage("bomb_ins.gif");
-        upgrade = new GifImage("upgrade_ins.gif");
-        coin = new GifImage("gold_ins.gif");
-        fire_list = fire.getImages();
-        lightning_list = lightning.getImages();
-        bomb_list = bomb.getImages();
-        upgrade_list = upgrade.getImages();
-        coin_list = coin.getImages();
-        */
+
         lightning = new Gif(new GifImage("lightning_ins.gif"), 610, 120);
         fire = new Gif(new GifImage("fire_ins.gif"), 170, 120);
         bomb = new Gif(new GifImage("bomb_ins.gif"), 390, 120);
@@ -123,36 +93,7 @@ public class Instruction extends World
     
     public void controlGifs()
     {
-        /*
-        if(lightningIndex>=lightning_list.size()-1)
-        {
-            lightningIndex = 0;
-        }
-        if(fireIndex>=fire_list.size()-1)
-        {
-            fireIndex = 0;
-        }
-        if(bombIndex>=bomb_list.size()-1)
-        {
-            bombIndex = 0;
-        }
-        if(upgradeIndex>=upgrade_list.size()-1)
-        {
-            upgradeIndex = 0;
-        }
-        if(coinIndex>=coin_list.size()-1)
-        {
-            coinIndex = 0;
-        }
         
-        if(t.millisElapsed()%3 == 0)
-        {
-            lightningIndex ++;
-            fireIndex ++;
-            bombIndex ++;
-            upgradeIndex ++;
-            coinIndex ++;
-            */
         background.get(imageIndex).drawImage(fire.getImage(70), 170, 120);
         background.get(imageIndex).drawImage(bomb.getImage(70), 390, 120);
         background.get(imageIndex).drawImage(lightning.getImage(70), 610, 120);

@@ -1,10 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Snail here.
+ * A type of enemy - snail
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class Snail extends Enemy
 {
@@ -19,10 +18,7 @@ public class Snail extends Enemy
         super(speed, health, coins, x, y);
         image = new GifImage("Snail.gif");
         this.images = image.getImages();
-        for(GreenfootImage image: images)
-        {
-            //image.scale(50, 50);
-        }
+
     }
     
     public void act() 

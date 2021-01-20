@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * in Greenfoot.  If you keep a reference to the Label then you can change the text it
  * displays.  
  *
- * @author Amjad Altadmri 
+ * @author Amjad Altadmri && Benny Wu
  * @version 1.1
  */
 public class Label extends Actor

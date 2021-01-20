@@ -1,10 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class Intro here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This is the main screen that is displayed when the player enters the game
+ * @author (Benny Wu) 
  */
 public class TitlePage extends World
 {
@@ -13,7 +11,9 @@ public class TitlePage extends World
      * Constructor for objects of class Intro.
      * 
      */
+    static GreenfootSound background_music = new GreenfootSound("Background_music.mp3");
     SimpleTimer t = new SimpleTimer();
+    SimpleTimer delay;
     GifImage intro = new GifImage("Intro_screen.gif");
     List<GreenfootImage> background = intro.getImages();
     int imageIndex = 0;
@@ -21,21 +21,25 @@ public class TitlePage extends World
     static int width = 483;
     public TitlePage()
     {    
-        // Create a new world with 960x483 cells with a cell size of 1x1 pixels.
         super(length, width, 1); 
+        //background_music.playLoop();
         for(GreenfootImage i: background)
         {
             i.scale(length, width);
         }
+        delay = new SimpleTimer();
         setBackground(background.get(imageIndex));
         t.mark();
         displayTitle();
         createButton();
+        background_music.setVolume(20);
+        
     }
     
     public void act()
     {
-        
+        background_music.playLoop();
+        displayTitle();
         setBackground(background.get(imageIndex));
         
         if(t.millisElapsed()>100)
@@ -44,6 +48,7 @@ public class TitlePage extends World
         }
 
     }
+    
     
     public GreenfootImage getImage()
     {
@@ -69,13 +74,24 @@ public class TitlePage extends World
         addObject(i_button, length/2, width*5/8);
     }
     
+    
     public void displayTitle()
     {
         Label l = new Label("Welcome to Benny's Tower Defense",52);
         l.setFillColor(Color.WHITE.brighter());
         addObject(l, length/2, width/8);
-        Label l2 = new Label("Also, Mr. Chan is so cool!", 50);
-        l2.setFillColor(Color.RED.darker());
-        addObject(l2, length/2, width/4);
+        if(delay.millisElapsed()>2000)
+        {
+            Label l2 = new Label("Also, Mr. Chan is so cool!", 50);
+            l2.setFillColor(Color.RED.darker());
+            addObject(l2, length/2, width/4);
+        }
+        
+        if(delay.millisElapsed()>3500)
+        {
+            Label l3 = new Label("(Gotta get those extra points you know)", 35);
+            l3.setFillColor(Color.RED.darker());
+            addObject(l3, length/2, width/3);
+        }
     }
 }

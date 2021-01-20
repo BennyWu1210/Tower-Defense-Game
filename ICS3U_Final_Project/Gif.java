@@ -2,17 +2,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class Gif here.
+ * Contains the properties of GifImage, with a bit more function, such as adding the images onto the screen directly
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class Gif extends Actor
 {
-    /**
-     * Act - do whatever the Gif wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     SimpleTimer time = new SimpleTimer();
     List<GreenfootImage> list;
     int index = 0;
@@ -24,7 +20,6 @@ public class Gif extends Actor
     
     public void act() 
     {
-        // Add your action code here.
     }    
     
     public GreenfootImage getImage(int delay)

@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class Fireball here.
+ * A type of projectile - fireball
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class Fireball extends Projectile
 {
-    /**
-     * Act - do whatever the Fireball wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     SimpleTimer time = new SimpleTimer();
     GifImage image;
     GifImage explosion;
@@ -30,14 +26,15 @@ public class Fireball extends Projectile
         this.tower = tower;
         this.images = image.getImages();
         this.gif = true;
+        this.sound = new GreenfootSound("Fireball_sound.mp3");
         time.mark();
-        
+        this.sound.setVolume(45);
         for(GreenfootImage image: images)
         {
             image.scale(25,25);
         }
         speed = 5;
-        
+        this.sound.play();
         setLocation(tower.getX(), tower.getY());
         
     }

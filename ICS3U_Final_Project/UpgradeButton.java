@@ -2,35 +2,30 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class UpgradeButton here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This type of button allows players to upgrade towers and gold mines
+ * @author (Benny Wu) 
  */
 public class UpgradeButton extends Button
 {
-    /**
-     * Act - do whatever the UpgradeButton wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
 
     boolean enlarged;
-    Tower tower;
+    Entity entity;
     Label cost_label;
     
-    public UpgradeButton(Tower tower)
+    public UpgradeButton(Entity entity)
     {
         super(new GreenfootImage("upgrade_button02.png"));
         this.length = 25;
         this.width = 25;
-        this.tower = tower;
+        this.entity = entity;
         setLabel();
         button.scale(length,width);
         enlarged = false;
         
         
     }
-    
+
     public void act() 
     {
         checkHover();
@@ -53,6 +48,7 @@ public class UpgradeButton extends Button
             button.scale((int)(length*1.25),(int)(width*1.25));
             displayCost(true);
         }
+
         if (Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this))
         {
             button.scale(length,width);
@@ -63,7 +59,7 @@ public class UpgradeButton extends Button
     
     public void setLabel()
     {
-        cost_label = new Label("$" + tower.getCost(), 30);
+        cost_label = new Label("$" + entity.getCost(), 30);
         cost_label.setFillColor(Color.RED);
     }
 
@@ -82,14 +78,17 @@ public class UpgradeButton extends Button
     public void remove()
     {
         
-        if(cost_label != null)
+        if(cost_label.getWorld() != null)
         {
+            
             ((Game)getWorld()).removeObject(cost_label);
         }
-        if(this!=null)
+        if(this.getWorld() != null && this!=null)
         {
             ((Game)getWorld()).removeObject(this);
         }
         
     }
+    
+    
 }

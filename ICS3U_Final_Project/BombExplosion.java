@@ -1,30 +1,31 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class BombExplosion here.
+ * A type of hit effect - bomb explosion
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class BombExplosion extends HitEffect
 {
-    /**
-     * Act - do whatever the BombExplosion wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
+    private boolean large_explosion;
     double splash_damage;
-    public BombExplosion(int x, int y, double damage) 
+    GreenfootSound sound = new GreenfootSound("bomb_sound.mp3");
+    public BombExplosion(int x, int y, double damage, boolean large_explosion) 
     {
         // Add your action code here.
         this.explosion = new GifImage("bomb_explosion.gif");
+        this.large_explosion = large_explosion;
         this.images = explosion.getImages();
         this.imageIndex = 0;
         this.splash_damage = damage;
         setLocation(x, y);
         for(GreenfootImage image: images)
         {
-            image.scale(60,60);
+            image.scale(70,70);
         }
+        sound.setVolume(30);
+        sound.play();
 
     }  
     
@@ -37,13 +38,34 @@ public class BombExplosion extends HitEffect
     
     public void checkIntersect()
     {
-        if(this.isTouching(Enemy.class))
+        if(!large_explosion && this.isTouching(Enemy.class))
         {
             List<Enemy> enemies = getIntersectingObjects(Enemy.class);
             for(Enemy e: enemies)
             {
                 e.takeDamage(this.splash_damage);
             }
+        }
+        else if(large_explosion)
+        {
+            List<Enemy> enemies = ((Game)getWorld()).enemyList;
+            
+            for(Enemy e: enemies)
+            {
+                e.takeDamage(this.splash_damage);
+            }
+        }
+    }
+    
+    
+    
+
+    
+    public void changeSize(int x, int y)
+    {
+        for(GreenfootImage image: images)
+        {
+            image.scale(x,y);
         }
     }
     

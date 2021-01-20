@@ -1,26 +1,28 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class Entity here.
+ * Includes all entities in the game, including towers, enemies, and projectiles
  * 
- * @author (your name) 
+ * @author (Benny Wu) 
  * @version (a version number or a date)
  */
 public abstract class Entity extends Actor
 {
-    /**
-     * Act - do whatever the Entity wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     Game world; 
     SimpleTimer time = new SimpleTimer();
     public double speed = 0; 
     public int[] pos = new int[2];
     public boolean existing = true;
     public List<GreenfootImage> images;
-
+    public int level;
     public double imageIndex = 0; // The index has to be a double to control the speed of image transition
     public boolean gif = false;
+    
+    protected boolean clicked = false;
+    protected UpgradeButton u;
+    protected Label level_label;
+    protected int cost;
     
     public abstract void act();  
     
@@ -57,6 +59,26 @@ public abstract class Entity extends Actor
         {
             return super.getImage();
         }
+    }
+
+    public void displayUpgrade()
+    {
+        
+        if (clicked)
+        {
+            u = new UpgradeButton(this);
+            getWorld().addObject(u, this.getX()+28, this.getY()+20);
+        }
+        else if(u!=null)
+        {
+            u.remove();
+        }
+    }
+    
+    
+    public int getCost()
+    {
+        return cost;
     }
     
     

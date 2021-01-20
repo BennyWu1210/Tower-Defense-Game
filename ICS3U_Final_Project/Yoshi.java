@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Yoshi here.
+ * A type of enemy - yoshi!
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class Yoshi extends Enemy
 {
-    /**
-     * Act - do whatever the Yoshi wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     public GifImage image;
     
     public Yoshi(double speed, double health, int coins, int x, int y)

@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Golem here.
+ * A type of enemy - golem
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class Golem extends Enemy
 {
-    /**
-     * Act - do whatever the Golem wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     SimpleTimer time = new SimpleTimer();
     public GifImage image;
     
@@ -20,10 +16,7 @@ public class Golem extends Enemy
         super(speed, health, coins, x, y);
         image = new GifImage("Golem.gif");
         this.images = image.getImages();
-        for(GreenfootImage image: images)
-        {
-            //image.scale(50, 50);
-        }
+
     }
     
     public void act() 

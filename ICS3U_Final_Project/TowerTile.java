@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class TowerTile here.
+ * Provides the towers a position to be placed
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class TowerTile extends Actor
 {
-    /**
-     * Act - do whatever the TowerTile wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     int[] position = new int[2];
     public GreenfootImage block = new GreenfootImage("images/tile01.png");
     static GreenfootImage fire = new GreenfootImage("fire_symbol.png");
@@ -45,7 +41,6 @@ public class TowerTile extends Actor
         {
             block.scale(40,40);
         }
-        // Add your action code here.
     }    
     
     public void detectClick()
@@ -73,38 +68,35 @@ public class TowerTile extends Actor
         if(Greenfoot.mouseClicked(lightningButton))
         {
             
-            if(world.checkCoins(lightningButton.getCoin()))
+            if(world.takeCoins(lightningButton.getCoin()))
             {
                 LightningTower l = new LightningTower(this);
                 world.addObject(l, position[0], position[1]-20);
                 world.removeObject(this);
             }
-            world.takeCoins(lightningButton.getCoin());
             world.removeObject(lightningButton.cost_label);
             
         }
         
         else if(Greenfoot.mouseClicked(fireButton))
         {
-            if (world.checkCoins(fireButton.getCoin()))
+            if (world.takeCoins(fireButton.getCoin()))
             {
                 InfernoTower i = new InfernoTower(this);
                 world.addObject(i, position[0], position[1]-20);
                 world.removeObject(this);
             }
-            world.takeCoins(fireButton.getCoin());
             world.removeObject(fireButton.cost_label);
             
         }
         else if(Greenfoot.mouseClicked(bombButton))
         {
-            if (world.checkCoins(bombButton.getCoin()))
+            if (world.takeCoins(bombButton.getCoin()))
             {
                 BombTower b = new BombTower(this);
                 world.addObject(b, position[0], position[1]-20);
                 world.removeObject(this);
             }
-            world.takeCoins(bombButton.getCoin());
             world.removeObject(bombButton.cost_label);
             
         }

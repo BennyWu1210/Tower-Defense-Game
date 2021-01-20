@@ -1,63 +1,68 @@
-
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.*;
+import java.util.*; 
 import java.io.*;
 
 /**
- * This is the main world where the game page of the tower defense runs on. 
+ * Benny's Tower Defense in a fun and engaging game to play with (Not Really lol)
+ * This is the main world where the different levels will be run on
  * It consists of the statuses of all existing objects
  * @Benny Wu
- * @1000
+ * 
  */
 
-/**
- * Optimize the shooting of towers
- * Add lighning strikes and adjust the angle issue
- * change the image of the mouse
- */
 public class Game extends World
 {
- 
-    // These arraylists store the set position of the paths, and the current status of the enemies
+    Level current_level;
+    
+    // These arraylists store the set position of the paths, gathered from different text files, and the current status of the enemies
     public ArrayList<int[]> pathOne = new ArrayList<int[]>(); 
     public ArrayList<int[]> pathTwo = new ArrayList<int[]>();
     public ArrayList<int[]> tiles = new ArrayList<int[]>();
     public ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-    //public ArrayList<Integer> enemy_num;
 
-                
-    
     GreenfootImage background;
-    int total_coins;                        // It represents the total amount of coins the player possesses
-    Label coins;                            // The label on the top left corner of the screen
-    SimpleTimer time = new SimpleTimer();   // A timer to control the speed of towers/enemies
+    public static int level_num;
+
+    SimpleTimer time = new SimpleTimer();    // This keeps track of the time gap between the spawn of enmies   
     SimpleTimer game_time = new SimpleTimer();
-    Label counter;
+    SimpleTimer wave_alert = new SimpleTimer();
+    SimpleTimer no_coin = new SimpleTimer();
+    
+   
+    // These labels represent the different messages displayed on the screen (time passed, new waves)
+    Label time_counter;
     Label coin_display;
-    Label wave_label;
+    Label wave_label;  
+    Label new_wave;
+    Label coins;
+    
     int lives;
-    Heart[] hearts;
-    public static int level;
     int wave;
     int enemy_counter;
-    Level current_level;
+    int total_coins; 
+    
+    // It stores the 5 lives 
+    Heart[] hearts;
+    
+    
+    
+    // The explode button is used to spawn a large explosion in the game
+    ExplodeButton explode_button; 
     
     /**
      * Constructor for objects of class Game
-     * All variables are constant at the beginning
+     * Initializes all instances within the Game, including enemies, tiles, and towers
      */
-    public Game(Level l)
+    public Game(Level level)
     {    
-        // Create a new world with 1050 x 700 cells with a cell size of 1x1 pixels.
-        
+
         super(1050, 700, 1); 
-        this.current_level = l;
-        this.wave = 1;
-        this.enemy_counter = 1;
-        level = l.getLevel();
-        background = l.getBackground();
-        //background = new GreenfootImage("game_map202.jpg");
+        level_num = level.getLevel();
+        this.current_level = level;
+        this.wave = 0;
+        this.enemy_counter = 0;
+        
+        background = level.getBackground();
         background.scale(1050, 700);
         setBackground(background);
         
@@ -66,89 +71,122 @@ public class Game extends World
         System.out.println("--------");
         
         // It reads the coordinates of the map and store it into certain arrays
-        readMouseInfo(l.getPathOne(), pathOne);
-        readMouseInfo(l.getPathTwo(), pathTwo);
-        readMouseInfo(l.getTiles(), tiles);
+        readMouseInfo(level.getPathOne(), pathOne);
+        readMouseInfo(level.getPathTwo(), pathTwo);
+        readMouseInfo(level.getTiles(), tiles);
 
         display_tiles(tiles);
         
-        // Set the labels and the amount of coins
-        total_coins = 10000;
+        // Sets the labels and the amount of coins
+        total_coins = 100;
         coins = new Label(total_coins, 50); 
         coins.setFillColor(Color.YELLOW);
-        addObject(coins, 260, 70);
+        addObject(coins, 180, 70);
         GreenfootImage coin = new GreenfootImage("coin.png");
         coin.scale(60,60);
-        background.drawImage(coin, 160, 40);
+        background.drawImage(coin, 60, 40);
         
-        // Update the status of the gold mine
-        updateMine(1, 1); 
+        // Updates the status of the gold mine
+        updateMine(0.75, 1); 
 
+        // Displays the hearts and lives onto the screen
         lives = 5;
         hearts = new Heart[lives];
         storeHeath();
-        displayHealth(800, 50);
+        displayHealth(830, 70);
         
-        counter = new Label("time: " + game_time.millisElapsed()/1000.0, 30);
-        counter.setFillColor(Color.BLACK);
-        addObject(counter, 400, 70);
+        time_counter = new Label("time: " + game_time.millisElapsed()/1000.0, 40);
+        time_counter.setFillColor(Color.GRAY.brighter());
+        addObject(time_counter, 900, 650);
         
-        //changeWave();
-        wave_label = new Label("Level " + this.level + " - " + this.wave, 30);
+        wave_label = new Label("Level " + this.level_num + " - " + this.wave, 35);
         displayWave();
+        wave_alert.mark();
         
+        explode_button = new ExplodeButton();
+        addObject(explode_button, 110, 650);
         time.mark();
         
         
     }
 
+    /**
+     * Constantly runs to spawn enemy and detect any occuring events
+     */
     public void act()
     {
-        /*
-        if(Greenfoot.mouseClicked(null))
+
+        if(new_wave != null && wave_alert.millisElapsed() > 2000)
         {
-            MouseInfo mouse = Greenfoot.getMouseInfo();
-            if(mouse!=null)
-            {
-                writeMouseInfo(mouse.getX(), mouse.getY(), "Tower Defense MousePos6.txt");
-            }
+            removeObject(new_wave);
         }
-        */
         
-        //System.out.println(this.wave);
-        if(enemy_counter % 5 == 0 && this.wave < 3)
+        if(enemy_counter % 8 == 0 && this.wave < 5)
         {
-            //level.changeWave();
             this.wave ++;
             displayWave();
+            wave_alert.mark();
             this.enemy_counter ++;
+            
+            if(this.wave == 1)
+            {
+                if(this.wave == 1 && this.level_num == 1)
+                {
+                    new_wave = new Label("GOOD LUCK!", 80);
+                    new_wave.setFillColor(Color.YELLOW.brighter());
+                    addObject(new_wave, 525, 350);
+                }
+                else
+                {
+                    new_wave = new Label("LEVEL " + this.level_num + "!", 80);
+                    new_wave.setFillColor(Color.YELLOW.brighter());
+                    addObject(new_wave, 525, 350);
+                }
+            }
+            else if(this.wave == 4)
+            {
+                new_wave = new Label("LAST WAVE!", 80);
+                new_wave.setFillColor(Color.YELLOW.brighter());
+                addObject(new_wave, 525, 350);
+            }
+            else
+            {
+                new_wave = new Label("NEW WAVE APPROACHING", 80);
+                new_wave.setFillColor(Color.YELLOW.brighter());
+                addObject(new_wave, 525, 350);
+            }
             
         }
         
         if(game_time.millisElapsed() > 500 && Greenfoot.isKeyDown("ENTER"))
         {
-            level++;
-            changeLevel((level)%3+1);
-            System.out.println(level);
+            level_num++;
+            if(level_num>3)
+            {
+                level_num = 1;
+            }
+            changeLevel((level_num));
+            System.out.println(level_num);
         }
         
         /* 
          * 
-         * Add an enemy onto the screen after a certain amount of time
-         * TODO: Needs to be change based on the difficulties of different levels
+         * Adds an enemy onto the screen after a certain amount of time
+         * Changes level if it passes the last wave
          */
         
-        if(wave == 3)
+        
+        if(wave == 5)
         {
             if(enemyList.size() == 0)
             {
-                if(this.level == 3)
+                if(this.level_num == 3)
                 {
                     changeLevel(-1);
                 }
                 else 
                 {
-                    changeLevel(this.level + 1);
+                    changeLevel(this.level_num + 1);
                 }
             }
         }
@@ -158,7 +196,8 @@ public class Game extends World
             addEnemy();
         }
         
-        if(game_time.millisElapsed()>800000)
+        // Automatically wins if player lasted for 500 seconds
+        if(game_time.millisElapsed()>500000)
         {
             detectCondition(true);
         }
@@ -167,7 +206,8 @@ public class Game extends World
         {
             updateTimer();
         }
-        detectCondition(false);
+        
+        detectCondition(false); // Constantly check if health is under 0
         checkEnemyStatus(); // Constantly checks if the enemy is in the world
         
         if (coin_display != null && 2000<no_coin.millisElapsed() && no_coin.millisElapsed()<3000)
@@ -191,49 +231,11 @@ public class Game extends World
         
     }
     
-    
-                        
+    /**
+    * Creates different enmies randomly based on numbers stored in a text file
+    */    
     public void addEnemy()
     {
-        //int num = Greenfoot.getRandomNumber(6);
-        
-        /*
-        if(num==0)
-        {
-        DudeEnemy d = new DudeEnemy(2.1,30,40,pathOne.get(0)[0], pathOne.get(0)[1]);
-        createEnemy(d);
-        }
-        
-        else if(num==1){
-        Yoshi y = new Yoshi(2.6,22,30,pathOne.get(0)[0], pathOne.get(0)[1]);
-        createEnemy(y);
-        }
-        else if(num==2){
-        Bat b = new Bat(4.2,3,15,pathOne.get(0)[0], pathOne.get(0)[1]);
-        createEnemy(b);
-        }
-        
-        else if(num==3)
-        {
-        WalkingSoldier w = new WalkingSoldier(2,45,20,pathOne.get(0)[0], pathOne.get(0)[1]);
-        createEnemy(w);
-        }
-        
-        else if(num==4)
-        {
-        Snail s = new Snail(2.2,45,100,pathOne.get(0)[0], pathOne.get(0)[1]);
-        createEnemy(s);
-        }
-        
-        else if(num==5 || num==6)
-        {
-        Golem g = new Golem(1.9,500,300,pathOne.get(0)[0], pathOne.get(0)[1]);
-        createEnemy(g);
-        }
-        */
-       
-        //int n = enemy_num.get(Greenfoot.getRandomNumber(enemy_num.size()));
-        //System.out.println(current_level.getEnemy());
         int n = current_level.getEnemy().get(Greenfoot.getRandomNumber(current_level.getEnemy().size()));
         switch (n) {
             case 1:
@@ -264,13 +266,11 @@ public class Game extends World
                 Bat bat = new Bat(4.2,3,15,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(bat);
                 break;
-                
-
-
       
         }
         
     }
+    
     
     public void createEnemy(Enemy e)
     {
@@ -279,6 +279,9 @@ public class Game extends World
         addObject(e, pathOne.get(0)[0], pathOne.get(0)[1]);
     }
     
+    /**
+     * Checks if every enemy is still in world, else removes it
+     */  
     public void checkEnemyStatus()
     {
         for(int i=0; i<enemyList.size(); i++)
@@ -294,40 +297,47 @@ public class Game extends World
         }
     }
     
-    public void updateMine(int speed, int level)
+    /**
+     * Updates the status of the mine when updated
+     */  
+    public void updateMine(double speed, int level)
     {
         GoldMine mine = new GoldMine(speed, level);
         addObject(mine, 550, 440);
     }
     
+    /**
+     * Updates the amount of coins when the amount is changed
+     */  
     public void updateCoins(int coin)
     {
         total_coins += coin;
         coins.setValue(total_coins);
     }
     
+    
     public void updateTimer()
     {
         if (game_time.millisElapsed()<10000)
         {
-            counter.setValue("TIME: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,3));
+            time_counter.setValue("TIME: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,3));
         }
         else if(game_time.millisElapsed()<100000)
         {
-            counter.setValue("TIME: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,4));
+            time_counter.setValue("TIME: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,4));
         }
         else
         {
-            counter.setValue("TIME: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,5));
+            time_counter.setValue("TIME: " + Double.toString(game_time.millisElapsed()/1000.0).substring(0,5));
         }
     }
     
+    
     public void displayWave()
     {
-
-        wave_label.setValue("Level " + this.level + " - " + this.wave);
+        wave_label.setValue("Level " + this.level_num + " - " + this.wave);
         wave_label.setFillColor(Color.ORANGE);
-        addObject(wave_label, 700, 80);
+        addObject(wave_label, 900, 100);
     }
     
     public void storeHeath()
@@ -352,42 +362,37 @@ public class Game extends World
         }
         
     }
-    
-    private SimpleTimer no_coin = new SimpleTimer();
-    
-    public boolean checkCoins(int coin)
+
+    public boolean takeCoins(int coin)
     {
-        if (this.total_coins - coin >= 0)
+        if(coin_display != null && coin_display.getWorld() != null)
         {
-            return true;
-        }
-        else
-        {
-            return false;
+            removeObject(coin_display);
         }
         
-    }
-    
-    public void takeCoins(int coin)
-    {
-        if(checkCoins(coin))
+        if(this.total_coins - coin >= 0)
         {
             this.total_coins -= coin;
+            return true;
         }
         else
         {
             coin_display = new Label("You do not have enough coins!", 50);
             coin_display.setFillColor(Color.RED);
-            addObject(coin_display, 530, 300);
+            addObject(coin_display, 500, 250);
             no_coin.mark(); 
+            return false;
         }
         
 
     }
     
+    /**
+     * Constantly detects if the game is won or lost
+     */
     public void detectCondition(boolean win)
     {
-        if (lives<=0)
+        if (lives <= 0)
         {
             GameOver oo = new GameOver(this);
             Greenfoot.setWorld(oo);
@@ -401,73 +406,35 @@ public class Game extends World
     
     public int getLevel()
     {
-        return this.level;
+        return this.level_num;
     }
-    
-    /*
-    public void changeWave()
-    {
-        System.out.println(level);
-        if(level==1)
-        {
-            enemy_num = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
-        }
-        else if(level==2)
-        {
-            enemy_num = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4));
-        }
-        else if(level==3)
-        {
-            enemy_num = new ArrayList<Integer>(Arrays.asList(3, 4, 5, 6));
-        }
-        
-        
-    }
-    */
-    
    
     public void changeLevel(int l)
     {
         if(l==1)
         {
-            /*
-            Level level = new Level(1050, 700, 1, new GreenfootImage("images/game_map11.png"), 
-            "Tower Defense MousePos1.txt","Tower Defense MousePos2.txt", "tiles_coordinates.txt");
-            */
             File file = new File("Level_01.txt");
             Level level = new Level(file);
             Game game = new Game(level);
-            //game.changeWave();
             Greenfoot.setWorld(game);
-            
-            
+
         }
         else if (l==2)
         {
-            /*
-            GreenfootImage background = new GreenfootImage("images/game_map101.jpg");
-            Level level = new Level(1050, 700, 2, background, "Tower Defense MousePos3.txt",
-            "Tower Defense MousePos4.txt", "tiles_coordinates02.txt");
-            */
+
             File file = new File("Level_02.txt");
             Level level = new Level(file);
             Game game = new Game(level);
-            //game.changeWave();
             Greenfoot.setWorld(game);
             
         }
         else if (l==3)
         {
-            /*
-            GreenfootImage background = new GreenfootImage("images/game_map202.jpg");
-            Level level = new Level(1050, 700, 3, background, "Tower Defense MousePos5.txt",
-            "Tower Defense MousePos6.txt", "tiles_coordinates03.txt");
-            */
+
             File file = new File("Level_03.txt");
             Level level = new Level(file);
             Game game = new Game(level);
-            //game.changeWave();
-            Greenfoot.setWorld(game);
+            //game.changeWave()            Greenfoot.setWorld(game);
             
         }
         else
@@ -477,6 +444,10 @@ public class Game extends World
         }
     }
     
+    /**
+     * The following three methods: Benny calls this the "mouse-clicking method", 
+     * a way to accurately write the position of tiles and routes into text files.
+     */
     public void mouseCoords(String f)
     {
         if(Greenfoot.mouseClicked(null))
@@ -547,4 +518,5 @@ public class Game extends World
             System.out.print("Cannot read file");
         }
     }
+    // OMG MR CHAN I SPENT SO MUCH TIME ON THIS
 }

@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class TowerOption here.
+ * Allows the players to place different towers using different options
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu)  
  */
 public class TowerOption extends Button
 {
-    /**
-     * Act - do whatever the TowerOption wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
 
     Label cost_label;
     int cost;

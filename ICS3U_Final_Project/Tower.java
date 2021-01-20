@@ -16,17 +16,17 @@ public class Tower extends Entity
 
     static GreenfootImage image;
     static GreenfootImage oval;
-    private boolean clicked = false;
+    
     private int radius;
     protected int level;
-    protected int cost;
     protected double damage;
     protected double splash_damage;
-    protected UpgradeButton u;
-    protected Label lv;
     //protected TowerTile tile;
     protected Oval o;
     protected int fire_rate;
+    //protected boolean clicked = false;
+    //public UpgradeButton u;
+    //protected Label level_label;
     
     
     public Tower(TowerTile tile)
@@ -91,8 +91,8 @@ public class Tower extends Entity
     public Enemy checkClosest()
     {
         time.mark();
-        int a = ((Game)getWorld()).enemyList.size();
-        System.out.println(a);
+        //int a = ((Game)getWorld()).enemyList.size();
+        //System.out.println(a);
         
         for(Enemy e: ((Game)getWorld()).enemyList)
         {
@@ -123,9 +123,10 @@ public class Tower extends Entity
     
     public void levelUp()
     {
-        ((Game)getWorld()).takeCoins(this.cost);
-        if(((Game)getWorld()).checkCoins(this.cost))
+        
+        if(((Game)getWorld()).takeCoins(this.cost))
         {
+            System.out.println("hhsai");
             this.level ++;
             this.damage *= 1.2;
             this.splash_damage *= 1.2;
@@ -134,24 +135,15 @@ public class Tower extends Entity
         }
     }
     
+    /*
     public void displayUpgrade()
     {
         
         if (clicked)
         {
-            /*
-            if(u != null)
-            {
-               
-                getWorld().removeObject(u);
-                u = null;
-            }
-            else
-            {
-                u = new UpgradeButton(this);
-                getWorld().addObject(u, this.getX()+25, this.getY()+15);
-            }
-            */
+            
+           
+            
             u = new UpgradeButton(this);
             getWorld().addObject(u, this.getX()+25, this.getY()+15);
         }
@@ -160,12 +152,10 @@ public class Tower extends Entity
             getWorld().removeObject(u);
         }
         
-        
-        
-        
-       
-        
     }
+    */
+    
+    
     
     public void displayButton()
     {

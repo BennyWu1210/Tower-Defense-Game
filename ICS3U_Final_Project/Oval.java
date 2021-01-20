@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Oval here.
+ * Contains the image of an oval, which shows the fire range of a tower
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class Oval extends Actor
 {
-    /**
-     * Act - do whatever the Oval wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     GreenfootImage image = new GreenfootImage("Oval3.png");
     public void act() 
     {

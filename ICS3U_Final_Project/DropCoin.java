@@ -1,17 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class DropCoin here.
+ * Displays the a gif when an enemy dies, or when the gold mine spawns a new coin
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class DropCoin extends Coin
 {
-    /**
-     * Act - do whatever the DropCoin wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     SimpleTimer time = new SimpleTimer();
     GifImage image;
     List<GreenfootImage> images;

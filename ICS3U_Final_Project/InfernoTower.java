@@ -14,7 +14,7 @@ public class InfernoTower extends Tower
      */
 
     ArrayList<int[]> positions;
-     
+    
     public InfernoTower(TowerTile tile)
     {
         super(tile);
@@ -27,14 +27,17 @@ public class InfernoTower extends Tower
         setImage(image);
         setRadius(150);
         setCost(30);
-        lv = new Label("Level " + 1, 20);
-        lv.setFillColor(Color.RED);
+        level_label = new Label("Level " + 1, 20);
+        level_label.setFillColor(Color.RED);
+        
+        
     }
     
     public void addedToWorld(World game)
     {
         world = (Game)game;
         positions = world.tiles;
+        world.addObject(level_label, this.getX(), this.getY()-36);
     }
     
     public void act() 
@@ -58,8 +61,8 @@ public class InfernoTower extends Tower
     
     public void displayLevel()
     {
-       lv.setValue("Level " + getLevel());
-       getWorld().addObject(lv, this.getX(), this.getY()-36);
+       level_label.setValue("Level " + getLevel());
+       //getWorld().addObject(level_label, this.getX(), this.getY()-36);
     }
     
     

@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Button here.
+ * This class is used to create different type of buttons in the game
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class Button extends Actor
 {
-    /**
-     * Act - do whatever the Button wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     public SimpleTimer time = new SimpleTimer();
     public GreenfootImage button;
     public double sizeOfButton = 1;
@@ -63,6 +59,7 @@ public class Button extends Actor
         button.scale((int)(length*sizeOfButton),(int)(width*sizeOfButton));
         
     }
+    
     
     public void checkHover()
     {

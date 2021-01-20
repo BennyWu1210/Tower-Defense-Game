@@ -1,43 +1,61 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class GoldMine here.
+ * Spawns coins and adds it to the players
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
-public class GoldMine extends Decoration
+public class GoldMine extends Entity
 {
-    /**
-     * Act - do whatever the GoldMine wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     SimpleTimer time = new SimpleTimer();
-    int Miningspeed;
+    double mining_speed;
     int level;
     int productivity;
+    int length;
+    int width;
     GreenfootImage image;
-    public GoldMine(int speed, int level)
+
+    public GoldMine(double speed, int level)
     {
-        this.Miningspeed = speed;
+        this.mining_speed = speed;
         this.level = level;
         this.length = 100;
         this.width = 70;
+        this.clicked = true;
+        this.cost = 100;
         productivity = 10;
         time.mark();
         image = new GreenfootImage("gold_mine_level01.png");
         image.scale(100,70);
+        level_label = new Label("Level " + this.level, 25);
+        level_label.setFillColor(Color.YELLOW.brighter());
+        
         setImage(image);
+        
     }
     
     public void act() 
     {
         enlarge();
-        if(1000/Miningspeed<time.millisElapsed())
+        displayLevel();
+        
+        
+        
+        if(u != null && u.detectClick())
+        {
+            System.out.println("hsjai");
+            this.levelUp();
+            u.remove();
+        }
+        
+        if(1000/mining_speed<time.millisElapsed())
         {
             time.mark();
             spawnCoin();
         }
+        
+        displayUpgrade();
     }    
     
     public void spawnCoin()
@@ -59,4 +77,27 @@ public class GoldMine extends Decoration
             image.scale(length,width);
         }
     }
+    
+    public void levelUp()
+    {
+        
+        if(((Game)getWorld()).takeCoins(this.cost))
+        {
+            this.level ++;
+            this.cost *= 2;
+            this.mining_speed += 1;
+        }
+        if(this.level > 1)
+        {
+            image = new GreenfootImage("gold_mine_level02.png");
+            setImage(image);
+        }
+    }
+    
+    public void displayLevel()
+    {
+       level_label.setValue("Level " + this.level);
+       getWorld().addObject(level_label, this.getX(), this.getY()-35);
+    }
+    
 }

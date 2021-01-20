@@ -1,10 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Bomb here.
+ * A type of projectile - bomb
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
  */
 public class Bomb extends Projectile
 {
@@ -33,9 +32,9 @@ public class Bomb extends Projectile
         {
             
             if(distanceFrom(tower.getX(), tower.getY())>tower.getRadius()
-            || distanceFrom(target.getX(), target.getY()) < 15 )
+            || distanceFrom(target.getX(), target.getY()) < 8 )
             {
-                if(distanceFrom(target.getX(), target.getY()) < 15)
+                if(distanceFrom(target.getX(), target.getY()) < 8)
                 {
                     target.takeDamage(damage);
                 }
@@ -73,7 +72,7 @@ public class Bomb extends Projectile
     
     public void disappear()
     {
-        BombExplosion explosion = new BombExplosion(getX(), getY(), splash_damage);
+        BombExplosion explosion = new BombExplosion(getX(), getY(), splash_damage, false);
         getWorld().addObject(explosion, getX(), getY());
     }
     
