@@ -89,7 +89,7 @@ public class Game extends World
         background.drawImage(coin, 60, 40);
         
         // Updates the status of the gold mine
-        updateMine(0.75, 1); 
+        updateMine(0.7, 1); 
 
         // Displays the hearts and lives onto the screen
         lives = 5;
@@ -240,27 +240,28 @@ public class Game extends World
         int n = current_level.getEnemy().get(Greenfoot.getRandomNumber(current_level.getEnemy().size()));
         switch (n) {
             case 1:
-                DudeEnemy d = new DudeEnemy(2.1+wave-1,30+wave*5,8,pathOne.get(0)[0], pathOne.get(0)[1]);
+                DudeEnemy d = new DudeEnemy(2.1+wave-1,30+wave*5,4,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(d);
                 break;
             case 2:
-                Yoshi y = new Yoshi(2.6+wave-1,22*wave,12,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Yoshi y = new Yoshi(2.6+wave-1,22*wave,6,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(y);
                 break;
             case 3:
-                Bat b = new Bat(4.2+wave-2,3,6,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Bat b = new Bat(4.2+wave-2,3,4,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(b);
                 break;
             case 4:
-                WalkingSoldier w = new WalkingSoldier(2+wave-1,45+wave,18,pathOne.get(0)[0], pathOne.get(0)[1]);
+                WalkingSoldier w = new WalkingSoldier(2+wave-1,45+wave, 9,pathOne.get(0)[0], pathOne.get(0)[1]);
+                
                 createEnemy(w);
                 break;
             case 5:
-                Snail s = new Snail(1.9+wave*0.5,45,27,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Snail s = new Snail(1.9+wave*0.5,45,12,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(s);
                 break;
             case 6:
-                Golem g = new Golem(1.9+wave*0.5,500,55,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Golem g = new Golem(1.9+wave*0.5,500,21,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(g);
                 break;
             default:

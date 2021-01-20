@@ -14,14 +14,14 @@ public class ExplodeButton extends Button
         this.length = 55;
         this.width = 55;
         setLocation(80, 720);
-        label = new Label("Mr.Chan's Power($300)", 24);
+        label = new Label("Mr.Chan's Power($500)", 24);
         label.setFillColor(Color.RED.brighter());
     }
     
     public void act() 
     {
         checkHover();
-        if(detectClick() && ((Game)getWorld()).takeCoins(300))
+        if(detectClick() && ((Game)getWorld()).takeCoins(500))
         {
             BombExplosion explosion = new BombExplosion(500, 400, 2.5, true);
             explosion.changeSize(1200,1200);
