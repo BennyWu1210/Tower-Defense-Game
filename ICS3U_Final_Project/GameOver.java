@@ -19,7 +19,6 @@ public class GameOver extends World
     
     /**
      * Constructor for objects of class GameOver.
-     * 
      */
     public GameOver(Game game)
     {    

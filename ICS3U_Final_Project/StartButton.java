@@ -4,6 +4,7 @@ import java.io.*;
  * It is the button that leads players into the game
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class StartButton extends Button
 {

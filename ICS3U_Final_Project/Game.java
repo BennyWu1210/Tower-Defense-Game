@@ -3,12 +3,12 @@ import java.util.*;
 import java.io.*;
 
 /**
- * Benny's Tower Defense in a fun and engaging game to play with (Not Really lol)
- * This is the main world where the different levels will be run on
- * It consists of the statuses of all existing objects
- * @Benny Wu
- * 
- */
+* Benny's Tower Defense in a fun and engaging game to play with (Not Really lol)
+* This is the main world where the different levels will be run on
+* It consists of the statuses of all existing objects
+* @Benny Wu
+* 
+*/
 
 public class Game extends World
 {
@@ -21,7 +21,7 @@ public class Game extends World
     public ArrayList<int[]> pathTwo = new ArrayList<int[]>();
     public ArrayList<int[]> tiles = new ArrayList<int[]>();
     public ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-
+    
     GreenfootImage background;
     
     SimpleTimer time = new SimpleTimer();    // This keeps track of the time gap between the spawn of enmies   
@@ -29,7 +29,7 @@ public class Game extends World
     SimpleTimer wave_alert = new SimpleTimer(); 
     SimpleTimer coin_delay = new SimpleTimer();
     
-   
+    
     // These labels represent the different messages displayed on the screen (time passed, new waves)
     Label time_counter;
     Label coin_display;
@@ -39,8 +39,8 @@ public class Game extends World
     
     int lives;
     int wave;
-    int enemy_counter;
     int total_coins; 
+    public int enemy_counter;
     static int level_num;
     
     // It stores the 5 lives 
@@ -57,7 +57,7 @@ public class Game extends World
      */
     public Game(Level level)
     {    
-
+    
         super(1050, 700, 1); 
         level_num = level.getLevel();
         this.current_level = level;
@@ -68,15 +68,12 @@ public class Game extends World
         background.scale(1050, 700);
         setBackground(background);
         
-        System.out.println("--------");
-        System.out.println("Welcome to Benny's Tower Defense");
-        System.out.println("--------");
         
         // It reads the coordinates of the map and store it into certain arrays
         readMouseInfo(level.getPathOne(), pathOne);
         readMouseInfo(level.getPathTwo(), pathTwo);
         readMouseInfo(level.getTiles(), tiles);
-
+    
         display_tiles(tiles);
         
         // Sets the labels and the amount of coins
@@ -90,7 +87,7 @@ public class Game extends World
         
         // Updates the status of the gold mine
         updateMine(0.7, 1); 
-
+    
         // Displays the hearts and lives onto the screen
         lives = 5;
         hearts = new Heart[lives];
@@ -111,19 +108,20 @@ public class Game extends World
         
         
     }
-
+    
     /**
      * Constantly runs to spawn enemy and detect any occuring events
      */
     public void act()
     {
-
+    
+    
         if(new_wave != null && wave_alert.millisElapsed() > 2000)
         {
             removeObject(new_wave);
         }
         
-        if(enemy_counter % 8 == 0 && this.wave < 5)
+        if(enemy_counter % 10 == 0 && this.wave < 5)
         {
             this.wave ++;
             displayWave();
@@ -134,28 +132,20 @@ public class Game extends World
             {
                 if(this.wave == 1 && this.level_num == 1)
                 {
-                    new_wave = new Label("GOOD LUCK!", 80);
-                    new_wave.setFillColor(Color.YELLOW.brighter());
-                    addObject(new_wave, 525, 350);
+                    newWave("GOOD LUCK!");
                 }
                 else
                 {
-                    new_wave = new Label("LEVEL " + this.level_num + "!", 80);
-                    new_wave.setFillColor(Color.YELLOW.brighter());
-                    addObject(new_wave, 525, 350);
+                    newWave("LEVEL " + this.level_num + "!");
                 }
             }
-            else if(this.wave == 4)
+            else if(this.wave == 5)
             {
-                new_wave = new Label("LAST WAVE!", 80);
-                new_wave.setFillColor(Color.YELLOW.brighter());
-                addObject(new_wave, 525, 350);
+                newWave("LAST WAVE!");
             }
             else
             {
-                new_wave = new Label("NEW WAVE APPROACHING", 80);
-                new_wave.setFillColor(Color.YELLOW.brighter());
-                addObject(new_wave, 525, 350);
+                newWave("NEW WAVE APPROACHING");
             }
             
         }
@@ -169,7 +159,6 @@ public class Game extends World
             }
             level_num++;
             changeLevel(level_num);
-            System.out.println(level_num);
         }
         
         /*
@@ -215,9 +204,9 @@ public class Game extends World
         {
             removeObject(coin_display);
         }
-
+    
     }
-
+    
     /**
      * Displays the images of tiles onto the screen
      */
@@ -240,28 +229,28 @@ public class Game extends World
         int n = current_level.getEnemy().get(Greenfoot.getRandomNumber(current_level.getEnemy().size()));
         switch (n) {
             case 1:
-                DudeEnemy d = new DudeEnemy(2.1+wave-1,30+wave*5,4,pathOne.get(0)[0], pathOne.get(0)[1]);
+                DudeEnemy d = new DudeEnemy(2.3+wave-1,30+wave*4,10+wave*5,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(d);
                 break;
             case 2:
-                Yoshi y = new Yoshi(2.6+wave-1,22*wave,6,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Yoshi y = new Yoshi(2.7+wave-1,25+wave,7+wave*5,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(y);
                 break;
             case 3:
-                Bat b = new Bat(4.2+wave-2,3,4,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Bat b = new Bat(4.3+wave-1,3,4+wave*5,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(b);
                 break;
             case 4:
-                WalkingSoldier w = new WalkingSoldier(2+wave-1,45+wave, 9,pathOne.get(0)[0], pathOne.get(0)[1]);
+                WalkingSoldier w = new WalkingSoldier(2+wave-1,45+wave, 9+wave*5,pathOne.get(0)[0], pathOne.get(0)[1]);
                 
                 createEnemy(w);
                 break;
             case 5:
-                Snail s = new Snail(1.9+wave*0.5,45,12,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Snail s = new Snail(1.7+wave*0.7,50+wave*3,12+wave*5,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(s);
                 break;
             case 6:
-                Golem g = new Golem(1.9+wave*0.5,500,21,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Golem g = new Golem(1.5+wave*0.7,600+wave*10,34+wave*5,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(g);
                 break;
             default:
@@ -295,8 +284,7 @@ public class Game extends World
            {
               enemyList.get(i).remove();
               enemyList.remove(i);
-              enemy_counter ++;
-              System.out.println(enemy_counter);
+              
            }
         }
     }
@@ -309,6 +297,7 @@ public class Game extends World
         GoldMine mine = new GoldMine(speed, level);
         addObject(mine, 550, 440);
     }
+        
     
     /**
      * Updates the amount of coins when the amount is changed
@@ -368,7 +357,7 @@ public class Game extends World
         }
         
     }
-
+    
     public boolean takeCoins(int coin)
     {
         if(coin_display != null && coin_display.getWorld() != null)
@@ -390,7 +379,7 @@ public class Game extends World
             return false;
         }
         
-
+    
     }
     
     /**
@@ -410,6 +399,17 @@ public class Game extends World
         }
     }
     
+    public void newWave(String t)
+    {
+        if(new_wave != null && new_wave.getWorld() != null)
+        {
+            removeObject(new_wave);
+        }
+        new_wave = new Label(t, 80);
+        new_wave.setFillColor(Color.YELLOW.brighter());
+        addObject(new_wave, 525, 350);
+    }
+        
     public int getLevel()
     {
         return this.level_num;
@@ -514,7 +514,6 @@ public class Game extends World
                 int y = Integer.parseInt(store_y);
                 int[] arr = {x, y};
                 path.add(arr);
-                // TODO: There may be two-digit integers, not the best way!
             }
             
         }

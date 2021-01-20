@@ -4,6 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * A type of enemy - walking soldier
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 18, 2021)
  */
 public class WalkingSoldier extends Enemy
 {

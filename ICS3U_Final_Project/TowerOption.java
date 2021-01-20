@@ -4,6 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Allows the players to place different towers using different options
  * 
  * @author (Benny Wu)  
+ * Last edited (Jan 20, 2021)
  */
 public class TowerOption extends Button
 {
@@ -32,6 +33,9 @@ public class TowerOption extends Button
         
     }    
     
+    /**
+     * Displays cost beside an object
+     */
     public void displayCost(boolean appear)
     {
         if (appear)
@@ -44,6 +48,9 @@ public class TowerOption extends Button
         }
     }
     
+    /**
+     * Changes the size if mouse hovers over the button
+     */
     public void checkHover()
     {
         if(Greenfoot.mouseMoved(this))

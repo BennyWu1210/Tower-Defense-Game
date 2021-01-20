@@ -4,6 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * A type of enemy - golem
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class Golem extends Enemy
 {

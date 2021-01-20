@@ -4,13 +4,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * A type of projectile - bomb
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class Bomb extends Projectile
 {
-    /**
-     * Act - do whatever the Bomb wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     Enemy target;
     int[] destination = new int[2];
     public Bomb(Enemy target, Tower tower)
@@ -26,6 +24,9 @@ public class Bomb extends Projectile
 
     }
     
+    /**
+     * Throws bonb towards enemy
+     */
     public void act() 
     {
         if(target.existing)

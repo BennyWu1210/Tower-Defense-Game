@@ -1,17 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class inferno here.
+ * A type of tower - Inferno Tower!
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class InfernoTower extends Tower
 {
-    /**
-     * Act - do whatever the inferno wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
 
     ArrayList<int[]> positions;
     
@@ -19,8 +16,8 @@ public class InfernoTower extends Tower
     {
         super(tile);
         this.fire_rate = 900;
-        this.damage = 2.2;
-        this.splash_damage = 1;
+        this.damage = 2.1;
+        this.splash_damage = 0.9;
         this.cost = level * 30;
         image = new GreenfootImage("inferno_tower1.png");
         image.scale(40,60);
@@ -46,7 +43,6 @@ public class InfernoTower extends Tower
         displayLevel();
         if(time.millisElapsed()>this.fire_rate)
         {
-            //System.out.println("firerate" + this.fire_rate);
             time.mark();
             Enemy target = checkClosest();
 
@@ -62,7 +58,6 @@ public class InfernoTower extends Tower
     public void displayLevel()
     {
        level_label.setValue("Level " + getLevel());
-       //getWorld().addObject(level_label, this.getX(), this.getY()-36);
     }
     
     

@@ -4,6 +4,7 @@ import java.util.*;
  * Displays the a gif when an enemy dies, or when the gold mine spawns a new coin
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class DropCoin extends Coin
 {

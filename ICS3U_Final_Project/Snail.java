@@ -4,13 +4,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * A type of enemy - snail
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class Snail extends Enemy
 {
-    /**
-     * Act - do whatever the Snail wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     public GifImage image;
     
     public Snail(double speed, double health, int coins, int x, int y)

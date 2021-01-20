@@ -1,9 +1,11 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Provides the towers a position to be placed
  * 
  * @author (Benny Wu) 
+ * Last Edited (Jan 17, 2021)
  */
 public class TowerTile extends Actor
 {
@@ -15,7 +17,6 @@ public class TowerTile extends Actor
     static GreenfootImage bomb = new GreenfootImage("bomb-4.png");
     static boolean clicked = false;
 
-    
     TowerOption fireButton = new TowerOption(fire, 30);
     TowerOption lightningButton = new TowerOption(lightning, 50);
     TowerOption bombButton = new TowerOption(bomb, 100);
@@ -43,6 +44,9 @@ public class TowerTile extends Actor
         }
     }    
     
+    /**
+     * Detects if the mouse clicks on this; if so, displays the three tower options 
+     */
     public void detectClick()
     {
         Game world = (Game)getWorld();
@@ -72,7 +76,9 @@ public class TowerTile extends Actor
             {
                 LightningTower l = new LightningTower(this);
                 world.addObject(l, position[0], position[1]-20);
+                world.updateCoins(0);
                 world.removeObject(this);
+                
             }
             world.removeObject(lightningButton.cost_label);
             
@@ -84,6 +90,7 @@ public class TowerTile extends Actor
             {
                 InfernoTower i = new InfernoTower(this);
                 world.addObject(i, position[0], position[1]-20);
+                world.updateCoins(0);
                 world.removeObject(this);
             }
             world.removeObject(fireButton.cost_label);
@@ -95,6 +102,7 @@ public class TowerTile extends Actor
             {
                 BombTower b = new BombTower(this);
                 world.addObject(b, position[0], position[1]-20);
+                world.updateCoins(0);
                 world.removeObject(this);
             }
             world.removeObject(bombButton.cost_label);
@@ -103,6 +111,7 @@ public class TowerTile extends Actor
         
         
     }
+    
     
     public void displayOptions()
     {

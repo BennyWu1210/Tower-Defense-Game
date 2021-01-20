@@ -5,6 +5,7 @@ import java.io.*;
  * Contains the properties of every level, and it is being passed into the Game class
  * 
  * @author (Benny Wu) 
+ * Last Edited (Jan 20, 2021)
  */
 public class Level extends Actor
 {
@@ -63,11 +64,9 @@ public class Level extends Actor
         
     }
     
-    public void act() 
-    {
-        // Add your action code here.
-    }    
-    
+    /**
+     * Changes the wave within a game to an integer
+     */
     public void changeWave(int wave)
     {
         this.wave = wave;

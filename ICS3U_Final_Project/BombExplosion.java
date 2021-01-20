@@ -1,19 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * A type of hit effect - bomb explosion
+ * A type of hit effect - Bomb Bxplosion
  * 
  * @author (Benny Wu) 
+ * Last Edited (Jan 20, 2021)
  */
 public class BombExplosion extends HitEffect
 {
 
-    private boolean large_explosion;
+    boolean large_explosion;
     double splash_damage;
     GreenfootSound sound = new GreenfootSound("bomb_sound.mp3");
     public BombExplosion(int x, int y, double damage, boolean large_explosion) 
     {
-        // Add your action code here.
         this.explosion = new GifImage("bomb_explosion.gif");
         this.large_explosion = large_explosion;
         this.images = explosion.getImages();
@@ -56,9 +56,6 @@ public class BombExplosion extends HitEffect
             }
         }
     }
-    
-    
-    
 
     
     public void changeSize(int x, int y)

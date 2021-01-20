@@ -4,18 +4,23 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Spawns coins and adds it to the players
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class GoldMine extends Entity
 {
 
     SimpleTimer time = new SimpleTimer();
+    GreenfootImage image;
+    
     double mining_speed;
     int level;
     int productivity;
     int length;
     int width;
-    GreenfootImage image;
-
+    
+    /**
+     * Initializes a gold mine with a double mining speed and a level
+     */
     public GoldMine(double speed, int level)
     {
         this.mining_speed = speed;
@@ -39,12 +44,9 @@ public class GoldMine extends Entity
     {
         enlarge();
         displayLevel();
-        
-        
-        
+
         if(u != null && u.detectClick())
         {
-            System.out.println("hsjai");
             this.levelUp();
             u.remove();
         }
@@ -66,6 +68,9 @@ public class GoldMine extends Entity
         world.updateCoins(10);
     }
     
+    /**
+     * Enlarges the image when the mouse hovers over it
+     */
     public void enlarge()
     {
         if(Greenfoot.mouseMoved(this))

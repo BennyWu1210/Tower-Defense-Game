@@ -2,8 +2,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * This is the screen that gets to be displayed after the player wins the game
- * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class GameWin extends World
 {
@@ -23,9 +23,9 @@ public class GameWin extends World
     public GameWin(Game game)
     {    
         super(1050, 700, 1);
+        this.game = game;
         background.scale(1050,700);
         setBackground(background);
-        this.game = game;
         result = new Label("Nice job MR. CHEN!", 40);
         result1 = new Label("You made it to Level " + game.level_num + "!", 30);
         result2 = new Label("And lasted for " + game.game_time.millisElapsed()/1000.0 + " seconds!", 30);

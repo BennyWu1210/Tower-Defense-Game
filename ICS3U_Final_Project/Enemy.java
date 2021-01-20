@@ -5,35 +5,30 @@ import java.util.*;
  * Moves and controls all enemies
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 
 public class Enemy extends Entity
 {
 
     SimpleTimer time = new SimpleTimer();
-    
-    
+
     protected double max_health;
     protected double health;
     protected int coins;
     protected int[] destination;
     protected DisplayBar healthBar;
     
-    
     private ArrayList<int[]> path;
     private int currentIndex = 0;
     private int xDiff;
     private int yDiff;
     
-    
-    
-
     public Enemy(double speed, double max_health, int coins, int x, int y)
     {
        this.speed = speed;
        this.max_health = max_health;
        this.health = max_health;
-       
        this.coins = coins;
        gif = true;
        pos[0] = x;
@@ -50,6 +45,7 @@ public class Enemy extends Entity
        {
            world = (Game)game;
            int num = Greenfoot.getRandomNumber(2);
+           world.enemy_counter ++;
            // Randomly chooses between the two paths
            if(num==0)
            {
@@ -66,7 +62,6 @@ public class Enemy extends Entity
        }
        else
        {
-           
            destination = new int[2];
        }
     }     
@@ -109,6 +104,9 @@ public class Enemy extends Entity
 
     }   
     
+    /**
+     * Relocates the desination of the enemy to the coordinate (x,y)
+     */
     public void relocate(int x, int y)
     {
         destination[0] = x;
@@ -117,6 +115,9 @@ public class Enemy extends Entity
         yDiff = destination[1] - getY();
     }
     
+    /**
+     * Gradually moves the enemy toward its updated destination
+     */
     public void move()
     {
 
@@ -140,7 +141,10 @@ public class Enemy extends Entity
         return image;
     }
     
-    public void takeDamage(double ouch)
+    /**
+     * Takes away a double from its total health
+     */
+    public void takeDamage(double ouch) //LMAO THIS IS A JOKE DON'T TAKE ANY MARKS OFF
     {
         if(this.health-ouch<0)
         {
@@ -167,9 +171,14 @@ public class Enemy extends Entity
         this.speed = speed;
     }
     
+    public int[] getDestination()
+    {
+        return this.destination;
+    } 
+    
+    
     public void remove()
     {
-        world = (Game)getWorld();
         if (currentIndex == path.size())
         {
             getWorld().removeObject(healthBar);

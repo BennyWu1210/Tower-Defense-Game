@@ -4,6 +4,7 @@ import java.util.*;
  * A type of projectile - lightning strike
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class LightningStrike extends Projectile
 {
@@ -30,6 +31,9 @@ public class LightningStrike extends Projectile
         time.mark();
     }  
     
+    /**
+     * Strikes enemy with lightning
+     */
     public void act()
     {
         super.act();
@@ -42,9 +46,9 @@ public class LightningStrike extends Projectile
         if(target.existing)
         {
             if(distanceFrom(tower.getX(), tower.getY())>tower.getRadius()
-            || distanceFrom(target.getX(), target.getY()) < 6 )
+            || distanceFrom(target.getX(), target.getY()) < 8 )
             {
-                if(distanceFrom(target.getX(), target.getY()) < 5)
+                if(distanceFrom(target.getX(), target.getY()) < 8)
                 {
                     target.takeDamage(damage);
                 }
@@ -93,7 +97,6 @@ public class LightningStrike extends Projectile
         {
             angle = 180+57.3*Math.atan((double)Math.abs(yDiff)/Math.abs(xDiff));
         }
-        System.out.println(xDiff + ", " + yDiff + ", " + angle);
         
         for(GreenfootImage img: images)
         {

@@ -1,10 +1,11 @@
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Contains the properties of GifImage, with a bit more function, such as adding the images onto the screen directly
+ * Contains the properties of GifImage, 
+ * with additinal features such as adding the images onto the screen directly without calling it elsewhere
  * 
  * @author (Benny Wu) 
+ * Last Edited (Jan 20, 2021)
  */
 public class Gif extends Actor
 {
@@ -17,11 +18,7 @@ public class Gif extends Actor
         list = i.getImages();
         setLocation(x, y);
     }
-    
-    public void act() 
-    {
-    }    
-    
+
     public GreenfootImage getImage(int delay)
     {
         if(time.millisElapsed()>delay)
@@ -37,8 +34,5 @@ public class Gif extends Actor
         return list.get(index);
 
     }
-    
-
-    
     
 }

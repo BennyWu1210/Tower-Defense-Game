@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The buttons that leads playes into the instruction page
+ * The button that leads playes into the instruction page
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class InstructionButton extends Button
 {
@@ -14,6 +14,7 @@ public class InstructionButton extends Button
      */
     
     private String file_name;
+    SimpleTimer timer = new SimpleTimer(); 
     public InstructionButton(String file_name, int l, int w)
     {
         super(new GreenfootImage(file_name));
@@ -24,14 +25,16 @@ public class InstructionButton extends Button
         
         
     }
-    
-    SimpleTimer timer = new SimpleTimer(); 
+
     public void act() 
     {
         checkHover();
         detectClick();
     }  
     
+    /**
+     * sets world to Game if mouse clicked on this
+     */
     public void detectClick()
     {
         if(Greenfoot.mouseClicked(this))
@@ -43,6 +46,9 @@ public class InstructionButton extends Button
             
     }
     
+    /**
+     * Changes the size if mouse hovers over the button
+     */
     public void checkHover()
     {
 

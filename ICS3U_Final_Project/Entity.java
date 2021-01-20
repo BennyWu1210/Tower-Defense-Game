@@ -4,7 +4,7 @@ import java.util.*;
  * Includes all entities in the game, including towers, enemies, and projectiles
  * 
  * @author (Benny Wu) 
- * @version (a version number or a date)
+ * Last edited (Jan 20, 2021)
  */
 public abstract class Entity extends Actor
 {
@@ -26,12 +26,18 @@ public abstract class Entity extends Actor
     
     public abstract void act();  
     
+    /**
+     * returns the distance from this instance to the coordinate (x,y)
+     */
     public double distanceFrom(int x, int y)
     {
         double distance = Math.sqrt(Math.pow(x-getX(), 2) + Math.pow(y-getY(), 2));
         return distance;
     }     
     
+    /**
+     * Gradually moves the instance to the coordinate (x,y)
+     */
     public void move(int x, int y)
     {
         double d = distanceFrom(x, y);
@@ -61,6 +67,9 @@ public abstract class Entity extends Actor
         }
     }
 
+    /**
+     * Displays the upgrade button onto the screen when mouse clicks, removes it otherwise
+     */
     public void displayUpgrade()
     {
         

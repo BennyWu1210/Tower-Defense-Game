@@ -1,18 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class Tower here.
+ * An entity that locates enemies and deals damage towards them
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class Tower extends Entity
 {
-    /**
-     * Act - do whatever the Tower wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    
 
     static GreenfootImage image;
     static GreenfootImage oval;
@@ -21,22 +16,15 @@ public class Tower extends Entity
     protected int level;
     protected double damage;
     protected double splash_damage;
-    //protected TowerTile tile;
     protected Oval o;
     protected int fire_rate;
-    //protected boolean clicked = false;
-    //public UpgradeButton u;
-    //protected Label level_label;
-    
+
     
     public Tower(TowerTile tile)
     {
         setLocation(tile.position[0], tile.position[1]);
-        //this.tile = tile;
         this.level = 1;
-        
         oval = new GreenfootImage("Oval3.png");
-        //displayButton();
         
     }
     
@@ -45,7 +33,6 @@ public class Tower extends Entity
 
         if(u != null && u.detectClick())
         {
-            System.out.println("hi");
             this.levelUp();
             u.remove();
         }
@@ -69,15 +56,10 @@ public class Tower extends Entity
         
         
     }    
-    
-    /*
-    public void addedToWorld(World game)
-    {
-        u = new UpgradeButton(this);
-        ((Game)game).addObject(u, this.getX()+25, this.getY()+15);
-    }
-    */
 
+    /**
+     * returns true if Enemy e is in the fire range of this tower, false otherwise
+     */
     public boolean isInRange(Enemy e)
     {
 
@@ -88,11 +70,12 @@ public class Tower extends Entity
         return false;
     }
     
+    /**
+     * returns the closest enemy from the tower
+     */
     public Enemy checkClosest()
     {
         time.mark();
-        //int a = ((Game)getWorld()).enemyList.size();
-        //System.out.println(a);
         
         for(Enemy e: ((Game)getWorld()).enemyList)
         {
@@ -108,6 +91,9 @@ public class Tower extends Entity
         
     }
     
+    /**
+     * Displays the fire range of the tower
+     */
     public void displayCircle()
     {
         if (clicked)
@@ -121,42 +107,33 @@ public class Tower extends Entity
         }
     }
     
+    /**
+     * Upgrades the tower to the next level
+     */
     public void levelUp()
     {
         
         if(((Game)getWorld()).takeCoins(this.cost))
         {
-            System.out.println("hhsai");
+            ((Game)getWorld()).updateCoins(0);
             this.level ++;
             this.damage *= 1.2;
-            this.splash_damage *= 1.2;
-            this.fire_rate *= 0.9;
+            this.splash_damage *= 1.4;
+            if(this.getClass() == LightningTower.class)
+            {
+                this.fire_rate *= 0.76;
+            }
+            else
+            {
+                this.fire_rate *= 0.82;
+            }
             this.cost *= 2;
         }
     }
-    
-    /*
-    public void displayUpgrade()
-    {
-        
-        if (clicked)
-        {
-            
-           
-            
-            u = new UpgradeButton(this);
-            getWorld().addObject(u, this.getX()+25, this.getY()+15);
-        }
-        else
-        {
-            getWorld().removeObject(u);
-        }
-        
-    }
-    */
-    
-    
-    
+
+    /**
+     * Displays the upgrade button
+     */
     public void displayButton()
     {
         u = new UpgradeButton(this);

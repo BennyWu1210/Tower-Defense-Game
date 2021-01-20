@@ -4,17 +4,16 @@ import java.util.*;
  * A type of enemy - dude enemy
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 18, 2021)
  */
 
 public class DudeEnemy extends Enemy
 {
 
-    
     GifImage image;
    
     public DudeEnemy(double speed, double health, int coins, int x, int y)
     {
-        
         super(speed, health, coins, x, y);
         image = new GifImage("dude.gif");
         this.images = image.getImages();
@@ -28,11 +27,7 @@ public class DudeEnemy extends Enemy
     
     public void act() 
     {
-
-        
         super.act();
-        
-        
     }    
     
 

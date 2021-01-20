@@ -2,7 +2,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Button of "Mr Chan's Power"
- * @@author (Benny Wu) 
+ * @author (Benny Wu) 
+ * Last edited (Jan 66, 2077)
  */
 public class ExplodeButton extends Button
 {
@@ -23,12 +24,15 @@ public class ExplodeButton extends Button
         checkHover();
         if(detectClick() && ((Game)getWorld()).takeCoins(500))
         {
-            BombExplosion explosion = new BombExplosion(500, 400, 2.5, true);
+            BombExplosion explosion = new BombExplosion(500, 400, 2.8, true);
             explosion.changeSize(1200,1200);
             getWorld().addObject(explosion, 500, 350);
         }
     }    
     
+    /**
+     * returns true if mouse click on this object, false otherwise
+     */
     public boolean detectClick()
     {
         if(Greenfoot.mouseClicked(this))
@@ -38,6 +42,9 @@ public class ExplodeButton extends Button
         return false;
     }
         
+    /**
+     * Changes the size if mouse hovers over the button
+     */
     public void checkHover()
     {
         if(Greenfoot.mouseMoved(this))

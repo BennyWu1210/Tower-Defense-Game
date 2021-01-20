@@ -4,6 +4,7 @@ import java.util.*;
  * A type of projectile - fireball
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class Fireball extends Projectile
 {
@@ -28,7 +29,7 @@ public class Fireball extends Projectile
         this.gif = true;
         this.sound = new GreenfootSound("Fireball_sound.mp3");
         time.mark();
-        this.sound.setVolume(45);
+        this.sound.setVolume(35);
         for(GreenfootImage image: images)
         {
             image.scale(25,25);
@@ -39,6 +40,9 @@ public class Fireball extends Projectile
         
     }
     
+    /**
+     * Throws fireball towards enemy
+     */
     public void act() 
     {
 

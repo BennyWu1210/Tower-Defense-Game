@@ -2,24 +2,22 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class BombTower here.
+ * A type of tower - Bomb Tower!
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class BombTower extends Tower
 {
-    /**
-     * Act - do whatever the BombTower wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     SimpleTimer time = new SimpleTimer();
+    
     public BombTower(TowerTile tile)
     {
         super(tile);
-        this.damage = 0;
+        this.damage = 1;
         this.splash_damage = 2;
-        this.fire_rate = 2300;
+        this.fire_rate = 2000;
         this.cost = level * 100;
         image = new GreenfootImage("Bomb_Tower.png");
         image.scale(50,65);
@@ -58,7 +56,6 @@ public class BombTower extends Tower
     public void displayLevel()
     {
        level_label.setValue("Level " + getLevel());
-       //getWorld().addObject(level_label, this.getX(), this.getY()-36);
     }
     
 }

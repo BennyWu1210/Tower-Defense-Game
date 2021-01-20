@@ -3,6 +3,7 @@ import java.util.*;
 /**
  * This is the instruction page that teaches players how to play the game
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class Instruction extends World
 {

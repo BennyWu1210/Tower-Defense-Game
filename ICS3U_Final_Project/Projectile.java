@@ -4,6 +4,7 @@ import java.util.*;
  * Contains all weapons/projectiles that towers possess
  * 
  * @author (Benny Wu) 
+ * * Last edited (Jan 20, 2021)
  */
 public class Projectile extends Entity
 {
@@ -16,10 +17,7 @@ public class Projectile extends Entity
     double splash_damage;
     GreenfootSound sound = new GreenfootSound("Fireball_sound.mp3");
     Tower tower;
-    public void act() 
-    {
-        // Overrides the act in entity
-    }  
+    
     
     public void splashDamage()
     {
@@ -40,6 +38,11 @@ public class Projectile extends Entity
         damage *= increase;
         splash_damage *= increase;
     }
+    
+    public void act() 
+    {
+        // Has to exist to override the entity
+    }  
     
     
 

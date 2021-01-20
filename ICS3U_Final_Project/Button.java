@@ -2,8 +2,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * This class is used to create different type of buttons in the game
- * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class Button extends Actor
 {
@@ -60,7 +60,9 @@ public class Button extends Actor
         
     }
     
-    
+    /**
+     * Changes the size if mouse hovers over the button
+     */
     public void checkHover()
     {
         if(Greenfoot.mouseMoved(this))

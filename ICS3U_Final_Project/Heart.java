@@ -1,9 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Contains the image of hearts on the screen
+ * An image of a heart
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class Heart extends Actor
 {
@@ -15,8 +16,5 @@ public class Heart extends Actor
         image = new GreenfootImage("heart.png");
         setImage(image);
     }
-    public void act() 
-    {
-        // Add your action code here.
-    }    
+
 }

@@ -4,6 +4,7 @@ import java.util.*;
  * A type of hit effect - fire explosion
  * 
  * @author (Benny Wu) 
+ * Last Edited (Jan 20, 2021)
  */
 public class FireExplosion extends HitEffect
 {
@@ -15,7 +16,6 @@ public class FireExplosion extends HitEffect
     
     public FireExplosion(int x, int y) 
     {
-        // Add your action code here.
         this.explosion = new GifImage("explosion01.gif");
         this.images = explosion.getImages();
         this.imageIndex = 0;
@@ -31,8 +31,6 @@ public class FireExplosion extends HitEffect
     {
         checkRemove();
     }
-    
-    
-       
+
     
 }

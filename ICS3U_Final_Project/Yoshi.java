@@ -4,6 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * A type of enemy - yoshi!
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 18, 2021)
  */
 public class Yoshi extends Enemy
 {
@@ -15,16 +16,11 @@ public class Yoshi extends Enemy
         super(speed, health, coins, x, y);
         image = new GifImage("Yoshi.gif");
         this.images = image.getImages();
-        for(GreenfootImage image: images)
-        {
-            //image.scale(40, 40);
-        }
+
     }
     
     public void act() 
     {
-
-        
         super.act();
     }    
 }

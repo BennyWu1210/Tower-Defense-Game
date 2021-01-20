@@ -4,13 +4,11 @@ import java.util.*;
  * Displays the health bar that all enemies possess
  * 
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class DisplayBar extends Actor
 {
-    /**
-     * Act - do whatever the DisplayBar wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     
     Game world;
     int[] pos = new int[2];
@@ -31,20 +29,25 @@ public class DisplayBar extends Actor
     {
         Game world = (Game)getWorld();
     }
-    
-    
+
     public void act() 
     {
        Game world = (Game)getWorld();
 
     }   
     
+    /**
+     * Constantly sets the health bar to a new location
+     */
     public void updatePosition(int x, int y)
     {
         setLocation(x,y);
 
     }
     
+    /**
+     * Sets bar to new image according to the percentage
+     */
     public void updatePercentage(double percent)
     {
         world = (Game)getWorld();

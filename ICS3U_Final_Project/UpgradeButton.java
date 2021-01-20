@@ -1,9 +1,9 @@
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * This type of button allows players to upgrade towers and gold mines
  * @author (Benny Wu) 
+ * Last edited (Jan 20, 2021)
  */
 public class UpgradeButton extends Button
 {
@@ -32,6 +32,9 @@ public class UpgradeButton extends Button
         
     }   
     
+    /**
+     * returns true if mouse click on this object, false otherwise
+     */
     public boolean detectClick()
     {
         if(Greenfoot.mouseClicked(this))
@@ -41,6 +44,9 @@ public class UpgradeButton extends Button
         return false;
     }
         
+    /**
+     * Changes the size if mouse hovers over the button
+     */
     public void checkHover()
     {
         if(Greenfoot.mouseMoved(this))
