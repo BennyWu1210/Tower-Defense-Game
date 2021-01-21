@@ -182,6 +182,20 @@ public class Game extends World
         }
         else if(time.millisElapsed()>Greenfoot.getRandomNumber(1500)+(4-this.wave)*1500)
         {
+            if(wave == 4)
+            {
+                int n = Greenfoot.getRandomNumber(2);
+                switch(n)
+                {
+                    case 0:
+                        addEnemy();
+                        return;
+                    case 1:
+                        addEnemy();
+                        enemy_counter --;
+                        return;
+                }
+            }
             time.mark();
             addEnemy();
         }

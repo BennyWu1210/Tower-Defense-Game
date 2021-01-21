@@ -16,7 +16,7 @@ public class LightningTower extends Tower
     {
         super(tile);
         this.fire_rate = 1800;
-        this.damage = 1.2;
+        this.damage = 0.5;
         this.splash_damage = 0.25;
         this.cost = level * 50;
 

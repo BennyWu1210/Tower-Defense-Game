@@ -121,11 +121,11 @@ public class Tower extends Entity
             this.splash_damage *= 1.4;
             if(this.getClass() == LightningTower.class)
             {
-                this.fire_rate *= 0.76;
+                this.fire_rate *= 0.82;
             }
             else
             {
-                this.fire_rate *= 0.82;
+                this.fire_rate *= 0.83;
             }
             this.cost *= 2;
         }

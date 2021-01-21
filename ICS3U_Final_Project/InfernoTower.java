@@ -17,7 +17,7 @@ public class InfernoTower extends Tower
         super(tile);
         this.fire_rate = 900;
         this.damage = 2.1;
-        this.splash_damage = 0.9;
+        this.splash_damage = 0.7;
         this.cost = level * 30;
         image = new GreenfootImage("inferno_tower1.png");
         image.scale(40,60);

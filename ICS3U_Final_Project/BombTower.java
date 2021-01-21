@@ -18,12 +18,12 @@ public class BombTower extends Tower
         this.damage = 1;
         this.splash_damage = 2;
         this.fire_rate = 2000;
-        this.cost = level * 100;
+        this.cost = level * 80;
         image = new GreenfootImage("Bomb_Tower.png");
         image.scale(50,65);
         setRadius(150);
         setImage(image);
-        setCost(100);
+        setCost(80);
         level_label = new Label("Level " + getLevel(), 20);
         level_label.setFillColor(Color.BLACK);
         

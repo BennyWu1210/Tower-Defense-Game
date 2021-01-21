@@ -19,7 +19,7 @@ public class TowerTile extends Actor
 
     TowerOption fireButton = new TowerOption(fire, 30);
     TowerOption lightningButton = new TowerOption(lightning, 50);
-    TowerOption bombButton = new TowerOption(bomb, 100);
+    TowerOption bombButton = new TowerOption(bomb, 80);
     public TowerTile(int x, int y)
     {
         block.rotate(30);

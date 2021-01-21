@@ -45,9 +45,9 @@ public class Bomb extends Projectile
             }
             
 
-            destination[0] = target.getX();
-            destination[1] = target.getY();
-            move(target.getX()+8, target.getY());
+            destination[0] = target.getDestination()[0];
+            destination[1] = target.getDestination()[1];
+            move(target.getX(), target.getY());
         }
         else
         {
@@ -66,6 +66,7 @@ public class Bomb extends Projectile
             }
             else
             {
+                
                 getWorld().removeObject(this);
             }
         }
