@@ -26,7 +26,7 @@ public class GameWin extends World
         this.game = game;
         background.scale(1050,700);
         setBackground(background);
-        result = new Label("Nice job MR. CHEN!", 40);
+        result = new Label("Nice job MR. CHAN!", 40);
         result1 = new Label("You made it to Level " + game.level_num + "!", 30);
         result2 = new Label("And lasted for " + game.game_time.millisElapsed()/1000.0 + " seconds!", 30);
         for(GreenfootImage image: yoshi.images)

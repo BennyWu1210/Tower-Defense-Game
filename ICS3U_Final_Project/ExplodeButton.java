@@ -24,7 +24,7 @@ public class ExplodeButton extends Button
         checkHover();
         if(detectClick() && ((Game)getWorld()).takeCoins(500))
         {
-            BombExplosion explosion = new BombExplosion(500, 400, 2.8, true);
+            BombExplosion explosion = new BombExplosion(500, 400, 1.5, true);
             explosion.changeSize(1200,1200);
             getWorld().addObject(explosion, 500, 350);
         }

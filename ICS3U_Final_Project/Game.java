@@ -77,7 +77,7 @@ public class Game extends World
         display_tiles(tiles);
         
         // Sets the labels and the amount of coins
-        total_coins = 100;
+        total_coins = 80;
         coins = new Label(total_coins, 50); 
         coins.setFillColor(Color.YELLOW);
         addObject(coins, 180, 70);
@@ -180,9 +180,9 @@ public class Game extends World
                 }
             }
         }
-        else if(time.millisElapsed()>Greenfoot.getRandomNumber(1500)+(4-this.wave)*1500)
+        else if(game_time.millisElapsed()>10000 && time.millisElapsed()>Greenfoot.getRandomNumber(1500)+(4-this.wave)*1500)
         {
-            if(wave == 4)
+            if(this.wave == 4)
             {
                 int n = Greenfoot.getRandomNumber(2);
                 switch(n)
@@ -243,24 +243,24 @@ public class Game extends World
         int n = current_level.getEnemy().get(Greenfoot.getRandomNumber(current_level.getEnemy().size()));
         switch (n) {
             case 1:
-                DudeEnemy d = new DudeEnemy(2.3+wave-1,30+wave*4,10+wave*5,pathOne.get(0)[0], pathOne.get(0)[1]);
+                DudeEnemy d = new DudeEnemy(2.3+wave-1,30+wave*4,10+wave*2,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(d);
                 break;
             case 2:
-                Yoshi y = new Yoshi(2.7+wave-1,25+wave,7+wave*5,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Yoshi y = new Yoshi(2.7+wave-1,23+wave,7+wave*2,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(y);
                 break;
             case 3:
-                Bat b = new Bat(4.3+wave-1,3,4+wave*5,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Bat b = new Bat(4.3+wave-1,3,4+wave*3,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(b);
                 break;
             case 4:
-                WalkingSoldier w = new WalkingSoldier(2+wave-1,45+wave, 9+wave*5,pathOne.get(0)[0], pathOne.get(0)[1]);
+                WalkingSoldier w = new WalkingSoldier(2+wave-1,45+wave, 9+wave*2,pathOne.get(0)[0], pathOne.get(0)[1]);
                 
                 createEnemy(w);
                 break;
             case 5:
-                Snail s = new Snail(1.7+wave*0.7,50+wave*3,12+wave*5,pathOne.get(0)[0], pathOne.get(0)[1]);
+                Snail s = new Snail(1.6+wave*0.7,45+wave*3,12+wave*2,pathOne.get(0)[0], pathOne.get(0)[1]);
                 createEnemy(s);
                 break;
             case 6:

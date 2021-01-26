@@ -84,9 +84,9 @@ public class Instruction extends World
         Label l4 = new Label("Collect coins to be RICH", 30);
         l4.setFillColor(Color.YELLOW.brighter());
         addObject(l4, 654, 280);
-        Label l5 = new Label("Don't let the enemies go through. Survive 2 minutes to move on to the next level", 25);
+        Label l5 = new Label("Don't let the enemies go through. Survive 5 waves to move on to the next level", 25);
         l5.setFillColor(Color.YELLOW.brighter());
-        addObject(l5, length/2, 450);
+        addObject(l5, length/2, 455);
         return_button = new Button(new GreenfootImage("return_button.png"));
         return_button.scale(70, 70);
         addObject(return_button, 35, 35);
