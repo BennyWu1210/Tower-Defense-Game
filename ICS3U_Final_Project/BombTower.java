@@ -3,15 +3,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * A type of tower - Bomb Tower!
- * 
- * @author (Benny Wu) 
+ *
+ * @author (Benny Wu)
  * Last edited (Jan 20, 2021)
  */
 public class BombTower extends Tower
 {
 
     SimpleTimer time = new SimpleTimer();
-    
+    // This is edited on Atom
     public BombTower(TowerTile tile)
     {
         super(tile);
@@ -26,16 +26,16 @@ public class BombTower extends Tower
         setCost(80);
         level_label = new Label("Level " + getLevel(), 20);
         level_label.setFillColor(Color.BLACK);
-        
+
     }
-    
+
     public void addedToWorld(World game)
     {
         world = (Game)game;
         getWorld().addObject(level_label, this.getX(), this.getY()-36);
     }
-    
-    public void act() 
+
+    public void act()
     {
         super.act();
         displayLevel();
@@ -49,13 +49,13 @@ public class BombTower extends Tower
                 Bomb b = new Bomb(target, this);
                 getWorld().addObject(b, getX(), getY());
             }
-            
+
         }
-    }    
-    
+    }
+
     public void displayLevel()
     {
        level_label.setValue("Level " + getLevel());
     }
-    
+
 }

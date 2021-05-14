@@ -15,7 +15,7 @@ public class Projectile extends Entity
     GifImage image;
     double damage;
     double splash_damage;
-    GreenfootSound sound = new GreenfootSound("Fireball_sound.mp3");
+    GreenfootSound sound;
     Tower tower;
     
     

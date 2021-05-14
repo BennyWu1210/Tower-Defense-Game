@@ -12,8 +12,8 @@ public class Instruction extends World
      * Constructor for objects of class Instruction.
      * 
      */
-    GifImage intro = new GifImage("Intro_screen.gif");
-    List<GreenfootImage> background = intro.getImages();
+    GifImage intro;
+    List<GreenfootImage> background;
     static int length = 960;
     static int width = 483;
     int imageIndex = 0;
@@ -29,6 +29,14 @@ public class Instruction extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(length, width, 1); 
 
+        if (intro == null){
+            intro = new GifImage("Intro_screen.gif");
+        }
+        
+        if (background == null){
+            background = intro.getImages();
+        }
+        
         lightning = new Gif(new GifImage("lightning_ins.gif"), 610, 120);
         fire = new Gif(new GifImage("fire_ins.gif"), 170, 120);
         bomb = new Gif(new GifImage("bomb_ins.gif"), 390, 120);

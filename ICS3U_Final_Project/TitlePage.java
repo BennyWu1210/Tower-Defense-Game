@@ -11,7 +11,7 @@ public class TitlePage extends World
     /**
      * Constructor for objects of class Intro.
      */
-    static GreenfootSound background_music = new GreenfootSound("Background_music.mp3");
+    static GreenfootSound background_music;
     static int length = 960;
     static int width = 483;
     
@@ -25,6 +25,10 @@ public class TitlePage extends World
     public TitlePage()
     {    
         super(length, width, 1); 
+        if (background_music == null)
+        {
+             background_music = new GreenfootSound("Background_music.mp3");
+        }
         for(GreenfootImage i: background)
         {
             i.scale(length, width);
