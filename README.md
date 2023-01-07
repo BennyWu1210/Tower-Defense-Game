@@ -10,7 +10,7 @@ If you've installed Greenfoot, feel free to try it out :)
 ![The Lightning Tower](https://media.giphy.com/media/tmS6LCf948432B0gt6/giphy.gif "The Lightning Tower")
 ![The Bomb Tower](https://media.giphy.com/media/rP8NL1ZEmu56ZKPvAe/giphy.gif "The Bomb Tower")
 
-**Upgrade your towers!**⛏\
+**Upgrade your towers**!⛏\
 ![Upgraded Tower](https://media.giphy.com/media/BsNuywaCKGQEU1STvc/giphy.gif "Upgraded Tower")
 
 **An upgradable gold mine that generates coins**⭐️\
