@@ -7,14 +7,7 @@ If you've installed Greenfoot, feel free to try it out :)
 
 **Some of the towers in the game**🗼\
 ![The Inferno Tower](/assets/fire_ins.gif)
-![The Lightning Tower](/assets/lightning_ins.gif)
-![The Bomb Tower](/assets/bomb_ins.gif)
 
-**An upgradable gold mine that generates coins**⛏\
-![Gold Mine](/assets/gold_ins.gif)
 
-**Game play**🎯
-![Game Play](/assets/Tower-Defense01.png)
-![Game Play](/assets/GameOver.gif)
 
 Enjoy!
